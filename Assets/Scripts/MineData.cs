@@ -8,7 +8,7 @@ public class MineData : MonoBehaviour
 
     public static MineData instance {  get; private set; }
 
-    [SerializeField] private Sprite bombSprite; // To set the mine sprite
+    //[SerializeField] private Sprite bombSprite; // To set the mine sprite
 
     [SerializeField] private List<Mine> mineList; // list of all mines
     [SerializeField] private int spawnBombCount = 5; // amount of bombs
@@ -17,9 +17,15 @@ public class MineData : MonoBehaviour
     [SerializeField] private Transform mineContainer;
     [SerializeField] private float bombChanceMultiplier = 30f;
 
-    [Header("Score")]
+    [Header("UI - Score")]
+    [SerializeField] private int highScore;
+    [SerializeField] private TMP_Text highScoreTMP;
     [SerializeField] private int score;
     [SerializeField] private TMP_Text scoreTMP;
+
+    [Header("UI - When Bomb Explodes")]
+    [SerializeField] private TMP_Text showScoreTMP;
+    [SerializeField] private GameObject showScoreAndTryAgain;
     
 
     private int maxSpawnCount = 100;
@@ -33,6 +39,22 @@ public class MineData : MonoBehaviour
     private void Start()
     {
         SpawnMines();
+    }
+
+    public void ShowTryAgain()
+    {
+        // set highscore when high enough
+        if (score > highScore) highScore = score;
+        
+        // show ui
+        showScoreAndTryAgain.SetActive(true);
+
+        // Set tmp
+        showScoreTMP.SetText("Score: " + score.ToString());
+        highScoreTMP.SetText("Highscore: " + highScore.ToString());
+
+        // Reset score after setting tmp
+        score = 0;
     }
 
     public void AddScore(int amount)

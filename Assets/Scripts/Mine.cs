@@ -6,6 +6,7 @@ public class Mine : MonoBehaviour
 {
     public int mineId;
     public bool isBomb;
+    [SerializeField] private GameObject bomb;
 
     private int bombCount = 0;
     private TMP_Text displayText;
@@ -34,6 +35,14 @@ public class Mine : MonoBehaviour
         bombCount = 0;
         displayText.SetText("");
         adjacentMinesFound = false;
+        bomb.SetActive(false);
+    }
+
+    private void Explode()
+    {
+        bomb.SetActive(isBomb);
+        if (isBomb) displayText.SetText("");
+        mineData.ShowTryAgain();
     }
 
     public void InitializeMine()
@@ -41,14 +50,37 @@ public class Mine : MonoBehaviour
 
         if (isBomb)
         {
-            displayText.SetText(bombCount.ToString());
+            displayText.SetText("");
             displayText.color = Color.red;
         }else
         {
-            displayText.SetText(bombCount.ToString());
+            displayText.SetText("");
             displayText.color = Color.white;
         }
 
+    }
+
+    private void ShowAdjacentMines()
+    {
+        foreach (Mine m in adjacentMines)
+        {
+
+            if (m == null) continue;
+            else if (!m.isBomb)
+            {
+                m.GetAdjacentMines();
+                m.displayText.SetText(m.bombCount.ToString());
+            }
+        }
+    }
+
+    public void ClickOnMine()
+    {
+        GetAdjacentMines();
+        if (isBomb) Explode();
+        else ShowAdjacentMines();
+        displayText.SetText(bombCount.ToString());
+        mineData.AddScore(bombCount);
     }
 
     public void GetAdjacentMines()
@@ -74,7 +106,7 @@ public class Mine : MonoBehaviour
 
         InitializeMine();
 
-        mineData.AddScore(bombCount);
+        //mineData.AddScore(bombCount);
     }
 
     private void FindAdjacentMines()
