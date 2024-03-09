@@ -82,6 +82,8 @@ public class Mine : MonoBehaviour
     {
         if (isShown) return;
 
+        isShown = true;
+
         GetAdjacentMines();
         if (isBomb) Explode();
         else ShowAdjacentMines();
