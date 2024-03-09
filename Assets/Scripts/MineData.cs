@@ -83,7 +83,7 @@ public class MineData : MonoBehaviour
     public void ReloadMines()
     {
 
-        Debug.Log("Reloading mines");
+        //Debug.Log("Reloading mines");
 
         foreach (var mine in mineList)
         {
@@ -116,7 +116,7 @@ public class MineData : MonoBehaviour
             mine.InitializeMine();
         }
 
-        Debug.Log("Total amount of mines: " + mineList.Count);
+        //Debug.Log("Total amount of mines: " + mineList.Count);
     }
 
     public Mine GetMine(int mineIndex) {

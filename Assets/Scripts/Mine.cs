@@ -15,6 +15,7 @@ public class Mine : MonoBehaviour
     private List<Mine> adjacentMines = new();
 
     private bool adjacentMinesFound = false;
+    private bool isShown = false;
 
     private void Start()
     {
@@ -31,6 +32,7 @@ public class Mine : MonoBehaviour
     public void ResetMines()
     {
         isBomb = false;
+        isShown = false;
         adjacentMines.Clear();
         bombCount = 0;
         displayText.SetText("");
@@ -66,19 +68,26 @@ public class Mine : MonoBehaviour
         {
 
             if (m == null) continue;
+            else if (m.isShown) continue;
             else if (!m.isBomb)
             {
                 m.GetAdjacentMines();
                 m.displayText.SetText(m.bombCount.ToString());
+                m.isShown = true;
             }
         }
     }
 
     public void ClickOnMine()
     {
+        if (isShown) return;
+
         GetAdjacentMines();
         if (isBomb) Explode();
         else ShowAdjacentMines();
+
+
+
         displayText.SetText(bombCount.ToString());
         mineData.AddScore(bombCount);
     }
