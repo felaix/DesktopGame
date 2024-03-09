@@ -104,6 +104,7 @@ public class MineData : MonoBehaviour
         {
             GameObject mineInstance = Instantiate(minePrefab, mineContainer);
             Mine mine = mineInstance.GetComponent<Mine>();
+
             mineList.Add(mine);
             mine.mineId = i;
 
@@ -115,8 +116,6 @@ public class MineData : MonoBehaviour
 
             mine.InitializeMine();
         }
-
-        //Debug.Log("Total amount of mines: " + mineList.Count);
     }
 
     public Mine GetMine(int mineIndex) {
