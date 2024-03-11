@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace DS.Elements
         public string Text { get; set; }
         public DSDialogueType DialogueType { get; set; }
 
-        public void Initialize(Vector2 position)
+        public virtual void Initialize(Vector2 position)
         {
             DialogueName = "DialogueName";
             Choices = new List<string>();
@@ -25,7 +26,7 @@ namespace DS.Elements
             SetPosition(new Rect(position, Vector2.zero));
         }
 
-        public void Draw()
+        public virtual void Draw()
         {
 
             // ! TITLE CONTAINER
@@ -39,8 +40,9 @@ namespace DS.Elements
 
             // ! INPUT CONTAINER
 
-            Port inputPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(string));
-            inputPort.portName = "Input";
+            Port inputPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(bool));
+            inputPort.portName = "Dialogue Connection";
+            inputPort.style.flexDirection = FlexDirection.Row;
 
             inputContainer.Add(inputPort);
 
@@ -54,6 +56,7 @@ namespace DS.Elements
             };
 
             TextField textTextField = new TextField() { value = Text };
+            textTextField.style.flexDirection = FlexDirection.Column;
 
             textFoldout.Add(textTextField);
 
@@ -62,7 +65,10 @@ namespace DS.Elements
             extensionContainer.Add(customDataContainer);
 
             RefreshExpandedState();
+
+
         }
     }
 
 }
+#endif
