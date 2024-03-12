@@ -54,6 +54,8 @@ namespace DS.Windows
             return compatiblePorts;
         }
 
+        #region Manipulators
+
         private void AddManipulators()
         {
             this.AddManipulator(new ContentDragger());
@@ -92,6 +94,8 @@ namespace DS.Windows
                 );
             return contextualMenuManipulator;
         }
+
+        #endregion
 
         private void AddStyles()
         {
