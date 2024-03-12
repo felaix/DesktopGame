@@ -26,3 +26,82 @@
 	background-color: transparent;
 	border-color: transparent;
 }
+
+.ds-node__textfield__hidden > .unity-text-field__input:focus 
+{
+	background-color: #1d1d1d;
+	border-color: #ffffff;
+
+}
+
+.ds-node__filename-textfield > .unity-text-field__input
+{
+	max-width: 1000px;
+	 
+}
+
+.ds-node__filename-textfield > .unity-text-field__input:focus
+{
+	margin: 4px;
+	padding: 4px;	 
+}
+
+.ds-node__choice-textfield > .unity-text-field__Input
+{
+	font-size: 11px;
+	height: 35px;
+	max-width: 1000px;
+	min-width: 0px;
+}
+
+.ds-node__choice-textfield > .unity-text-field__Input:focus
+{
+	height: 25px;
+	margin: 4px;
+	padding: 4px;
+}
+
+.ds-node__quote-textfield > .unity-text-field__Input
+{
+	background-color: #232527;
+	border-color: transparent;
+	border-left-color: #27292C;
+	border-left-width: 4px;
+	padding: 16px;
+	max-width: 600px;
+}
+
+.ds-node__quote-textfield > .unity-text-field__Input:hover
+{
+	background-color: #252729;
+}
+
+.ds-node__quote-textfield > .unity-text-field__Input:focus
+{
+	background-color: #1d1d1d;
+	border-color: #ffffff;
+}
+
+
+.ds-node__button
+{
+	background-color: #252729;
+	border-color: #1d1d1E;
+	max-height: 25px;
+	margin: 4px;
+}
+
+.ds-node__button:hover
+{
+	background-color: #2B2D2F;
+}
+
+.ds-node__button:active
+{
+	background-color: #212325;
+	color: #FDD057;
+}
+
+TextField {
+	margin-left: 0px;
+}

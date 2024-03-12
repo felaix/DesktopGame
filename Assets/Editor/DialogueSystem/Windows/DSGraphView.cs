@@ -10,6 +10,7 @@ namespace DS.Windows
 {
     using Elements;
     using Enumerations;
+    using System.Collections.Generic;
 
     public class DSGraphView : GraphView
     {
@@ -44,6 +45,15 @@ namespace DS.Windows
             return node;
         }
 
+        public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter adapter)
+        {
+            List<Port> compatiblePorts = new List<Port>();
+
+            ports.ForEach(port => { if (startPort == port) return; if (startPort.node == port.node) return; if (startPort.direction == port.direction) return; compatiblePorts.Add(port); });
+
+            return compatiblePorts;
+        }
+
         private void AddManipulators()
         {
             this.AddManipulator(new ContentDragger());
@@ -55,6 +65,24 @@ namespace DS.Windows
             this.AddManipulator(CreateNodeContextualMenu("Add Single Node", DSDialogueType.SingleChoice));
             this.AddManipulator(CreateNodeContextualMenu("Add Multiple Node", DSDialogueType.MultipleChoice));
 
+            this.AddManipulator(CreateGroupContextualMenu());
+
+        }
+
+        private IManipulator CreateGroupContextualMenu()
+        {
+            ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
+                menuEvent => menuEvent.menu.AppendAction("Add Group", actionEvent => AddElement(CreateGroup("Dialogue Group", actionEvent.eventInfo.localMousePosition)))
+            );
+            return contextualMenuManipulator;
+        }
+
+        private Group CreateGroup(string title, Vector2 localMousePosition)
+        {
+            Group group = new Group() { title = title };
+            group.SetPosition(new Rect(localMousePosition, Vector2.zero));
+
+            return group;
         }
 
         private IManipulator CreateNodeContextualMenu(string actionText, DSDialogueType type)
