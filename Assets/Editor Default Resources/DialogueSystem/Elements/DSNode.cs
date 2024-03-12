@@ -8,6 +8,7 @@ namespace DS.Elements
 {
 
     using Enumerations;
+    using Utilities;
 
 
     public class DSNode : Node
@@ -31,17 +32,13 @@ namespace DS.Elements
 
             // ! TITLE CONTAINER
 
-            TextField dialogueNameTextField = new TextField()
-            {
-                value = DialogueName
-            };
-
+            TextField dialogueNameTextField = DSElementUtility.CreateTextField(DialogueName);
+            
             titleContainer.Insert(0,dialogueNameTextField);
 
             // ! INPUT CONTAINER
 
-            Port inputPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(bool));
-            inputPort.portName = "Dialogue Connection";
+            Port inputPort = this.CreatePort("Dialogue Connection", Orientation.Horizontal, Direction.Input, Port.Capacity.Multi);
             inputPort.style.flexDirection = FlexDirection.Row;
 
             inputContainer.Add(inputPort);
@@ -50,12 +47,9 @@ namespace DS.Elements
 
             VisualElement customDataContainer = new VisualElement();
 
-            Foldout textFoldout = new Foldout()
-            {
-                text = "Dialogue Text"
-            };
+            Foldout textFoldout = DSElementUtility.CreateFoldout("Dialogue Text");
 
-            TextField textTextField = new TextField() { value = Text };
+            TextField textTextField = DSElementUtility.CreateTextArea(Text);
             textTextField.style.flexDirection = FlexDirection.Column;
 
             textFoldout.Add(textTextField);

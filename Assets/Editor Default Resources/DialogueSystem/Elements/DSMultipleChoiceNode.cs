@@ -8,36 +8,38 @@ using UnityEngine.UIElements;
 
 namespace DS.Elements
 {
+
+    using Enumerations;
+    using Utilities;
+
     public class DSMultipleChoiceNode : DSNode
     {
         public override void Draw()
         {
             base.Draw();
 
-            Button addChoiceBtn = new Button() { text = "Add" };
+            Button addChoiceBtn = DSElementUtility.CreateButton("Add Choice", () =>
+            {
+                Port choicePort = CreateChoicePort("New Choice");
+
+                Choices.Add("New Choice");
+
+                outputContainer.Add(choicePort);
+            });
 
             mainContainer.Insert(1, addChoiceBtn);
 
             foreach (string choice in Choices)
             {
-                Port choicePort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(bool));
+                Port choicePort = CreateChoicePort("New Choice");
 
-                choicePort.name = "";
-
-                Button deleteChoiceBtn = new Button() { text = "X" };
-                TextField choiceTextField = new TextField() { value = choice };
-
-                choiceTextField.style.flexDirection = FlexDirection.Column;
-
-                choicePort.Add(choiceTextField);
-                choicePort.Add(deleteChoiceBtn);
+                //Choices.Add("New Choice");
 
                 outputContainer.Add(choicePort);
             }
 
             RefreshExpandedState();
         }
-
         public override void Initialize(Vector2 position)
         {
             base.Initialize(position);
@@ -46,6 +48,25 @@ namespace DS.Elements
 
             Choices.Add("New Choice");
         }
+
+        #region Element Creation
+        private Port CreateChoicePort(string choice)
+        {
+            Port choicePort = this.CreatePort();
+
+            choicePort.name = "";
+
+            Button deleteChoiceBtn = DSElementUtility.CreateButton("X");
+            TextField choiceTextField = DSElementUtility.CreateTextField(choice);
+
+            choiceTextField.style.flexDirection = FlexDirection.Column;
+
+            choicePort.Add(choiceTextField);
+            choicePort.Add(deleteChoiceBtn);
+            return choicePort;
+        }
+        #endregion
+
     }
 
 }

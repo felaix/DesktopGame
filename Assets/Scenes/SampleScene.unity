@@ -1179,6 +1179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Message (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 3949620432183478239, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
+      propertyPath: m_text
+      value: hello?
+      objectReference: {fileID: 0}
     - target: {fileID: 5055515040770833921, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 5.0000305
@@ -3339,6 +3343,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Message (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3949620432183478239, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
+      propertyPath: m_text
+      value: hey cutieee
+      objectReference: {fileID: 0}
     - target: {fileID: 5055515040770833921, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 5.0000305
@@ -3840,6 +3848,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1724295807}
     m_Modifications:
+    - target: {fileID: 962719110619838028, guid: 24fc30716fd4afd41bb0134b63da4c3e, type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.11764707
+      objectReference: {fileID: 0}
+    - target: {fileID: 962719110619838028, guid: 24fc30716fd4afd41bb0134b63da4c3e, type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.11764707
+      objectReference: {fileID: 0}
+    - target: {fileID: 962719110619838028, guid: 24fc30716fd4afd41bb0134b63da4c3e, type: 3}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0.11764707
+      objectReference: {fileID: 0}
     - target: {fileID: 2015695954333182638, guid: 24fc30716fd4afd41bb0134b63da4c3e, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -3924,6 +3944,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Response_Button (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6215090869454831600, guid: 24fc30716fd4afd41bb0134b63da4c3e, type: 3}
+      propertyPath: m_text
+      value: let's talk later
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3985,7 +4009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.11764707, g: 0.11764707, b: 0.11764707, a: 1}
+  m_Color: {r: 0.14509805, g: 0.14509805, b: 0.14901961, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4057,6 +4081,10 @@ PrefabInstance:
     - target: {fileID: 3621880388125575240, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
       propertyPath: m_Name
       value: Message (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949620432183478239, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
+      propertyPath: m_text
+      value: i miss you
       objectReference: {fileID: 0}
     - target: {fileID: 5055515040770833921, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -4272,6 +4300,10 @@ PrefabInstance:
     - target: {fileID: 3621880388125575240, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
       propertyPath: m_Name
       value: Message (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949620432183478239, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
+      propertyPath: m_text
+      value: how it's going?
       objectReference: {fileID: 0}
     - target: {fileID: 5055515040770833921, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -5477,6 +5509,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Message (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 3949620432183478239, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
+      propertyPath: m_text
+      value: ..?
+      objectReference: {fileID: 0}
     - target: {fileID: 5055515040770833921, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 5.0000305
@@ -5761,6 +5797,10 @@ PrefabInstance:
     - target: {fileID: 3621880388125575240, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
       propertyPath: m_Name
       value: Message (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949620432183478239, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
+      propertyPath: m_text
+      value: ...
       objectReference: {fileID: 0}
     - target: {fileID: 5055515040770833921, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -6278,6 +6318,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Response_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 6215090869454831600, guid: 24fc30716fd4afd41bb0134b63da4c3e, type: 3}
+      propertyPath: m_text
+      value: sorry babe, no time
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6294,6 +6338,10 @@ PrefabInstance:
     - target: {fileID: 654302748977109285, guid: ecb33b6726683914cbfbe46453b47241, type: 3}
       propertyPath: m_Name
       value: Message_Response
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158719233648888862, guid: ecb33b6726683914cbfbe46453b47241, type: 3}
+      propertyPath: m_text
+      value: ok
       objectReference: {fileID: 0}
     - target: {fileID: 5145534792332813531, guid: ecb33b6726683914cbfbe46453b47241, type: 3}
       propertyPath: m_Pivot.x
