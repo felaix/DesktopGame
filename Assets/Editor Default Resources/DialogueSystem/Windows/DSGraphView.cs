@@ -1,5 +1,3 @@
-using DS.Elements;
-using System;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
@@ -10,18 +8,24 @@ namespace DS.Windows
 {
     using Elements;
     using Enumerations;
+    using System;
     using System.Collections.Generic;
 
     public class DSGraphView : GraphView
     {
-        public DSGraphView() {
+        private DSEditorWindow editorWindow;
+        private DSSearchWindow searchWindow;
+
+        public DSGraphView(DSEditorWindow dSEditor) {
+            editorWindow = dSEditor;
             AddManipulators();
+            AddSearchWindow();
             AddGridBackground();
             //CreateNode();
             AddStyles();
         }
 
-        private DSNode CreateNode(Vector2 position, DSDialogueType type)
+        public DSNode CreateNode(Vector2 position, DSDialogueType type)
         {
 
             DSNode node;
@@ -74,12 +78,12 @@ namespace DS.Windows
         private IManipulator CreateGroupContextualMenu()
         {
             ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
-                menuEvent => menuEvent.menu.AppendAction("Add Group", actionEvent => AddElement(CreateGroup("Dialogue Group", actionEvent.eventInfo.localMousePosition)))
+                menuEvent => menuEvent.menu.AppendAction("Add Group", actionEvent => AddElement(CreateGroup("Dialogue Group", GetLocalMousePosition(actionEvent.eventInfo.localMousePosition))))
             );
             return contextualMenuManipulator;
         }
 
-        private Group CreateGroup(string title, Vector2 localMousePosition)
+        public Group CreateGroup(string title, Vector2 localMousePosition)
         {
             Group group = new Group() { title = title };
             group.SetPosition(new Rect(localMousePosition, Vector2.zero));
@@ -90,13 +94,20 @@ namespace DS.Windows
         private IManipulator CreateNodeContextualMenu(string actionText, DSDialogueType type)
         {
             ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
-                menuEvent => menuEvent.menu.AppendAction(actionText, actionEvent => AddElement(CreateNode(actionEvent.eventInfo.localMousePosition, type)))
+                menuEvent => menuEvent.menu.AppendAction(actionText, actionEvent => AddElement(CreateNode(GetLocalMousePosition(actionEvent.eventInfo.localMousePosition), type)))
                 );
             return contextualMenuManipulator;
         }
 
         #endregion
 
+        #region Add Elements
+
+        private void AddSearchWindow()
+        {
+            if (searchWindow == null) { searchWindow = ScriptableObject.CreateInstance<DSSearchWindow>(); searchWindow.Initialize(this); }
+            nodeCreationRequest = context => SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), searchWindow);
+        }
         private void AddStyles()
         {
             StyleSheet graphViewstyleSheet = (StyleSheet) EditorGUIUtility.Load("DialogueSystem/DSGraphViewStyle.uss");
@@ -114,6 +125,21 @@ namespace DS.Windows
 
             Insert(0, gridBackground);
         }
+
+        #endregion
+
+        #region Utilities
+
+        public Vector2 GetLocalMousePosition(Vector2 mousePosition, bool isSearchWindow = false)
+        {
+            Vector2 worldMousePosition = mousePosition;
+            if (isSearchWindow) { worldMousePosition -= editorWindow.position.position; }
+            Vector2 localMousePosition = contentViewContainer.WorldToLocal(worldMousePosition);
+
+            return localMousePosition;
+        }
+
+        #endregion
     }
 
 }

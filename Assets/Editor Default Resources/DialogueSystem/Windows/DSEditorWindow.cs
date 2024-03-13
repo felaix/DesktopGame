@@ -19,7 +19,7 @@ namespace DS.Windows
 
         private void AddGraphView()
         {
-            DSGraphView graphView = new DSGraphView();
+            DSGraphView graphView = new DSGraphView(this);
 
             graphView.StretchToParentSize();
 
