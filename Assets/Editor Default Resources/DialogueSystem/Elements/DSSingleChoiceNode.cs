@@ -5,7 +5,7 @@ using UnityEditor.Experimental.GraphView;
 
 namespace DS.Elements
 {
-
+    using DS.Windows;
     using Utilities;
 
     public class DSSingleChoiceNode : DSNode
@@ -31,9 +31,9 @@ namespace DS.Elements
 
         }
 
-        public override void Initialize(Vector2 position)
+        public override void Initialize(DSGraphView graphView, Vector2 position)
         {
-            base.Initialize(position);
+            base.Initialize(graphView, position);
 
             DialogueType = DSDialogueType.SingleChoice;
 

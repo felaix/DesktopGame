@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 namespace DS.Elements
 {
-
+    using DS.Windows;
     using Enumerations;
     using Utilities;
 
@@ -40,9 +40,9 @@ namespace DS.Elements
 
             RefreshExpandedState();
         }
-        public override void Initialize(Vector2 position)
+        public override void Initialize(DSGraphView graphView, Vector2 position)
         {
-            base.Initialize(position);
+            base.Initialize(graphView, position);
 
             DialogueType = DSDialogueType.MultipleChoice;
 
