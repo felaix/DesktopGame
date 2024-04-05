@@ -78,7 +78,7 @@ namespace DS.Elements
             Foldout textFoldout = DSElementUtility.CreateFoldout("Dialogue Text");
 
             TextField textTextField = DSElementUtility.CreateTextArea(Text);
-            textTextField.style.flexDirection = FlexDirection.Column;
+            textTextField.style.flexDirection = FlexDirection.Column; 
 
             textFoldout.Add(textTextField);
 

@@ -68,7 +68,7 @@ namespace DS.Windows
 
         public void RemoveGroupedNode(DSNode node, Group group)
         {
-            string nodeName = node.DialogueName;
+            string nodeName = node.DialogueName.ToLower();
 
             node.Group = null;
 
@@ -90,18 +90,23 @@ namespace DS.Windows
             }
         }
 
+        // ! Add Node to Group
         public void AddGroupedNode(DSNode node, Group group)
         {
-            string nodeName = node.DialogueName;
+            Debug.Log("adding grouped node: " + node.DialogueName);
+            string nodeName = node.DialogueName.ToLower();
             node.Group = group;
 
             if (!groupedNodes.ContainsKey(group))
             {
                 groupedNodes.Add(group, new SerializableDictionary<string, DSNodeErrorData>());
+                Debug.Log("does not contain " + group + ". added new dictionary");
             }
 
-            if (groupedNodes[group].ContainsKey(nodeName))
+            if (!groupedNodes[group].ContainsKey(nodeName))
             {
+                Debug.Log("does not contain " + nodeName + ". added new node");
+
                 DSNodeErrorData nodeErrorData = new DSNodeErrorData();
                 nodeErrorData.Nodes.Add(node);
 
@@ -114,6 +119,8 @@ namespace DS.Windows
 
             groupedNodesList.Add(node);
 
+            Debug.Log(node + " added to groupednodeslist");
+
             Color errorColor = groupedNodes[group][nodeName].ErrorData.Color;
 
             node.SetErrorStyle(errorColor);
@@ -124,9 +131,11 @@ namespace DS.Windows
             }
         }
 
+        // Add node to graph view (not inside group)
         public void AddUngroupedNode(DSNode node)
         {
-            string nodeName = node.DialogueName;
+            Debug.Log("adding ungrouped node");
+            string nodeName = node.DialogueName.ToLower();
 
             if (!ungroupedNodes.ContainsKey(nodeName))
             {
@@ -152,13 +161,13 @@ namespace DS.Windows
 
         public void RemoveUngroupedNode(DSNode node)
         {
-            string nodeName = node.DialogueName;
+            string nodeName = node.DialogueName.ToLower();
 
             List<DSNode> ungroupedNodesList = ungroupedNodes[nodeName].Nodes;
             ungroupedNodesList.Remove(node);
             node.ResetStyle();
-            if (ungroupedNodes[nodeName].Nodes.Count == 1) { ungroupedNodesList[0].ResetStyle(); return; }
-            if (ungroupedNodes[nodeName].Nodes.Count == 0) { ungroupedNodes.Remove(nodeName); }
+            if (ungroupedNodesList.Count == 1) { ungroupedNodesList[0].ResetStyle(); return; }
+            if (ungroupedNodesList.Count == 0) { ungroupedNodes.Remove(nodeName); }
         }
 
         #endregion
