@@ -9,7 +9,6 @@ namespace DS.Windows
     using Data.Error;
     using Elements;
     using Enumerations;
-    using System;
     using System.Collections.Generic;
 
     public class DSGraphView : GraphView
@@ -20,6 +19,24 @@ namespace DS.Windows
         private SerializableDictionary<string, DSNodeErrorData> ungroupedNodes;
         private SerializableDictionary<Group, SerializableDictionary<string, DSNodeErrorData>> groupedNodes;
 
+        private int repeatedNamesAmount;
+        public int RepeatedNamesAmount
+        {
+            get { return repeatedNamesAmount; }
+            set
+            {
+                repeatedNamesAmount = value;
+                if (repeatedNamesAmount == 0)
+                {
+                    editorWindow.EnableSaving();
+                }
+
+                if (repeatedNamesAmount > 0)
+                {
+                    editorWindow.DisableSaving();
+                }
+            }
+        }
 
         public DSGraphView(DSEditorWindow dSEditor) {
             editorWindow = dSEditor;
@@ -78,7 +95,7 @@ namespace DS.Windows
 
             node.ResetStyle();
 
-            if (groupNodeList.Count == 1) { groupNodeList[0].ResetStyle(); return; }
+            if (groupNodeList.Count == 1) { groupNodeList[0].ResetStyle(); --RepeatedNamesAmount; return; }
 
             if (groupNodeList.Count == 0)
             {
@@ -93,19 +110,16 @@ namespace DS.Windows
         // ! Add Node to Group
         public void AddGroupedNode(DSNode node, Group group)
         {
-            Debug.Log("adding grouped node: " + node.DialogueName);
             string nodeName = node.DialogueName.ToLower();
             node.Group = group;
 
             if (!groupedNodes.ContainsKey(group))
             {
                 groupedNodes.Add(group, new SerializableDictionary<string, DSNodeErrorData>());
-                Debug.Log("does not contain " + group + ". added new dictionary");
             }
 
             if (!groupedNodes[group].ContainsKey(nodeName))
             {
-                Debug.Log("does not contain " + nodeName + ". added new node");
 
                 DSNodeErrorData nodeErrorData = new DSNodeErrorData();
                 nodeErrorData.Nodes.Add(node);
@@ -119,7 +133,6 @@ namespace DS.Windows
 
             groupedNodesList.Add(node);
 
-            Debug.Log(node + " added to groupednodeslist");
 
             Color errorColor = groupedNodes[group][nodeName].ErrorData.Color;
 
@@ -127,6 +140,7 @@ namespace DS.Windows
 
             if (groupedNodesList.Count == 2)
             {
+                ++RepeatedNamesAmount;
                 groupedNodesList[0].SetErrorStyle(errorColor);
             }
         }
@@ -134,7 +148,6 @@ namespace DS.Windows
         // Add node to graph view (not inside group)
         public void AddUngroupedNode(DSNode node)
         {
-            Debug.Log("adding ungrouped node");
             string nodeName = node.DialogueName.ToLower();
 
             if (!ungroupedNodes.ContainsKey(nodeName))
@@ -155,6 +168,8 @@ namespace DS.Windows
 
             if (ungroupedNodesList.Count == 2)
             {
+                ++RepeatedNamesAmount;
+
                 ungroupedNodesList[0].SetErrorStyle(errorColor);
             }
         }
@@ -166,7 +181,7 @@ namespace DS.Windows
             List<DSNode> ungroupedNodesList = ungroupedNodes[nodeName].Nodes;
             ungroupedNodesList.Remove(node);
             node.ResetStyle();
-            if (ungroupedNodesList.Count == 1) { ungroupedNodesList[0].ResetStyle(); return; }
+            if (ungroupedNodesList.Count == 1) { ungroupedNodesList[0].ResetStyle(); --RepeatedNamesAmount;  return; }
             if (ungroupedNodesList.Count == 0) { ungroupedNodes.Remove(nodeName); }
         }
 

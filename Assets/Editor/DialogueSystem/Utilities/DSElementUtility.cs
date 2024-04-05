@@ -31,18 +31,18 @@ namespace DS.Utilities
         }
 
         #region TextField
-        public static TextField CreateTextField( string value = null, EventCallback<ChangeEvent<string>> onValueChanged= null )
+        public static TextField CreateTextField( string value = null, string label = null, EventCallback<ChangeEvent<string>> onValueChanged= null )
         {
-            TextField textField = new TextField() { value=value };
+            TextField textField = new TextField() { value=value, label=label };
 
             if (onValueChanged != null) { textField.RegisterValueChangedCallback(onValueChanged); }
 
             return textField;
         }
 
-        public static TextField CreateTextArea(string value = null, EventCallback<ChangeEvent<string>> onValueChanged = null) 
+        public static TextField CreateTextArea(string value = null, string label = null, EventCallback<ChangeEvent<string>> onValueChanged = null) 
         {
-            TextField textArea = CreateTextField(value, onValueChanged);
+            TextField textArea = CreateTextField(value, label, onValueChanged);
             textArea.multiline = true;
             return textArea;
         }
