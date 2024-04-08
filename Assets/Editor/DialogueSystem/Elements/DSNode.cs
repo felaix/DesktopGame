@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 namespace DS.Elements
 {
+    using DS.Data.Save;
     using DS.Windows;
     using Enumerations;
     using System;
@@ -17,12 +18,12 @@ namespace DS.Elements
 
         public string ID { get; set; }
         public string DialogueName { get; set; }
-        public List<string> Choices { get; set; }
+        public List<DSChoiceSaveData> Choices { get; set; }
         public string Text { get; set; }
         public DSDialogueType DialogueType { get; set; }
         public Group Group { get; set; }
 
-        private DSGraphView graphView;
+        protected DSGraphView graphView;
         private Color defaultBackgroundColor;
 
         public virtual void Initialize(DSGraphView dsGraphView, Vector2 position)
@@ -30,7 +31,7 @@ namespace DS.Elements
             ID = Guid.NewGuid().ToString();
 
             DialogueName = "DialogueName";
-            Choices = new List<string>();
+            Choices = new List<DSChoiceSaveData>();
             Text = "Dialogue Text.";
 
             graphView = dsGraphView;

@@ -5,6 +5,7 @@ using UnityEditor.Experimental.GraphView;
 
 namespace DS.Elements
 {
+    using DS.Data.Save;
     using DS.Windows;
     using Utilities;
 
@@ -18,11 +19,11 @@ namespace DS.Elements
 
             // ! OUTPUT CONTAINER
 
-            foreach (string choice in Choices)
+            foreach (DSChoiceSaveData choice in Choices)
             {
-                Port choicePort = this.CreatePort(choice);
+                Port choicePort = this.CreatePort(choice.Text);
 
-                choicePort.name = choice;
+                choicePort.userData = choice;
 
                 outputContainer.Add(choicePort);
             }
@@ -37,7 +38,12 @@ namespace DS.Elements
 
             DialogueType = DSDialogueType.SingleChoice;
 
-            Choices.Add("Next Dialogue");
+            DSChoiceSaveData choiceSaveData = new DSChoiceSaveData()
+            {
+                Text = "Next Dialogue"
+            };
+
+            Choices.Add(choiceSaveData);
         }
 
 

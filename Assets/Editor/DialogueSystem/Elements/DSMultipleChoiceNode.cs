@@ -5,6 +5,8 @@ using UnityEngine.UIElements;
 
 namespace DS.Elements
 {
+    using DS.Data;
+    using DS.Data.Save;
     using DS.Windows;
     using Enumerations;
     using Utilities;
@@ -17,18 +19,21 @@ namespace DS.Elements
 
             Button addChoiceBtn = DSElementUtility.CreateButton("Add Choice", () =>
             {
-                Port choicePort = CreateChoicePort("New Choice");
 
-                Choices.Add("New Choice");
+                DSChoiceSaveData choiceData = CreateChoiceData();
+
+                Choices.Add(choiceData);
+
+                Port choicePort = CreateChoicePort(choiceData);
 
                 outputContainer.Add(choicePort);
             });
 
             mainContainer.Insert(1, addChoiceBtn);
 
-            foreach (string choice in Choices)
+            foreach (DSChoiceSaveData choice in Choices)
             {
-                Port choicePort = CreateChoicePort("New Choice");
+                Port choicePort = CreateChoicePort(choice);
 
                 //Choices.Add("New Choice");
 
@@ -43,18 +48,35 @@ namespace DS.Elements
 
             DialogueType = DSDialogueType.MultipleChoice;
 
-            Choices.Add("New Choice");
+            DSChoiceSaveData choiceData = CreateChoiceData();
+            Choices.Add(choiceData);
         }
 
         #region Element Creation
-        private Port CreateChoicePort(string choice)
+
+        private DSChoiceSaveData CreateChoiceData() { return new DSChoiceSaveData() { Text = "New Choice" }; }
+
+        private Port CreateChoicePort(object userData)
         {
             Port choicePort = this.CreatePort();
 
-            choicePort.name = "";
+            choicePort.userData = userData;
 
-            Button deleteChoiceBtn = DSElementUtility.CreateButton("X");
-            TextField choiceTextField = DSElementUtility.CreateTextField(choice);
+            DSChoiceSaveData choiceData = (DSChoiceSaveData) userData; 
+
+            Button deleteChoiceBtn = DSElementUtility.CreateButton("X", () =>
+            {
+                if (Choices.Count == 1) return;
+
+                if (choicePort.connected)
+                {
+                    graphView.DeleteElements(choicePort.connections);
+                }
+
+                Choices.Remove(choiceData);
+                graphView.RemoveElement(choicePort);
+            });
+            TextField choiceTextField = DSElementUtility.CreateTextField(choiceData.Text);
 
             choiceTextField.style.flexDirection = FlexDirection.Column;
 
