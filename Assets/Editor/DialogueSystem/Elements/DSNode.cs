@@ -10,6 +10,7 @@ namespace DS.Elements
     using DS.Windows;
     using Enumerations;
     using System;
+    using System.Linq;
     using Utilities;
 
 
@@ -48,6 +49,24 @@ namespace DS.Elements
 
             TextField dialogueNameTextField = DSElementUtility.CreateTextField(DialogueName, null, callback =>
             {
+
+                TextField target = (TextField)callback.target;
+                target.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
+
+                if (string.IsNullOrEmpty(target.value))
+                {
+                    if (!string.IsNullOrEmpty(DialogueName))
+                    {
+                        ++graphView.RepeatedNamesAmount;
+                    }
+                }else
+                {
+                    if (string.IsNullOrEmpty(DialogueName))
+                    {
+                        --graphView.RepeatedNamesAmount;
+                    }
+                }
+
                 if (Group == null)
                 {
                     graphView.RemoveUngroupedNode(this);
@@ -83,7 +102,10 @@ namespace DS.Elements
 
             Foldout textFoldout = DSElementUtility.CreateFoldout("Dialogue Text");
 
-            TextField textTextField = DSElementUtility.CreateTextArea(Text);
+            TextField textTextField = DSElementUtility.CreateTextArea(Text, null, callback =>
+            {
+                Text = callback.newValue;
+            });
             textTextField.style.flexDirection = FlexDirection.Column; 
 
             textFoldout.Add(textTextField);
@@ -95,6 +117,13 @@ namespace DS.Elements
             RefreshExpandedState();
 
 
+        }
+
+        public bool IsStartingNode()
+        {
+            Port inputPort = (Port) inputContainer.Children().FirstOrDefault();
+
+            return !inputPort.connected;
         }
 
         public void SetErrorStyle(Color color)

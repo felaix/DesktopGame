@@ -76,7 +76,10 @@ namespace DS.Elements
                 Choices.Remove(choiceData);
                 graphView.RemoveElement(choicePort);
             });
-            TextField choiceTextField = DSElementUtility.CreateTextField(choiceData.Text);
+            TextField choiceTextField = DSElementUtility.CreateTextField(choiceData.Text, null, callback =>
+            {
+                choiceData.Text = callback.newValue;
+            });
 
             choiceTextField.style.flexDirection = FlexDirection.Column;
 

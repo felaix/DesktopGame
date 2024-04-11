@@ -10,7 +10,7 @@ namespace DS.Data.Save
     public class DSChoiceSaveData
     {
         [field: SerializeField] public string Text {  get; set; }
-        [field: SerializeField] string NodeID { get; set; }
+        [field: SerializeField] public string NodeID { get; set; }
 
     }
 
