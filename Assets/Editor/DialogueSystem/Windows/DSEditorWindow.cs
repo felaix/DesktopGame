@@ -11,7 +11,7 @@ namespace DS.Windows
         private DSGraphView graphView;
         private readonly string defaultFileName = "Dialogue Filename";
         private Button saveBtn;
-        private TextField fileNameTextField;
+        private static TextField fileNameTextField;
 
         [MenuItem("Tools/Dialogue Graph")]
         public static void Open()
@@ -36,11 +36,32 @@ namespace DS.Windows
             });
 
             saveBtn = DSElementUtility.CreateButton("Save", () => Save());
+            Button clearBtn = DSElementUtility.CreateButton("Clear", () => Clear());
+            Button resetBtn = DSElementUtility.CreateButton("Reset", () => ResetGraph());
+           
 
             toolbar.Add(fileNameTextField);
             toolbar.Add(saveBtn);
+            toolbar.Add(clearBtn);
+            toolbar.Add(resetBtn);
 
             rootVisualElement.Add(toolbar);
+        }
+
+        private void Clear()
+        {
+            graphView.ClearGraph(); 
+        }
+
+        private void ResetGraph()
+        {
+            Clear();
+            UpdateFileName(defaultFileName);
+        }
+
+        public static void UpdateFileName(string newFileName)
+        {
+            fileNameTextField.value = newFileName;
         }
 
         private void Save()

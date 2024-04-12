@@ -21,6 +21,8 @@ namespace DS.Windows
         private SerializableDictionary<string, DSNodeErrorData> ungroupedNodes;
         private SerializableDictionary<Group, SerializableDictionary<string, DSNodeErrorData>> groupedNodes;
 
+        #region Repeated Names
+         
         private int repeatedNamesAmount;
         public int RepeatedNamesAmount
         {
@@ -39,7 +41,7 @@ namespace DS.Windows
                 }
             }
         }
-
+        #endregion
         public DSGraphView(DSEditorWindow dSEditor) {
             editorWindow = dSEditor;
 
@@ -277,6 +279,16 @@ namespace DS.Windows
             Vector2 localMousePosition = contentViewContainer.WorldToLocal(worldMousePosition);
 
             return localMousePosition;
+        }
+
+        public void ClearGraph()
+        {
+            graphElements.ForEach(graphElement => RemoveElement(graphElement));
+
+            groupedNodes.Clear();
+            ungroupedNodes.Clear();
+
+            RepeatedNamesAmount = 0;
         }
 
         #endregion
