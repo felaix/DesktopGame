@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -75,18 +74,23 @@ namespace TDS
 
         private void Move(InputAction.CallbackContext context)
         {
-            Debugger.Instance.CreateLog("Move");
-
             Vector2 direction = context.ReadValue<Vector2>();
 
             rb.velocity = direction * stats.Speed;
-            transform.LookAt(direction);
+
+            Rotate(direction);
         }
 
         #endregion
 
         #region Rotation
 
+        private void Rotate(Vector2 direction)
+        {
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        }
 
         #endregion
 
