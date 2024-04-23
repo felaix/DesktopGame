@@ -9,6 +9,7 @@ namespace TDS
         private TDS_Controls input;
         private Rigidbody2D rb;
         private Gun gun;
+        private Animator anim;
 
         private Vector2 direction;
 
@@ -32,7 +33,9 @@ namespace TDS
         {
             rb = GetComponent<Rigidbody2D>();
             gun = GetComponent<Gun>();
+            anim = GetComponent<Animator>();
 
+            if (anim == null) Debugger.Instance.CreateWarningLog("Animator is missing");
             if (gun == null) Debugger.Instance.CreateWarningLog("Gun is missing");
             if (rb == null) Debugger.Instance.CreateWarningLog("Rigidbody2D is missing");
         }
@@ -95,9 +98,22 @@ namespace TDS
 
         private void Rotate(Vector2 direction)
         {
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-            transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            //transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
+            Vector3 scaleDirection = direction;
+            if (scaleDirection.x == 0f) scaleDirection.x = 1f; 
+            if (scaleDirection.y == 0f) scaleDirection.y = 1f; 
+            if (scaleDirection.z == 0f) scaleDirection.z = 1f;
+
+            if (direction.x < 0f) anim.Play("Player_Walk_R"); 
+            if (direction.x > 0f) anim.Play("Player_Walk_R");
+            
+            if (direction.y < 0f) anim.Play("Player_Walk_Up");
+            if (direction.y > 0f) anim.Play("Player_Walk_Up");
+
+            transform.localScale = scaleDirection;
         }
 
         #endregion
