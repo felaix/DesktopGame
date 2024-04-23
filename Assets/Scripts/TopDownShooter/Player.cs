@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -81,16 +82,32 @@ namespace TDS
         private void Fire(InputAction.CallbackContext context)
         {
             gun.ShootBullet(direction, stats.AttackSpeed);
-        }   
-
+        }
         private void Move(InputAction.CallbackContext context)
         {
-            direction = context.ReadValue<Vector2>();
+            Vector2 inputDirection = context.ReadValue<Vector2>();
+            Vector2 horizontalMovement = new Vector2(inputDirection.x, 0f).normalized;
+            Vector2 verticalMovement = new Vector2(0f, inputDirection.y).normalized;
 
-            rb.velocity = direction * stats.Speed;
+            if (horizontalMovement.magnitude > 0f)
+            {
+                rb.velocity = horizontalMovement * stats.Speed;
+                direction = horizontalMovement;
+            }
+            else if (verticalMovement.magnitude > 0f)
+            {
+                rb.velocity = verticalMovement * stats.Speed;
+                direction = verticalMovement;
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
+                direction = Vector2.zero;
+            }
 
             Rotate(direction);
         }
+
 
         #endregion
 
@@ -98,19 +115,18 @@ namespace TDS
 
         private void Rotate(Vector2 direction)
         {
-            //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-            //transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
             Vector3 scaleDirection = direction;
+            scaleDirection.y = 1f;
+            scaleDirection.z = 1f;
             if (scaleDirection.x == 0f) scaleDirection.x = 1f; 
-            if (scaleDirection.y == 0f) scaleDirection.y = 1f; 
-            if (scaleDirection.z == 0f) scaleDirection.z = 1f;
+            //if (scaleDirection.y == 0f) scaleDirection.y = 1f; 
+            //if (scaleDirection.z == 0f) scaleDirection.z = 1f;
 
             if (direction.x < 0f) anim.Play("Player_Walk_R"); 
             if (direction.x > 0f) anim.Play("Player_Walk_R");
             
-            if (direction.y < 0f) anim.Play("Player_Walk_Up");
+            if (direction.y < 0f) anim.Play("Player_Walk_Down");
             if (direction.y > 0f) anim.Play("Player_Walk_Up");
 
             transform.localScale = scaleDirection;
