@@ -8,6 +8,9 @@ namespace TDS
         private Stats stats;
         private TDS_Controls input;
         private Rigidbody2D rb;
+        private Gun gun;
+
+        private Vector2 direction;
 
         private void Awake()
         {
@@ -22,11 +25,16 @@ namespace TDS
                 input = new TDS_Controls();
                 input.Enable();
             }
+
         }
 
         private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
+            gun = GetComponent<Gun>();
+
+            if (gun == null) Debugger.Instance.CreateWarningLog("Gun is missing");
+            if (rb == null) Debugger.Instance.CreateWarningLog("Rigidbody2D is missing");
         }
 
         private void OnEnable()
@@ -69,12 +77,12 @@ namespace TDS
 
         private void Fire(InputAction.CallbackContext context)
         {
-            Debugger.Instance.CreateLog("Fire");
+            gun.ShootBullet(direction, stats.AttackSpeed);
         }   
 
         private void Move(InputAction.CallbackContext context)
         {
-            Vector2 direction = context.ReadValue<Vector2>();
+            direction = context.ReadValue<Vector2>();
 
             rb.velocity = direction * stats.Speed;
 
