@@ -1,0 +1,5 @@
+.bg {
+    background-color: #f2f2f2; /* Light gray */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px;
+}
