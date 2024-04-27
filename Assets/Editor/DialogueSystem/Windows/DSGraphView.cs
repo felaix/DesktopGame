@@ -59,7 +59,7 @@ namespace DS.Windows
             AddStyles();
         }
 
-        public DSNode CreateNode(Vector2 position, DSDialogueType type)
+        public DSNode CreateNode(string nodeName, Vector2 position, DSDialogueType type, bool showDraw = true)
         {
 
             DSNode node;
@@ -77,8 +77,8 @@ namespace DS.Windows
                     break;
             }
 
-            node.Initialize(this, position);
-            node.Draw();
+            node.Initialize(nodeName, this, position);
+            if (showDraw) node.Draw();
 
             AddUngroupedNode(node);
 
@@ -236,7 +236,7 @@ namespace DS.Windows
         private IManipulator CreateNodeContextualMenu(string actionText, DSDialogueType type)
         {
             ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
-                menuEvent => menuEvent.menu.AppendAction(actionText, actionEvent => AddElement(CreateNode(GetLocalMousePosition(actionEvent.eventInfo.localMousePosition), type)))
+                menuEvent => menuEvent.menu.AppendAction(actionText, actionEvent => AddElement(CreateNode("DialogueName", GetLocalMousePosition(actionEvent.eventInfo.localMousePosition), type)))
                 );
             return contextualMenuManipulator;
         }

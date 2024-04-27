@@ -42,9 +42,9 @@ namespace DS.Elements
 
             RefreshExpandedState();
         }
-        public override void Initialize(DSGraphView graphView, Vector2 position)
+        public override void Initialize(string nodeName, DSGraphView graphView, Vector2 position)
         {
-            base.Initialize(graphView, position);
+            base.Initialize(nodeName, graphView, position);
 
             DialogueType = DSDialogueType.MultipleChoice;
 

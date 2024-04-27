@@ -16,13 +16,14 @@ namespace DS.Utilities
 
     public class DSIOUtility
     {
-        private static GraphView graphView;
+        private static DSGraphView graphView;
         private static string graphFileName;
         private static string containerFolderPath;
 
         private static List<DSNode> nodes;
 
         private static Dictionary<string, DSDialogueSO> createdDialogues;
+        private static Dictionary<string, DSNode> loadedNodes;
 
         public static void Initialize(string graphName, DSGraphView dsGraphView)
         {
@@ -32,14 +33,13 @@ namespace DS.Utilities
 
             nodes = new List<DSNode>();
             createdDialogues = new Dictionary<string, DSDialogueSO>();
+            loadedNodes = new Dictionary<string, DSNode>();
         }
 
         #region Save Methods
 
         public static void Save()
         {
-            
-
             CreateStaticFolders();
 
             GetElementsFromGraphView();
@@ -64,7 +64,6 @@ namespace DS.Utilities
         }
         private static void SaveNodes(DSGraphSaveDataSO graphData, DSDialogueContainerSO dialogueContainer)
         {
-
             List<string> nodeNames = new List<string>();
 
             foreach (DSNode node in nodes)
@@ -101,21 +100,9 @@ namespace DS.Utilities
 
         private static void SaveNodeToGraph(DSNode node, DSGraphSaveDataSO graphData)
         {
+            List<DSChoiceSaveData> choices = CloneNodeChoices(node.Choices);
 
-            List<DSChoiceSaveData> choices = new List<DSChoiceSaveData>();
-
-            foreach (DSChoiceSaveData choice in node.Choices)
-            {
-                DSChoiceSaveData choiceData = new DSChoiceSaveData() 
-                {
-                    Text = choice.Text,
-                    NodeID = choice.NodeID
-                };
-
-                choices.Add(choiceData);
-            }
-             
-            DSNodeSaveData nodeData = new DSNodeSaveData() 
+            DSNodeSaveData nodeData = new DSNodeSaveData()
             {
                 ID = node.ID,
                 Name = node.DialogueName,
@@ -127,6 +114,25 @@ namespace DS.Utilities
 
             graphData.Nodes.Add(nodeData);
         }
+
+        private static List<DSChoiceSaveData> CloneNodeChoices(List<DSChoiceSaveData> nodeChoices)
+        {
+            List<DSChoiceSaveData> choices = new List<DSChoiceSaveData>();
+
+            foreach (DSChoiceSaveData choice in nodeChoices)
+            {
+                DSChoiceSaveData choiceData = new DSChoiceSaveData()
+                {
+                    Text = choice.Text,
+                    NodeID = choice.NodeID
+                };
+
+                choices.Add(choiceData);
+            }
+
+            return choices;
+        }
+
         private static void SaveNodeToScriptableObject(DSNode node, DSDialogueContainerSO dialogueContainer)
         {
             DSDialogueSO dialogue;
@@ -142,6 +148,63 @@ namespace DS.Utilities
 
         #endregion
 
+        #region Load Methods
+
+        public static void Load()
+        {
+            DSGraphSaveDataSO graphData = LoadAsset<DSGraphSaveDataSO>("Assets/Editor/DialogueSystem/Graphs", graphFileName);
+
+            if (graphData == null) { EditorUtility.DisplayDialog("couldn't load the file", "The file at the following path could not found:\n\n" + $"Assets/Editor/DialogueSystem/Graphs/{graphFileName}\n\n" + "Make sure you chose the right file and it's placed in the folder path", "Thx!" ); return; }
+            DSEditorWindow.UpdateFileName(graphData.FileName);
+
+            LoadNodes(graphData.Nodes);
+            LoadNodesConnection();
+        }
+
+        private static void LoadNodesConnection()
+        {
+            foreach(KeyValuePair<string, DSNode> loadedNode in loadedNodes)
+            {
+                foreach (Port choicePort in loadedNode.Value.outputContainer.Children())
+                {
+                    DSChoiceSaveData choiceData = choicePort.userData as DSChoiceSaveData;
+
+                    if (string.IsNullOrEmpty(choiceData.NodeID)) { continue; }
+                    
+                    DSNode nextNode = loadedNodes[choiceData.NodeID];
+
+                    Port nextNodeInputPort = (Port) nextNode.inputContainer.Children().First();
+
+                    Edge edge = choicePort.ConnectTo(nextNodeInputPort);
+
+                    graphView.AddElement(edge);
+
+                    loadedNode.Value.RefreshPorts();
+                }
+            }
+        }
+
+        private static void LoadNodes(List<DSNodeSaveData> nodes)
+        {
+            foreach(DSNodeSaveData nodeData in nodes)
+            {
+                List<DSChoiceSaveData> choices = CloneNodeChoices(nodeData.Choices);
+                DSNode node = graphView.CreateNode(nodeData.Name, nodeData.Position, nodeData.DialogueType, false);
+
+                node.ID = nodeData.ID;
+                node.Choices = choices;
+                node.Text = nodeData.Text;
+
+                node.Draw();
+
+                graphView.AddElement(node);
+
+                loadedNodes.Add(node.ID, node);
+
+            }
+        }
+
+        #endregion
         private static void UpdateDialoguesChoicesConnections()
         {
             foreach(DSNode node in nodes)
@@ -196,8 +259,7 @@ namespace DS.Utilities
         private static T CreateAsset<T>(string path, string assetName) where T : ScriptableObject
         {
             string fullPath = $"{path}/{assetName}.asset";
-
-            T asset = AssetDatabase.LoadAssetAtPath<T>(fullPath);
+            T asset = LoadAsset<T>(path, assetName);
 
             if (asset == null)
             {
@@ -206,6 +268,13 @@ namespace DS.Utilities
             }
             return asset;
         }
+
+        private static T LoadAsset<T>(string path, string assetName) where T : ScriptableObject
+        {
+            string fullPath = path + "/" + assetName + ".asset";
+            return AssetDatabase.LoadAssetAtPath<T>(fullPath);
+        }
+
         private static void CreateStaticFolders()
         {
             // ! Editor: Graphs
