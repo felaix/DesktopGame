@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5637264047911702877}
   - component: {fileID: 1602855893953583606}
   - component: {fileID: 7762471604672328607}
+  - component: {fileID: 550309901764656492}
   m_Layer: 5
   m_Name: Message
   m_TagString: Untagged
@@ -77,6 +78,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1.75
+--- !u!210 &550309901764656492
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3621880388125575240}
+  m_Enabled: 1
+  m_SortingLayerID: -853446677
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &7239428861700203058
 GameObject:
   m_ObjectHideFlags: 0
