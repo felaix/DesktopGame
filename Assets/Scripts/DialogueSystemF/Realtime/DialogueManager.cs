@@ -10,10 +10,13 @@ namespace DS
         [SerializeField] private DialogueBaseNodeSO currentDialogue;
 
         [Header("Chat UI ")]
-        [SerializeField] private GameObject messagePrefab;
-        [SerializeField] private GameObject responsePrefab;
-        [SerializeField] private Transform messageContainer;
-        [SerializeField] private Transform responseContainer;
+        [SerializeField] private GameObject npcMessagePrefab;
+        [SerializeField] private GameObject choiceButtonPrefab;
+        [SerializeField] private GameObject userMessagePrefab;
+
+        [SerializeField] private Transform npcMessageContainer;
+        [SerializeField] private Transform choiceButtonContainer;
+        [SerializeField] private Transform userMessageContainer;
 
         private List<GameObject> choiceButtons = new();
 
@@ -25,23 +28,29 @@ namespace DS
 
         private void Start()
         {
-            CreateMessage(currentDialogue);
+            CreateNPCMessage(currentDialogue);
             CreateResponse(currentDialogue);
         }
 
         private void SetNewDialogue(DialogueBaseNodeSO newDialogue) => currentDialogue = newDialogue;
 
-        private void CreateMessage(DialogueBaseNodeSO dialogue)
+        private void CreateNPCMessage(DialogueBaseNodeSO dialogue)
         {
-            TMP_Text dialogueText = Instantiate(messagePrefab, messageContainer).GetComponentInChildren<TMP_Text>();
+            TMP_Text dialogueText = Instantiate(npcMessagePrefab, npcMessageContainer).GetComponentInChildren<TMP_Text>();
             dialogueText.text = dialogue.Dialogue;
+        }
+
+        private void CreateUserMessage(DialogueBaseNodeSO dialogue, int choice)
+        {
+            TMP_Text userTMP = Instantiate(userMessagePrefab, npcMessageContainer).GetComponentInChildren<TMP_Text>();
+            userTMP.text = dialogue.GetChoiceText(choice);
         }
 
         private void CreateResponse(DialogueBaseNodeSO dialogue)
         {
             for (int i = 0; i < currentDialogue.Choices.Count; i++)
             {
-                GameObject response = Instantiate(responsePrefab, responseContainer);
+                GameObject response = Instantiate(choiceButtonPrefab, choiceButtonContainer);
                 choiceButtons.Add(response);
                 TMP_Text responseTMP = response.GetComponentInChildren<TMP_Text>();
                 response.GetComponent<DialogueResponseButton>().index = i;
@@ -57,9 +66,12 @@ namespace DS
 
         public void OnRespond(int index)
         {
+            CreateUserMessage(currentDialogue, index);
+
             SetNewDialogue(currentDialogue.Choices[index].NextDialogue);
             DeleteChoices();
-            CreateMessage(currentDialogue);
+
+            CreateNPCMessage(currentDialogue);
             CreateResponse(currentDialogue);
         }
 
