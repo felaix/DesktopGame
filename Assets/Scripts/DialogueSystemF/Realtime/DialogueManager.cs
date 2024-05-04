@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 namespace DS
@@ -38,6 +39,11 @@ namespace DS
         {
             CreateNPCMessage(currentDialogue);
             CreateChoiceButtons(currentDialogue);
+        }
+
+        public void ToggleChoiceButtons()
+        {
+            choiceButtons.ForEach(button => { gameObject.SetActive(button); });
         }
 
         private void SetNewDialogue(DialogueBaseNodeSO newDialogue) => currentDialogue = newDialogue;
@@ -130,7 +136,8 @@ namespace DS
         {
             yield return new WaitForSeconds(2f);
             CreateNPCMessage(currentDialogue);
-            CreateChoiceButtons(currentDialogue);
+            if (currentDialogue.SkipChoices()) { SetNewDialogue(currentDialogue.NextNode); StartCoroutine(NPCNextMessageCoroutine()); yield return null; }
+            else { CreateChoiceButtons(currentDialogue); }
         }
 
         private IEnumerator HideChoicesCoroutine(RectTransform[] rectTransforms)
@@ -165,7 +172,7 @@ namespace DS
                 yield return new WaitForSeconds(.1f);
                 tmp.text = ". . . ";
                 yield return new WaitForSeconds(.1f);
-
+                  
                 canAnswer = true;
             }
 

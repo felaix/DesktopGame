@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
-  m_Name: Dialogue_7
+  m_Name: Dialogue_9
   m_EditorClassIdentifier: 
-  Dialogue: great! one sec...
+  Dialogue: (send image here)
   Choices: []
-  NextNode: {fileID: 0}
+  NextNode: {fileID: 11400000, guid: f1b84b58ce8655040aa49d4642b0164c, type: 2}
