@@ -5,9 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DialogueBaseNode", menuName = "Dialogue System")]
 public class DialogueBaseNodeSO : ScriptableObject
 {
+
     public string Dialogue;
+
+    [Header("Multiple Choices")]
     public List<Choice> Choices;
+
+    [Header("Single Node")]
+    public DialogueBaseNodeSO NextNode;
     public string GetChoiceText(int index) => Choices[index].ChoiceText;
+    public bool SkipChoices() => NextNode != null;
     public DialogueBaseNodeSO GetChoiceNode(int index) => Choices[index].NextDialogue;
     public virtual void Intialize(string dialogue, List<Choice> choices)
     {

@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
   m_Name: Dialogue_2
   m_EditorClassIdentifier: 
-  Dialogue: How are you?
+  Dialogue: Same here, just relaxing after a long day.
   Choices:
-  - ChoiceText: Good, what about you?
-    NextDialogue: {fileID: 11400000, guid: a93a6bf9b7abbf545a22ba5000ed9c74, type: 2}
-  - ChoiceText: I'm fine, thanks!
-    NextDialogue: {fileID: 11400000, guid: a93a6bf9b7abbf545a22ba5000ed9c74, type: 2}
+  - ChoiceText: Alright then.
+    NextDialogue: {fileID: 11400000, guid: 8be714f9033883743adaaeb4e24cf113, type: 2}

@@ -10,12 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
-  m_Name: Dialogue_3
+  m_Name: Dialogue_4
   m_EditorClassIdentifier: 
-  Dialogue: Anything exciting planned for the weekend?
-  Choices:
-  - ChoiceText: Not really, probably just hanging out with friends.
-    NextDialogue: {fileID: 11400000, guid: 8da12e3981ed50f44afad73439ff5635, type: 2}
-  - ChoiceText: ....
-    NextDialogue: {fileID: 11400000, guid: 8da12e3981ed50f44afad73439ff5635, type: 2}
-  NextNode: {fileID: 0}
+  Dialogue: Anyway....
+  Choices: []
+  NextNode: {fileID: 11400000, guid: 0b12b81ecc3871c4e8356f92d9e1c702, type: 2}

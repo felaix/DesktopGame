@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
-  m_Name: Dialogue_3
+  m_Name: Dialogue_5
   m_EditorClassIdentifier: 
-  Dialogue: Anything exciting planned for the weekend?
+  Dialogue: Do you remember the cute girl we met last week?
   Choices:
-  - ChoiceText: Not really, probably just hanging out with friends.
-    NextDialogue: {fileID: 11400000, guid: 8da12e3981ed50f44afad73439ff5635, type: 2}
-  - ChoiceText: ....
-    NextDialogue: {fileID: 11400000, guid: 8da12e3981ed50f44afad73439ff5635, type: 2}
+  - ChoiceText: Yes
+    NextDialogue: {fileID: 11400000, guid: 5785899f37eb3cd4a8cd5cb71c51ecd2, type: 2}
+  - ChoiceText: No
+    NextDialogue: {fileID: 11400000, guid: 489721f9de5f2b34a9f9aec3feb024f6, type: 2}
   NextNode: {fileID: 0}

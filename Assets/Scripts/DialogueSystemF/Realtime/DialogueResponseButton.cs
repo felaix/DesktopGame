@@ -17,6 +17,11 @@ public class DialogueResponseButton : MonoBehaviour
         container = GetComponentInParent<Transform>();
     }
 
+    private void FixedUpdate()
+    {
+        btn.interactable = DialogueManager.Instance.CanAnswer();
+    }
+
     public void Respond()
     {
         container.gameObject.SetActive(false);
