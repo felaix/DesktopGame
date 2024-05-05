@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Mine
   - Bullet
+  - Chat
   layers:
   - Default
   - TransparentFX

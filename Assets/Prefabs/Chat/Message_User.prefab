@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6883425458686455789}
   - component: {fileID: 866521735330358842}
   m_Layer: 5
-  m_Name: Message_Response
+  m_Name: Message_User
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

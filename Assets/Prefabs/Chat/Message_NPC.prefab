@@ -13,10 +13,9 @@ GameObject:
   - component: {fileID: 7762471604672328607}
   - component: {fileID: 550309901764656492}
   - component: {fileID: 3801223724496794048}
-  - component: {fileID: 4098514109293783423}
   - component: {fileID: 2959067938108150468}
   m_Layer: 5
-  m_Name: Message
+  m_Name: Message_NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,19 +118,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 1
---- !u!114 &4098514109293783423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3621880388125575240}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6a85925a7e9c2a46b9afe653927a650, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0.1, y: 0}
 --- !u!114 &2959067938108150468
 MonoBehaviour:
   m_ObjectHideFlags: 0

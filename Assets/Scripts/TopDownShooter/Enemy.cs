@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        Debug.Log("trigger entered");
+        //Debug.Log("trigger entered");
 
         if (collision.CompareTag("Bullet"))
         {

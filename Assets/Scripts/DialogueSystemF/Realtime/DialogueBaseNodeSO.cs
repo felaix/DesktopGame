@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DialogueBaseNode", menuName = "Dialogue System")]
 public class DialogueBaseNodeSO : ScriptableObject
 {
-
     public string Dialogue;
 
     [Header("Multiple Choices")]

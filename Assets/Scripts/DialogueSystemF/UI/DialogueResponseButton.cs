@@ -1,4 +1,3 @@
-using DS;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +7,10 @@ public class DialogueResponseButton : MonoBehaviour
 
     private Button btn;
     private Transform container;
+    private ChatUI chat;
+
+    public void SetChat(ChatUI c) { chat = c; }
+    public ChatUI GetChat() { return chat; }
 
     private void Start()
     {
@@ -19,15 +22,16 @@ public class DialogueResponseButton : MonoBehaviour
 
     private void FixedUpdate()
     {
-        btn.interactable = DialogueManager.Instance.CanAnswer();
+        btn.interactable = DialogueManager.Instance.GetCanAnswer();
     }
 
     public void Respond()
     {
         container.gameObject.SetActive(false);
-        DialogueManager.Instance.OnRespond(index);
+        chat.Respond(index);
+        //DialogueManager.Instance.OnRespond(index);
 
-        if (gameObject != null) Destroy(gameObject, .1f);
-        Debugger.Instance.CreateLog("Choice Clicked");
+        //if (gameObject != null) Destroy(gameObject, .1f);
+        //Debugger.Instance.CreateLog("Choice Clicked");
     }
 }

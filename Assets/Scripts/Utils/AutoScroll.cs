@@ -20,14 +20,14 @@ public class AutoScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         scrollSpeed = 0f;
-        Debugger.Instance.CreateLog("Pointer Down!");
+        //Debugger.Instance.CreateLog("Pointer Down!");
 
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         scrollSpeed = spd;
-        Debugger.Instance.CreateLog("Pointer UP!");
+        //Debugger.Instance.CreateLog("Pointer UP!");
     }
 
     void Update()
