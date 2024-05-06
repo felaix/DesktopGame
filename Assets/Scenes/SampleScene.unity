@@ -730,6 +730,9 @@ MonoBehaviour:
   chatPrefab: {fileID: 2639983353898540174, guid: 34c0d366c498c9c44b3108eb3ab36b60, type: 3}
   chatButtonContainer: {fileID: 792119946}
   chatContainer: {fileID: 749300779}
+  dialogues:
+  - {fileID: 11400000, guid: a93a6bf9b7abbf545a22ba5000ed9c74, type: 2}
+  - {fileID: 11400000, guid: da1121bc64363744fbb17720c847faa4, type: 2}
 --- !u!1 &297963273
 GameObject:
   m_ObjectHideFlags: 0

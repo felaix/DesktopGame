@@ -1,7 +1,4 @@
-﻿using DG.Tweening;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +18,7 @@ public class DialogueManager : MonoBehaviour
 
     private GameObject currentChat;
 
+    public List<DialogueBaseNodeSO> dialogues = new();  
     private bool canAnswer = false;
     public bool GetCanAnswer() => canAnswer;
     public void SetCanAnswer(bool can) => canAnswer = can;
@@ -32,8 +30,9 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
-        CreateChat();
-        CreateChat();
+
+        CreateChat(dialogues[0], "David");
+        
     }
 
 
@@ -47,20 +46,22 @@ public class DialogueManager : MonoBehaviour
     //    else ActivateButtons();
     //}
 
-    public void CreateChatButton(int index)
+    public void CreateChatButton(int index, string name)
     {
         GameObject chatBtn = Instantiate(chatButtonPrefab, chatButtonContainer);
         chatButtons.Add(chatBtn);
+        chatBtn.GetComponentInChildren<TMP_Text>().text = name;
         chatBtn.GetComponent<Button>().onClick.AddListener(() => ShowChat(index));
     }
 
-    public void CreateChat()
+    public void CreateChat(DialogueBaseNodeSO dialogue, string name)
     {
         GameObject chat = Instantiate(chatPrefab, chatContainer);
-        ChatUI chatUI = chat.GetComponent<ChatUI>();    
+        ChatUI chatUI = chat.GetComponent<ChatUI>();
         chats.Add(chat);
         chatUI.SetIndex(chats.Count);
-        CreateChatButton(chatUI.GetIndex());
+        chatUI.dialogueSO = dialogue;
+        CreateChatButton(chatUI.GetIndex(), name);
     }
 
     public void ShowChat(int index)

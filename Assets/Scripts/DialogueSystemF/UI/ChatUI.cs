@@ -17,9 +17,6 @@ public class ChatUI : MonoBehaviour
     public DialogueBaseNodeSO dialogueSO;
 
     private List<GameObject> choiceButtons = new();
-    public void SetNewDialogue(DialogueBaseNodeSO newDialogue) => dialogueSO = newDialogue;
-    public int GetIndex() => chatIndex;
-    public void SetIndex(int index){ chatIndex = index; }
 
     private Coroutine userMessageCoroutine;
     private Coroutine npcMessageCoroutine;
@@ -37,8 +34,6 @@ public class ChatUI : MonoBehaviour
     }
     private void OnEnable()
     {
-
-        //CreateNPCMessage();
         if (userMessageCoroutine != null)
         {
             userMessageCoroutine = StartCoroutine(UserMessageSpawnCoroutine(savedUserRect));
@@ -55,11 +50,13 @@ public class ChatUI : MonoBehaviour
         }
     }
 
-
     private void OnDisable()
     {
         StopAllCoroutines();
     }
+    public void SetNewDialogue(DialogueBaseNodeSO newDialogue) => dialogueSO = newDialogue;
+    public int GetIndex() => chatIndex;
+    public void SetIndex(int index) { chatIndex = index; }
 
     public void Respond(int index)
     {
@@ -69,6 +66,7 @@ public class ChatUI : MonoBehaviour
 
         CreateNPCMessage();
         CreateChoiceButtons();
+
         if (dialogueSO.SkipChoices()) { SetNewDialogue(dialogueSO.NextNode); npcNextMessageCoroutine = StartCoroutine(NPCNextMessageCoroutine()); }
     }
 

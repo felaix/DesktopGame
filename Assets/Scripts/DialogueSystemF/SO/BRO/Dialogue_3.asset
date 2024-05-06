@@ -18,4 +18,6 @@ MonoBehaviour:
     NextDialogue: {fileID: 11400000, guid: 8da12e3981ed50f44afad73439ff5635, type: 2}
   - ChoiceText: ....
     NextDialogue: {fileID: 11400000, guid: 8da12e3981ed50f44afad73439ff5635, type: 2}
+  - ChoiceText: lol
+    NextDialogue: {fileID: 11400000, guid: 8da12e3981ed50f44afad73439ff5635, type: 2}
   NextNode: {fileID: 0}
