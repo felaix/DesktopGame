@@ -64,6 +64,7 @@ public class ChatUI : MonoBehaviour
         SetNewDialogue(dialogueSO.Choices[index].NextDialogue);
         DeleteChoices();
 
+        if (dialogueSO == null) return;
         CreateNPCMessage();
         CreateChoiceButtons();
 

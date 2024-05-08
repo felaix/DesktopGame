@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue_10
   m_EditorClassIdentifier: 
   Dialogue: what do you think?
+  npc: 1
   Choices:
   - ChoiceText: yeaaaa
     NextDialogue: {fileID: 0}

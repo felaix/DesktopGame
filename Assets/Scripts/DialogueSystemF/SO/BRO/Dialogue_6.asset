@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue_6
   m_EditorClassIdentifier: 
   Dialogue: blond hair, blue eyes...?
+  npc: 1
   Choices:
   - ChoiceText: Ahh yes
     NextDialogue: {fileID: 11400000, guid: 5785899f37eb3cd4a8cd5cb71c51ecd2, type: 2}

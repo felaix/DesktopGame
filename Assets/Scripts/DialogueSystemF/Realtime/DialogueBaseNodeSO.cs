@@ -6,6 +6,7 @@ using UnityEngine;
 public class DialogueBaseNodeSO : ScriptableObject
 {
     public string Dialogue;
+    public NPC npc;
 
     [Header("Multiple Choices")]
     public List<Choice> Choices;
@@ -27,4 +28,13 @@ public class Choice
 {
     public string ChoiceText;
     public DialogueBaseNodeSO NextDialogue;
+}
+
+
+[Serializable]
+public enum NPC
+{
+    Mum,
+    David,
+    Hacker
 }

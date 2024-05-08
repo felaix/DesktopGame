@@ -52,6 +52,7 @@ public class DialogueManager : MonoBehaviour
         chatButtons.Add(chatBtn);
         chatBtn.GetComponentInChildren<TMP_Text>().text = name;
         chatBtn.GetComponent<Button>().onClick.AddListener(() => ShowChat(index));
+        
     }
 
     public void CreateChat(DialogueBaseNodeSO dialogue, string name)
@@ -72,6 +73,44 @@ public class DialogueManager : MonoBehaviour
         if (currentChat != null) currentChat.SetActive(false);
         chats[index-1].SetActive(true);
         currentChat = chats[index - 1];
+
+        SelectChat(index - 1);
+    }
+
+    public void SelectChat(int index)
+    {
+
+        Debug.Log("Selecting chat " + index);
+
+        ColorBlock selectedColors = new ColorBlock
+        {
+            normalColor = new Color32(45, 45, 48, 200),
+            highlightedColor = new Color32(45, 45, 48, 200),
+            pressedColor = new Color32(62, 62, 66, 200),
+            disabledColor = new Color32(200,200,200, 200),
+            selectedColor = new Color32(45,45,48, 200),
+            colorMultiplier = 1f,
+            fadeDuration = .1f
+        };
+
+        ColorBlock normalColors = new ColorBlock
+        {
+            normalColor = new Color32(37, 37, 38, 200),
+            highlightedColor = new Color32(45, 45, 48, 200),
+            pressedColor = new Color32(62, 62, 66, 200),
+            disabledColor = new Color32(200, 200, 200, 200),
+            selectedColor = new Color32(45, 45, 48, 200),
+            colorMultiplier = 1f,
+            fadeDuration = .1f
+        };
+
+        foreach (var ch in chatButtons)
+        {
+            ch.GetComponent<Button>().colors = normalColors;
+        }
+
+        chatButtons[index].GetComponent<Button>().colors = selectedColors;
+
     }
 
 }
