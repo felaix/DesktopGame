@@ -142,7 +142,7 @@ public class ChatUI : MonoBehaviour
         CreateNPCMessage();
         if (dialogueSO.SkipChoices()) { SetNewDialogue(dialogueSO.NextNode); npcNextMessageCoroutine = StartCoroutine(NPCNextMessageCoroutine()); yield return null; }
         else { CreateChoiceButtons(); }
-        yield return new WaitForSeconds(.25f);
+        yield return new WaitForSeconds(.1f);
 
         npcNextMessageCoroutine = null;
     }

@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,7 +18,7 @@ namespace TDS
             if (stats == null)
             {
                 stats = new Stats();
-                stats.Initialize(10, 5f, 20);
+                stats.Initialize(3, 5f, 20);
             }
 
             if (input == null)
@@ -51,6 +50,12 @@ namespace TDS
             UnsubscribeControls();
         }
 
+        public void DealDamage(int  damage)
+        {
+            stats.HP -= damage;
+            Debugger.Instance.CreateLog("HP: " + stats.HP);
+        }
+
         #region Controls
         private void SubscribeControls()
         {
@@ -71,6 +76,12 @@ namespace TDS
 
         #endregion
 
+
+        private void Fire(InputAction.CallbackContext context)
+        {
+            gun.ShootBullet(direction, stats.AttackSpeed);
+        }
+
         #region Movement
 
         private void StopMoving(InputAction.CallbackContext context)
@@ -79,10 +90,6 @@ namespace TDS
             rb.velocity = Vector2.zero;
         }
 
-        private void Fire(InputAction.CallbackContext context)
-        {
-            gun.ShootBullet(direction, stats.AttackSpeed);
-        }
         private void Move(InputAction.CallbackContext context)
         {
             Vector2 inputDirection = context.ReadValue<Vector2>();
