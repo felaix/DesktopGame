@@ -166,6 +166,7 @@ public class ChatUI : MonoBehaviour
         else originalTxt = txt;
 
         DialogueManager.Instance.SetCanAnswer(false);
+        DialogueManager.Instance.SetChatStatus(this.GetIndex(), "typing...");
 
         while (!DialogueManager.Instance.GetCanAnswer())
         {
@@ -196,6 +197,8 @@ public class ChatUI : MonoBehaviour
         tmp.text = originalTxt;
         if (!dialogueSO.SkipChoices()) ActivateButtons();
         yield return new WaitForSeconds(.1f);
+        //Debug.Log(chatIndex);
+        //DialogueManager.Instance.SetChatStatus(chatIndex-1, "online");
 
         npcMessageCoroutine = null;
     }

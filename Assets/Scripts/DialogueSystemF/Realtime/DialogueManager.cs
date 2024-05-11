@@ -13,7 +13,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Transform chatButtonContainer;
     [SerializeField] private Transform chatContainer;
 
-    private List<GameObject> chatButtons = new();
+    private List<ChatButton> chatButtons = new();
     private List<GameObject> chats = new();
 
     private GameObject currentChat;
@@ -48,12 +48,15 @@ public class DialogueManager : MonoBehaviour
 
     public void CreateChatButton(int index, string name)
     {
-        GameObject chatBtn = Instantiate(chatButtonPrefab, chatButtonContainer);
+        ChatButton chatBtn = Instantiate(chatButtonPrefab, chatButtonContainer).GetComponent<ChatButton>();
         chatButtons.Add(chatBtn);
-        chatBtn.GetComponentInChildren<TMP_Text>().text = name;
+        chatBtn.Initialize(null,"last seen...", name);
+
         chatBtn.GetComponent<Button>().onClick.AddListener(() => ShowChat(index));
         
     }
+
+    public void SetChatStatus(int index, string status) => chatButtons[index].SetStatus(status);
 
     public void CreateChat(DialogueBaseNodeSO dialogue, string name)
     {
