@@ -107,7 +107,7 @@ public class ChatUI : MonoBehaviour
             dialogueResponseButton.SetChat(this);
 
             TMP_Text responseTMP = choiceInstance.GetComponentInChildren<TMP_Text>();
-            Debug.Log(dialogueSO.GetChoiceText(i));
+            //Debug.Log(dialogueSO.GetChoiceText(i));
             responseTMP.text = dialogueSO.GetChoiceText(i);
             
             choiceInstance.SetActive(false);

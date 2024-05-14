@@ -30,9 +30,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
-
         CreateChat(dialogues[0], "David");
-        
     }
 
 
@@ -68,13 +66,14 @@ public class DialogueManager : MonoBehaviour
         CreateChatButton(chatUI.GetIndex(), name);
     }
 
+    private GameObject GetChatUI(int index) => chats[index].transform.GetChild(0).gameObject;
+
     public void ShowChat(int index)
     {
-        Debug.Log("index: "+ index);
         Debug.Log("SHow chat");
         if (currentChat == chats[index-1]) return;
-        if (currentChat != null) currentChat.SetActive(false);
-        chats[index-1].SetActive(true);
+        if (currentChat != null) currentChat.transform.GetChild(0).gameObject.SetActive(false);
+        GetChatUI(index-1).SetActive(true);
         currentChat = chats[index - 1];
 
         SelectChat(index - 1);

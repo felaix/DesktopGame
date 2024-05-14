@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: DialogueBaseNode
   m_EditorClassIdentifier: 
   Dialogue: Hey, what's up?
+  npc: 1
   Choices:
   - ChoiceText: Not much, just chilling. How about you?
     NextDialogue: {fileID: 11400000, guid: 4862030a53187364cb604c0c64e26363, type: 2}
   - ChoiceText: Hey, not much. How 'bout you?
     NextDialogue: {fileID: 11400000, guid: 4862030a53187364cb604c0c64e26363, type: 2}
+  NextNode: {fileID: 0}
