@@ -22,6 +22,7 @@ public class DialogueManager : MonoBehaviour
     private bool canAnswer = false;
     public bool GetCanAnswer() => canAnswer;
     public void SetCanAnswer(bool can) => canAnswer = can;
+    public void SetNotification(int index) { if (currentChat == chats[index]) return; else chatButtons[index].IncreaseUnreadMessages(); }
     private void Awake()
     {
         Instance = this;
@@ -55,6 +56,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void SetChatStatus(int index, string status) => chatButtons[index].SetStatus(status);
+    public void SetChatNotification(int index) => chatButtons[index].unreadMessages++;
 
     public void CreateChat(DialogueBaseNodeSO dialogue, string name)
     {
@@ -66,14 +68,13 @@ public class DialogueManager : MonoBehaviour
         CreateChatButton(chatUI.GetIndex(), name);
     }
 
-    private GameObject GetChatUI(int index) => chats[index].transform.GetChild(0).gameObject;
-
     public void ShowChat(int index)
     {
-        Debug.Log("SHow chat");
-        if (currentChat == chats[index-1]) return;
+        //if (currentChat == chats[index-1]) { currentChat.transform.GetChild(0).gameObject.SetActive(true); return; }
+
         if (currentChat != null) currentChat.transform.GetChild(0).gameObject.SetActive(false);
-        GetChatUI(index-1).SetActive(true);
+        
+        chats[index - 1].transform.GetChild(0).gameObject.SetActive(true);
         currentChat = chats[index - 1];
 
         SelectChat(index - 1);
@@ -112,6 +113,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         chatButtons[index].GetComponent<Button>().colors = selectedColors;
+        chatButtons[index].ResetUnreadMessages();
 
     }
 

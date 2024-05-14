@@ -200,6 +200,7 @@ public class ChatUI : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         //Debug.Log(chatIndex);
         //DialogueManager.Instance.SetChatStatus(chatIndex-1, "online");
+        DialogueManager.Instance.SetNotification(this.GetIndex() - 1);
         DialogueManager.Instance.SetChatStatus(this.GetIndex() - 1, "online");
 
         npcMessageCoroutine = null;
