@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Dialogue_2
   m_EditorClassIdentifier: 
   Dialogue: Same here, just relaxing after a long day.
-  npc: 1
+  npc: 2
+  Delay: 0.1
   Choices:
   - ChoiceText: Alright then.
     NextDialogue: {fileID: 11400000, guid: 8be714f9033883743adaaeb4e24cf113, type: 2}

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
   m_Name: D_Mum_2
   m_EditorClassIdentifier: 
-  Dialogue: Oh, and while you're at it, could you check the mail too?
+  Dialogue: My smart little boy <3
+  npc: 0
+  Delay: 0.1
   Choices:
   - ChoiceText: (ignore)
-    NextDialogue: {fileID: 0}
-  - ChoiceText: Sure thing, Mom.
     NextDialogue: {fileID: 0}
   NextNode: {fileID: 0}

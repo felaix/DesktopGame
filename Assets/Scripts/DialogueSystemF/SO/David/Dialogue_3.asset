@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Dialogue_3
   m_EditorClassIdentifier: 
   Dialogue: Anything exciting planned for the weekend?
-  npc: 1
+  npc: 2
+  Delay: 0.1
   Choices:
   - ChoiceText: Not really, probably just hanging out with friends.
     NextDialogue: {fileID: 11400000, guid: 8da12e3981ed50f44afad73439ff5635, type: 2}
-  - ChoiceText: ....
+  - ChoiceText: Not yet.
     NextDialogue: {fileID: 11400000, guid: 8da12e3981ed50f44afad73439ff5635, type: 2}
-  - ChoiceText: lol
+  - ChoiceText: Nope.
     NextDialogue: {fileID: 11400000, guid: 8da12e3981ed50f44afad73439ff5635, type: 2}
   NextNode: {fileID: 0}

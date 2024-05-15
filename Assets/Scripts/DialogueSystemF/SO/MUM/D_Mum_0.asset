@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
   m_Name: D_Mum_0
   m_EditorClassIdentifier: 
-  Dialogue: Did you remember to take out the trash, sweetheart?
+  Dialogue: Hey sweetheart, how was your day?
+  npc: 0
+  Delay: 0.1
   Choices:
-  - ChoiceText: Oops, I knew I was forgetting something!
+  - ChoiceText: Great Mum, i aced the math test!
     NextDialogue: {fileID: 11400000, guid: 7c6593dbed0edde43a879b5d4b59501f, type: 2}
-  - ChoiceText: MooOoooom...
+  - ChoiceText: Good.
     NextDialogue: {fileID: 11400000, guid: 7c6593dbed0edde43a879b5d4b59501f, type: 2}
   NextNode: {fileID: 0}

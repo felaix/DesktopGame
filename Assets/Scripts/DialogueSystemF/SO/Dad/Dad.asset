@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Dialogue: 
   npc: 1
+  Delay: 0.1
   Choices: []
   NextNode: {fileID: 0}

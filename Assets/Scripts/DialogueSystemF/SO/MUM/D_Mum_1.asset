@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
   m_Name: D_Mum_1
   m_EditorClassIdentifier: 
-  Dialogue: Thanks, darling!
+  Dialogue: Ohhh i'm so proud of you darling.
+  npc: 0
+  Delay: 0.1
   Choices: []
   NextNode: {fileID: 11400000, guid: 95b36e2697afd664fb1d4213ba4e0b47, type: 2}

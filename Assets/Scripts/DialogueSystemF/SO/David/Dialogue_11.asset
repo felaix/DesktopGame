@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
-  m_Name: Dialogue_7
+  m_Name: Dialogue_11
   m_EditorClassIdentifier: 
-  Dialogue: :x
+  Dialogue: and
   npc: 2
   Delay: 0.1
   Choices: []
-  NextNode: {fileID: 11400000, guid: a38e2385be191774caeb8892448fd809, type: 2}
+  NextNode: {fileID: 11400000, guid: 4e722f090f8f61c4ca18f556046f4e2c, type: 2}

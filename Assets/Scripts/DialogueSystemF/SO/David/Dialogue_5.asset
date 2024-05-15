@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
   m_Name: Dialogue_5
   m_EditorClassIdentifier: 
-  Dialogue: Do you remember the cute girl we met last week?
-  npc: 1
+  Dialogue: Did you read the news?
+  npc: 2
+  Delay: 0.1
   Choices:
-  - ChoiceText: Yes
-    NextDialogue: {fileID: 11400000, guid: 5785899f37eb3cd4a8cd5cb71c51ecd2, type: 2}
-  - ChoiceText: No
+  - ChoiceText: ???
+    NextDialogue: {fileID: 11400000, guid: 489721f9de5f2b34a9f9aec3feb024f6, type: 2}
+  - ChoiceText: No?
     NextDialogue: {fileID: 11400000, guid: 489721f9de5f2b34a9f9aec3feb024f6, type: 2}
   NextNode: {fileID: 0}

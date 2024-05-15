@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,7 @@ public class DialogueManager : MonoBehaviour
     public bool GetCanAnswer() => canAnswer;
     public void SetCanAnswer(bool can) => canAnswer = can;
     public void SetNotification(int index) { if (currentChat == chats[index]) return; else chatButtons[index].IncreaseUnreadMessages(); }
+
     private void Awake()
     {
         Instance = this;
@@ -31,19 +33,26 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
-        CreateChat(dialogues[0], "David");
+
+        //dialogues.ForEach(dialogue => CreateChat(dialogue, dialogue.npc.ToString()));
+
+        StartCoroutine(StartChat());
+
+        //CreateChat(dialogues[0], "David");
     }
 
+    private IEnumerator StartChat()
+    {
+        yield return new WaitForSeconds(1f);
 
-    //public void Reload(DialogueBaseNodeSO dialogue, int index)
-    //{
-    //    Debug.Log("Reload");
-    //    DeleteChoices();
-    //    SetNewDialogue(dialogue);
-    //    //CreateChoiceButtons(dialogue);
-    //    if (currentDialogue.SkipChoices()) { SetNewDialogue(currentDialogue.NextNode); StartCoroutine(NPCNextMessageCoroutine()); }
-    //    else ActivateButtons();
-    //}
+        while (dialogues.Count > 0)
+        {
+            Debug.Log("Create Chat");
+            CreateChat(dialogues[0], dialogues[0].npc.ToString());
+            dialogues.RemoveAt(0);
+            yield return new WaitForSeconds(20f);
+        }
+    }
 
     public void CreateChatButton(int index, string name)
     {

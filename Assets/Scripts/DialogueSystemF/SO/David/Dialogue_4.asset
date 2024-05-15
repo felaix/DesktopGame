@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue_4
   m_EditorClassIdentifier: 
   Dialogue: Anyway....
-  npc: 1
+  npc: 2
+  Delay: 0.1
   Choices: []
   NextNode: {fileID: 11400000, guid: 0b12b81ecc3871c4e8356f92d9e1c702, type: 2}
