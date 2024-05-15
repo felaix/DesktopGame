@@ -52,18 +52,27 @@ public class DialogueManager : MonoBehaviour
         chatBtn.Initialize(null,"last seen...", name);
 
         chatBtn.GetComponent<Button>().onClick.AddListener(() => ShowChat(index));
-        
     }
 
     public void SetChatStatus(int index, string status) => chatButtons[index].SetStatus(status);
     public void SetChatNotification(int index) => chatButtons[index].unreadMessages++;
 
+    public void AddChat(GameObject chat, bool createBtn = false)
+    {
+        chats.Add(chat);
+        ChatUI chatUI = chat.GetComponent<ChatUI>();
+        chatUI.SetIndex(chats.Count);
+
+        if (createBtn) CreateChatButton(chatUI.GetIndex(), chatUI.dialogueSO.npc.ToString());
+    }
+
     public void CreateChat(DialogueBaseNodeSO dialogue, string name)
     {
         GameObject chat = Instantiate(chatPrefab, chatContainer);
         ChatUI chatUI = chat.GetComponent<ChatUI>();
-        chats.Add(chat);
-        chatUI.SetIndex(chats.Count);
+        AddChat(chat);
+        //chats.Add(chat);
+        //chatUI.SetIndex(chats.Count);
         chatUI.dialogueSO = dialogue;
         CreateChatButton(chatUI.GetIndex(), name);
     }

@@ -35,6 +35,7 @@ public class Choice
 public enum NPC
 {
     Mum,
+    Dad,
     David,
-    Hacker
+    Hacker,
 }

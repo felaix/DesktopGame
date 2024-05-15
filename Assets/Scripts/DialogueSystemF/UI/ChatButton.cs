@@ -31,6 +31,11 @@ public class ChatButton : MonoBehaviour
     public void ShowNotification() => notification.SetActive(true);
     public void HideNotification() => notification.SetActive(false);
 
+    private void Start()
+    {
+        Initialize(ProfilePicture, Status, Username);
+    }
+
     public void Initialize(Sprite sprite = null, string status = "online", string username = "username")
     {
         GetComponents();

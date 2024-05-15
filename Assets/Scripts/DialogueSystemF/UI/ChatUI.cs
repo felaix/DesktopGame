@@ -29,8 +29,12 @@ public class ChatUI : MonoBehaviour
     private TMP_Text savedNPCTimeTMP;
     private string originalTxt;
 
+    public bool readOnly;
+
     private void Start()
     {
+        if (readOnly) { DialogueManager.Instance.AddChat(gameObject, true); return; }
+
         CreateNPCMessage();
         CreateChoiceButtons();
     }
