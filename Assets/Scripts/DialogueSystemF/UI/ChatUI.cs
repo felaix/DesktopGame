@@ -24,7 +24,9 @@ public class ChatUI : MonoBehaviour
 
     private RectTransform savedUserRect;
     private RectTransform savedNpcRect;
-    private TMP_Text savedTMP;
+    private TMP_Text savedUserTimeTMP;
+    private TMP_Text savedNPCMsgTMP;
+    private TMP_Text savedNPCTimeTMP;
     private string originalTxt;
 
     private void Start()
@@ -36,12 +38,12 @@ public class ChatUI : MonoBehaviour
     {
         if (userMessageCoroutine != null)
         {
-            userMessageCoroutine = StartCoroutine(UserMessageSpawnCoroutine(savedUserRect));
+            userMessageCoroutine = StartCoroutine(UserMessageSpawnCoroutine(savedUserRect, savedUserTimeTMP));
         }
 
         if (npcMessageCoroutine != null)
         {
-            npcMessageCoroutine = StartCoroutine(NPCMessageSpawnCoroutine(savedNpcRect, savedTMP, originalTxt));
+            npcMessageCoroutine = StartCoroutine(NPCMessageSpawnCoroutine(savedNpcRect, savedNPCMsgTMP, savedNPCTimeTMP, originalTxt));
         }
 
         if (npcNextMessageCoroutine != null)
@@ -84,13 +86,16 @@ public class ChatUI : MonoBehaviour
         // Instantiate NPC Message
         GameObject npcMessageInstance = Instantiate(npcMessagePrefab, npcMessageContainer);
 
+        TMP_Text timeTMP = npcMessageInstance.transform.GetChild(1).GetComponent<TMP_Text>();
+        savedNPCTimeTMP = timeTMP;
+
         // Set Dialogue Text
         TMP_Text dialogueTMP = npcMessageInstance.GetComponentInChildren<TMP_Text>();
         dialogueTMP.text = dialogueSO.Dialogue;
-        savedTMP = dialogueTMP;
+        savedNPCTimeTMP = dialogueTMP;
 
         // Animate Message
-        npcMessageCoroutine = StartCoroutine(NPCMessageSpawnCoroutine((RectTransform)npcMessageInstance.transform, dialogueTMP));
+        npcMessageCoroutine = StartCoroutine(NPCMessageSpawnCoroutine((RectTransform)npcMessageInstance.transform, dialogueTMP, timeTMP));
 
     }
     public void CreateChoiceButtons()
@@ -122,6 +127,10 @@ public class ChatUI : MonoBehaviour
 
         RectTransform userMsgRect = userMessageInstance.GetComponent<RectTransform>();
 
+        TMP_Text userTimeTMP = userMsgRect.GetChild(1).GetComponent<TMP_Text>();
+        userTimeTMP.text = TimeManager.Instance.GetTime();
+        savedUserTimeTMP = userTimeTMP;
+
         // Set Text
         TMP_Text userTMP = userMessageInstance.GetComponentInChildren<TMP_Text>();
         userTMP.text = dialogueSO.GetChoiceText(choice);
@@ -130,7 +139,7 @@ public class ChatUI : MonoBehaviour
         //LayoutRebuilder.ForceRebuildLayoutImmediate(container.GetComponent<RectTransform>());
 
         // Animate Message
-        userMessageCoroutine = StartCoroutine(UserMessageSpawnCoroutine(userMsgRect));
+        userMessageCoroutine = StartCoroutine(UserMessageSpawnCoroutine(userMsgRect, userTimeTMP));
     }
 
     #endregion
@@ -148,22 +157,25 @@ public class ChatUI : MonoBehaviour
         npcNextMessageCoroutine = null;
     }
 
-    private IEnumerator UserMessageSpawnCoroutine(RectTransform t)
+    private IEnumerator UserMessageSpawnCoroutine(RectTransform t, TMP_Text timeTMP)
     {
         savedUserRect = t;
 
         t.DOScaleX(0f, .01f);
         t.DOScaleX(1f, .25f);
+
+        timeTMP.text = TimeManager.Instance.GetTime();
+
         yield return new WaitForSeconds(.25f);
 
         userMessageCoroutine = null;
         yield return null;
     }
 
-    private IEnumerator NPCMessageSpawnCoroutine(RectTransform t, TMP_Text tmp, string txt = "")
+    private IEnumerator NPCMessageSpawnCoroutine(RectTransform t, TMP_Text msgTMP, TMP_Text timeTMP, string txt = "")
     {
         savedNpcRect = t;
-        if (txt == "") originalTxt = tmp.text;
+        if (txt == "") originalTxt = msgTMP.text;
         else originalTxt = txt;
 
         DialogueManager.Instance.SetCanAnswer(false);
@@ -171,31 +183,32 @@ public class ChatUI : MonoBehaviour
 
         while (!DialogueManager.Instance.GetCanAnswer())
         {
-
+            timeTMP.text = "";
             t.DOScaleX(0f, 0f);
             yield return new WaitForSeconds(.5f);
-            tmp.text = "";
+            msgTMP.text = "";
             t.DOScaleX(.5f, .25f);
-            tmp.text = ". . . ";
+            msgTMP.text = ". . . ";
             yield return new WaitForSeconds(.5f);
-            tmp.text = ". ";
+            msgTMP.text = ". ";
             yield return new WaitForSeconds(.1f);
-            tmp.text = " . . ";
+            msgTMP.text = " . . ";
             yield return new WaitForSeconds(.1f);
-            tmp.text = ". . . ";
+            msgTMP.text = ". . . ";
             yield return new WaitForSeconds(.1f);
-            tmp.text = ". ";
+            msgTMP.text = ". ";
             yield return new WaitForSeconds(.1f);
-            tmp.text = " . . ";
+            msgTMP.text = " . . ";
             yield return new WaitForSeconds(.1f);
-            tmp.text = ". . . ";
+            msgTMP.text = ". . . ";
             yield return new WaitForSeconds(.1f);
 
+            timeTMP.text = TimeManager.Instance.GetTime();
             DialogueManager.Instance.SetCanAnswer(true);
         }
 
         t.DOScaleX(1f, .25f);
-        tmp.text = originalTxt;
+        msgTMP.text = originalTxt;
         if (!dialogueSO.SkipChoices()) ActivateButtons();
         yield return new WaitForSeconds(.1f);
         //Debug.Log(chatIndex);
