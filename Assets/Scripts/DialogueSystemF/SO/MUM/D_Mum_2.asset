@@ -16,6 +16,11 @@ MonoBehaviour:
   npc: 0
   Delay: 0.1
   Choices:
-  - ChoiceText: (ignore)
-    NextDialogue: {fileID: 0}
+  - ChoiceText: Mum i'm not a little boy anymore.
+    NextDialogue: {fileID: 11400000, guid: ac5d9c9e87a115948954e131de45db5b, type: 2}
+  - ChoiceText: <3
+    NextDialogue: {fileID: 11400000, guid: 208ac453dee31414b98b012d1d44e84d, type: 2}
   NextNode: {fileID: 0}
+  trigger:
+    Dialogue: {fileID: 0}
+    Npc: 0
