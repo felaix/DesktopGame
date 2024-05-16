@@ -138,6 +138,8 @@ public class ChatUI : MonoBehaviour
         GameObject userMessageInstance = Instantiate(userMessagePrefab, userMessageContainer);
 
         RectTransform userMsgRect = userMessageInstance.GetComponent<RectTransform>();
+        userMsgRect.transform.localPosition = Vector3.zero;
+        userMsgRect.localScale =new Vector3(1, 0, 0);
 
         TMP_Text userTimeTMP = userMsgRect.GetChild(1).GetComponent<TMP_Text>();
         userTimeTMP.text = TimeManager.Instance.GetTime();
@@ -171,8 +173,11 @@ public class ChatUI : MonoBehaviour
     {
         savedUserRect = t;
 
-        t.DOScaleX(0f, .01f);
-        t.DOScaleX(1f, .25f);
+        t.DOScale(new Vector3(1, 1, 1), .35f).SetEase(Ease.InOutElastic);
+
+        //t.DOScaleX(0f, .0f);
+        //t.DOLo(1f, .35f);
+        //t.DOLocalMoveY(1f, 1f);
 
         timeTMP.text = TimeManager.Instance.GetTime();
 

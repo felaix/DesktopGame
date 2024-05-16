@@ -207,6 +207,7 @@ MonoBehaviour:
   choiceButtonContainer: {fileID: 6185197201029166939}
   userMessageContainer: {fileID: 2835685082685957563}
   dialogueSO: {fileID: 11400000, guid: a93a6bf9b7abbf545a22ba5000ed9c74, type: 2}
+  readOnly: 0
 --- !u!1 &2874118468205345077
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +247,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_SizeDelta: {x: -980, y: -580}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3517470737962748545
 MonoBehaviour:
@@ -267,7 +268,7 @@ MonoBehaviour:
     m_Bottom: 10
   m_ChildAlignment: 0
   m_Spacing: 10
-  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 0
