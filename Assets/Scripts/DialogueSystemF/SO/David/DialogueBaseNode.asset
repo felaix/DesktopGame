@@ -18,6 +18,9 @@ MonoBehaviour:
   Choices:
   - ChoiceText: Not much, just chilling. How about you?
     NextDialogue: {fileID: 11400000, guid: 4862030a53187364cb604c0c64e26363, type: 2}
-  - ChoiceText: Hey, not much, wbu?
+  - ChoiceText: Hey David :) not much, wbu?
     NextDialogue: {fileID: 11400000, guid: 4862030a53187364cb604c0c64e26363, type: 2}
   NextNode: {fileID: 0}
+  trigger:
+    Dialogue: {fileID: 0}
+    Npc: 0

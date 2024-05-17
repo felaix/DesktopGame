@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
   m_Name: Dialogue_13
   m_EditorClassIdentifier: 
-  Dialogue: creepy af
+  Dialogue: I have to go now. I'll tell u later
   npc: 2
-  Delay: 0.1
+  Delay: 2
   Choices: []
-  NextNode: {fileID: 0}
+  NextNode: {fileID: 11400000, guid: 42f4104737d0c454bbafa40a1e029593, type: 2}
+  trigger:
+    Dialogue: {fileID: 0}
+    Npc: 0
