@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hacker 13
   m_EditorClassIdentifier: 
   Dialogue: well.. do you like anime?
-  npc: 3
+  npc: 5
   Delay: 1
   Choices:
   - ChoiceText: yes

@@ -53,3 +53,6 @@ TagManager:
   - name: UI - Chat
     uniqueID: 3441520619
     locked: 0
+  - name: UI - MainMenu
+    uniqueID: 1915983441
+    locked: 0

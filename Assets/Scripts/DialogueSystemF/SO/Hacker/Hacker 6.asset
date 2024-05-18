@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: Hacker 6
   m_EditorClassIdentifier: 
   Dialogue: 'you know, i think, when something negative happens, '
-  npc: 3
+  npc: 5
   Delay: 0.3
   Choices: []
   NextNode: {fileID: 11400000, guid: e1201185f99b1984cb1563dfe1ce1495, type: 2}
-  trigger:
-    Dialogue: {fileID: 0}
-    Npc: 0
+  TriggerDialogue: {fileID: 0}

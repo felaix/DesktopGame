@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hacker 14
   m_EditorClassIdentifier: 
   Dialogue: Do you like music?
-  npc: 3
+  npc: 5
   Delay: 1
   Choices:
   - ChoiceText: yes

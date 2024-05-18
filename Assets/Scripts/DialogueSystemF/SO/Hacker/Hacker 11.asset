@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hacker 11
   m_EditorClassIdentifier: 
   Dialogue: Nice! Do you have any pets?
-  npc: 3
+  npc: 5
   Delay: 1
   Choices:
   - ChoiceText: yes, a cat.

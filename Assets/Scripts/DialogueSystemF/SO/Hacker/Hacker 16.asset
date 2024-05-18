@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hacker 16
   m_EditorClassIdentifier: 
   Dialogue: I know a lot of things.
-  npc: 3
+  npc: 5
   Delay: 1
   Choices:
   - ChoiceText: This is getting weird. How do you know my name?

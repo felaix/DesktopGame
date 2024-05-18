@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hacker 8
   m_EditorClassIdentifier: 
   Dialogue: although you may not see it at that time.
-  npc: 3
+  npc: 5
   Delay: 0.1
   Choices:
   - ChoiceText: wow, thank you

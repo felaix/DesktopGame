@@ -44,6 +44,7 @@ public enum NPC
     Mum,
     Dad,
     David,
-    Unknown,
-    Leon
+    Hacker,
+    Leon,
+    Unknown
 }

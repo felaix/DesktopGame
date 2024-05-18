@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hacker 4
   m_EditorClassIdentifier: 
   Dialogue: I can understand that
-  npc: 3
+  npc: 5
   Delay: 2
   Choices: []
   NextNode: {fileID: 11400000, guid: 08668698240d5ee41a9d2d53449ee77a, type: 2}

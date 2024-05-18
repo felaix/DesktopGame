@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hacker 9
   m_EditorClassIdentifier: 
   Dialogue: ???
-  npc: 3
+  npc: 5
   Delay: 1
   Choices:
   - ChoiceText: I'm doing well, thanks.

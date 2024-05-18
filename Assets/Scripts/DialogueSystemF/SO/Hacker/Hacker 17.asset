@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hacker 17
   m_EditorClassIdentifier: 
   Dialogue: Don't worry about it.
-  npc: 3
+  npc: 5
   Delay: 1
   Choices: []
   NextNode: {fileID: 11400000, guid: 907f97de2ae3351438f3c44d9b2a4a81, type: 2}

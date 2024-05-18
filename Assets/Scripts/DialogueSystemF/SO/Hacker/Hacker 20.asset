@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hacker 20
   m_EditorClassIdentifier: 
   Dialogue: Minecraft is awesome! Do you paly any sports?
-  npc: 3
+  npc: 5
   Delay: 1
   Choices:
   - ChoiceText: Yeah, i play soccer sometimes. It's fun.

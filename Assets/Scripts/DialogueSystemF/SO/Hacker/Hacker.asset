@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hacker
   m_EditorClassIdentifier: 
   Dialogue: hi
-  npc: 3
+  npc: 5
   Delay: 1
   Choices:
   - ChoiceText: who are you?
@@ -21,6 +21,4 @@ MonoBehaviour:
   - ChoiceText: hi
     NextDialogue: {fileID: 11400000, guid: 889df53e1907d404e97d4c3992aed0ec, type: 2}
   NextNode: {fileID: 0}
-  trigger:
-    Dialogue: {fileID: 0}
-    Npc: 0
+  TriggerDialogue: {fileID: 0}

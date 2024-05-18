@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: Hacker 5
   m_EditorClassIdentifier: 
   Dialogue: life sucks sometimes
-  npc: 3
+  npc: 5
   Delay: 0.2
   Choices: []
   NextNode: {fileID: 11400000, guid: 87a39717e2b245c4bb356535208e17fd, type: 2}
-  trigger:
-    Dialogue: {fileID: 0}
-    Npc: 0
+  TriggerDialogue: {fileID: 0}

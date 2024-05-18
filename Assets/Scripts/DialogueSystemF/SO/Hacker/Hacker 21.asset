@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hacker 21
   m_EditorClassIdentifier: 
   Dialogue: Do you hear that?
-  npc: 3
+  npc: 5
   Delay: 1
   Choices:
   - ChoiceText: No, seriously, how do you know my name?

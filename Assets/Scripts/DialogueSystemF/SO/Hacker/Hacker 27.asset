@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hacker 27
   m_EditorClassIdentifier: 
   Dialogue: Are you sick?
-  npc: 3
+  npc: 5
   Delay: 1
   Choices:
   - ChoiceText: What do you mean?
