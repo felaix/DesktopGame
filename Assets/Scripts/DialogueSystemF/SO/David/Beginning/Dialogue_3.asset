@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
+  m_Name: Dialogue_3
+  m_EditorClassIdentifier: 
+  Dialogue: Anything exciting planned for the weekend?
+  npc: 2
+  Delay: 0.1
+  Choices:
+  - ChoiceText: Not really, probably just hanging out with friends.
+    NextDialogue: {fileID: 11400000, guid: 8da12e3981ed50f44afad73439ff5635, type: 2}
+  - ChoiceText: Not yet.
+    NextDialogue: {fileID: 11400000, guid: 8da12e3981ed50f44afad73439ff5635, type: 2}
+  - ChoiceText: Nope.
+    NextDialogue: {fileID: 11400000, guid: 8da12e3981ed50f44afad73439ff5635, type: 2}
+  NextNode: {fileID: 0}

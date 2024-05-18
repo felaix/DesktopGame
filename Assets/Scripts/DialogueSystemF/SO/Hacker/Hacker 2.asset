@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
+  m_Name: Hacker 2
+  m_EditorClassIdentifier: 
+  Dialogue: how are you?
+  npc: 3
+  Delay: 5
+  Choices:
+  - ChoiceText: i'm good, thanks. wbu?
+    NextDialogue: {fileID: 11400000, guid: 32b65b7ec01c36449b464727ed8ee09c, type: 2}
+  - ChoiceText: idk. i'm worried about a few things.
+    NextDialogue: {fileID: 11400000, guid: 5c433e85cc9022548880b3832a310a3f, type: 2}
+  - ChoiceText: (ignore)
+    NextDialogue: {fileID: 11400000, guid: 65317ddddb2c15c48a43c2024c0e5abc, type: 2}
+  NextNode: {fileID: 0}
+  TriggerDialogue: {fileID: 0}

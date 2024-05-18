@@ -114,6 +114,9 @@ public class ChatUI : MonoBehaviour
         // Animate Message
         npcMessageCoroutine = StartCoroutine(NPCMessageSpawnCoroutine((RectTransform)npcMessageInstance.transform, dialogueTMP, timeTMP));
 
+        // Trigger a new chat
+
+        if (dialogueSO.TriggerDialogue != null) DialogueManager.Instance.CreateChat(dialogueSO.TriggerDialogue, dialogueSO.GetTriggerNPCName());
     }
     public void CreateChoiceButtons()
     {

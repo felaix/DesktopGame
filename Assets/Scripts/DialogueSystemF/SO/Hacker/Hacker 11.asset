@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
+  m_Name: Hacker 11
+  m_EditorClassIdentifier: 
+  Dialogue: Nice! Do you have any pets?
+  npc: 3
+  Delay: 1
+  Choices:
+  - ChoiceText: yes, a cat.
+    NextDialogue: {fileID: 11400000, guid: 119e71b1616a48945afa80ad90f49c7d, type: 2}
+  - ChoiceText: yes, a dog.
+    NextDialogue: {fileID: 11400000, guid: 79476ad824f90614a9026d8ab6c22ecb, type: 2}
+  - ChoiceText: no
+    NextDialogue: {fileID: 11400000, guid: 67512201b6610b8439574cf9fe1f51d7, type: 2}
+  - ChoiceText: i won't tell you
+    NextDialogue: {fileID: 11400000, guid: a018fd0de2e284045908e325d7c0089b, type: 2}
+  NextNode: {fileID: 0}
+  TriggerDialogue: {fileID: 0}

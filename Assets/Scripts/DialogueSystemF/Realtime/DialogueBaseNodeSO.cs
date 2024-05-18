@@ -17,10 +17,13 @@ public class DialogueBaseNodeSO : ScriptableObject
     public DialogueBaseNodeSO NextNode;
 
     [Header("Trigger Node")]
-    public Trigger trigger;
+    public DialogueBaseNodeSO TriggerDialogue;
     public string GetChoiceText(int index) => Choices[index].ChoiceText;
     public bool SkipChoices() => NextNode != null;
     public DialogueBaseNodeSO GetChoiceNode(int index) => Choices[index].NextDialogue;
+
+    public string GetTriggerNPCName() => TriggerDialogue.npc.ToString();
+    public string GetNPCName() => npc.ToString();
     public virtual void Intialize(string dialogue, List<Choice> choices)
     {
         Dialogue = dialogue;
@@ -36,17 +39,11 @@ public class Choice
 }
 
 [Serializable]
-public class Trigger
-{
-    public DialogueBaseNodeSO Dialogue;
-    public NPC Npc;
-}
-
-[Serializable]
 public enum NPC
 {
     Mum,
     Dad,
     David,
-    Hacker,
+    Unknown,
+    Leon
 }

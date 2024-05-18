@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
+  m_Name: Hacker 16
+  m_EditorClassIdentifier: 
+  Dialogue: I know a lot of things.
+  npc: 3
+  Delay: 1
+  Choices:
+  - ChoiceText: This is getting weird. How do you know my name?
+    NextDialogue: {fileID: 11400000, guid: 2ec39f7970cf7194f9834907c115d6a7, type: 2}
+  NextNode: {fileID: 0}
+  TriggerDialogue: {fileID: 11400000, guid: 1c36e264d31f0a84996d0f4d86ac280c, type: 2}
