@@ -50,10 +50,19 @@ namespace TDS
             UnsubscribeControls();
         }
 
-        public void DealDamage(int  damage)
+        public void DealDamage(int damage)
         {
+
+            Debug.Log(stats.HP + " " + stats);
+
             stats.HP -= damage;
-            Debugger.Instance.CreateLog("HP: " + stats.HP);
+            CanvasManager.Instance.UpdatePlayerHP(stats.HP);
+
+            if (stats.HP < 0) 
+            { 
+                stats.HP = 0;
+                input.Disable();
+            }
         }
 
         #region Controls

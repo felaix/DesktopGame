@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private Transform player;
+    private UnityEngine.Transform player;
     private Animator animator;
     private SpriteRenderer sr;
-    [SerializeField] private float speed = 1f;
+    [SerializeField] private float speed = 20f;
 
     [SerializeField] private GameObject deathFX;
+    [SerializeField] private Vector3 radius;
 
     private void Start()
     {
@@ -23,20 +24,20 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (player != null)
+        if (player != null && DistanceToPlayer() > -2f)
         {
-            Vector3 directionToPlayer = (player.position - transform.position);
-            transform.position += directionToPlayer * speed * Time.smoothDeltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, GetRandomPositionNearPlayer(), (speed * Time.deltaTime));
         }
     }
 
+    private float DistanceToPlayer() => Vector3.Distance(transform.position, player.position);
 
     private Vector3 GetRandomPositionNearPlayer()
     {
 
-        float randomOffsetX = Random.Range(0, .5f);
-        float randomOffsetY = Random.Range(0, .5f);
-        Vector3 randomPos = new Vector3(player.position.x + randomOffsetX, player.position.y + randomOffsetY, 1f);
+        float randomOffsetX = Random.Range(0, radius.x);
+        float randomOffsetY = Random.Range(0, radius.y);
+        Vector3 randomPos = new Vector3(player.position.x + randomOffsetX, player.position.y + randomOffsetY, 0f);
 
         return randomPos;
     }
@@ -48,17 +49,31 @@ public class Enemy : MonoBehaviour
 
         if (collision.CompareTag("Bullet"))
         {
-            Instantiate(deathFX, transform.position, Quaternion.identity);
-            Debugger.Instance.CreateLog("Enemy die!");
-            sr.DOBlendableColor(Color.red, .1f);
-            animator.Play("Enemy_Death");
-            Destroy(this.gameObject, .25f);
+            Death();
         }
 
-        if (collision.CompareTag("Player"))
+        else if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<Player>().DealDamage(1);
+            collision.GetComponent<Player>()?.DealDamage(1);
+            Death();
         }
     }
 
-}
+    private void Death()
+    {
+        SpawnManager.Instance.OnEnemyDeath(gameObject);
+
+        CreateDeathFX();
+
+        sr.DOBlendableColor(Color.red, .1f);
+        sr.DOBlendableColor(Color.white, .2f);
+
+        if (animator != null) animator.Play("Enemy_Death");
+
+        this.GetComponent<Collider2D>().enabled = false;
+
+        Destroy(this.gameObject, 1f);
+    }
+
+    private void CreateDeathFX() {if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
+}}
