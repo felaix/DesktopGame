@@ -1137,19 +1137,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1773669409}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1863600342}
-        m_TargetAssemblyTypeName: EffectManager, Assembly-CSharp
-        m_MethodName: TurnOnPC
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0.5
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1773669409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1343,6 +1331,7 @@ MonoBehaviour:
   - {fileID: 1576124490}
   typingSpeed: 0.05
   _transparent: {r: 0, g: 0, b: 0, a: 0}
+  _startButton: {fileID: 1773669408}
   onLoad: 0
 --- !u!114 &1863600343
 MonoBehaviour:
