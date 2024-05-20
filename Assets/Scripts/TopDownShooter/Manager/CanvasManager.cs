@@ -2,12 +2,12 @@ using DG.Tweening;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TDS
 {
     public class CanvasManager : MonoBehaviour
     {
-
         public static CanvasManager Instance { get; private set; }
 
         [SerializeField] private TMP_Text waveTMP;
@@ -15,12 +15,36 @@ namespace TDS
         [SerializeField] private GameObject _gameOverScreen;
         [SerializeField] private GameObject _game;
 
+        [SerializeField] private Slider _timerSlider;
+        [SerializeField] private float _duration;
+
+        private void Start()
+        {
+            _timerSlider.maxValue = _duration;
+        }
+
         private void Awake()
         {
-
             if (Instance == null) { Instance = this ; } else Destroy(this);
 
             SpawnManager.Instance.WaveCompleted += ToggleWaveCompletedUI;
+        }
+        
+        private void Update()
+        {
+            UpdateTimer();
+        }
+
+        public void UpdateTimer()
+        {
+            float timer = Time.deltaTime;
+
+            if (_duration > 0)
+            {
+                _duration -= timer;
+            }
+
+            _timerSlider.value = (_duration);
         }
 
         public void UpdatePlayerHP(int hp)
@@ -69,7 +93,7 @@ namespace TDS
 
         public void ToggleWaveCompletedUI()
         {
-            waveTMP.text = "Level " + SpawnManager.Instance.GetLevel() + " completed.";
+            waveTMP.text = "Wave " + SpawnManager.Instance.GetLevel() + " completed.";
             TMPAnimation();
         }
 

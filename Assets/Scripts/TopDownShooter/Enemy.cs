@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject deathFX;
     [SerializeField] private Vector3 radius;
 
+    private bool canMove = true;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -24,10 +26,15 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (player != null && DistanceToPlayer() > -2f)
+        if (player != null && DistanceToPlayer() > -2f && canMove)
         {
             transform.position = Vector3.MoveTowards(transform.position, GetRandomPositionNearPlayer(), (speed * Time.deltaTime));
         }
+    }
+
+    private void OnDisable()
+    {
+        Destroy(gameObject);
     }
 
     private float DistanceToPlayer() => Vector3.Distance(transform.position, player.position);
@@ -59,9 +66,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Death()
+    public void Death()
     {
         SpawnManager.Instance.OnEnemyDeath(gameObject);
+
+        canMove = false;
 
         CreateDeathFX();
 

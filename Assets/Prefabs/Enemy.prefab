@@ -146,9 +146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45f250d8f9976be4eb68d9f7677274df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 100
   deathFX: {fileID: 2845294590406298908, guid: e4d7c5fcc74f2cb40bfcc3e722c892d9, type: 3}
-  radius: {x: -5, y: -2, z: 0}
+  radius: {x: -5, y: -2, z: 2}
 --- !u!95 &6357536865326113543
 Animator:
   serializedVersion: 5

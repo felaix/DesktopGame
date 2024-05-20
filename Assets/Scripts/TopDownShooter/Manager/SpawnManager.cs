@@ -1,3 +1,4 @@
+using EditorAttributes;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -16,10 +17,11 @@ namespace TDS
         [SerializeField] private GameObject enemyPrefab;
         public int Level = 1;
 
-        public List<GameObject> enemies = new();
+        [ReadOnly] public List<GameObject> enemies = new();
 
         public Action WaveCompleted = () => Debug.Log("Wave Completed");
         public bool HasStarted = false;
+        [ReadOnly] public bool CanSpawn = true;
 
         public bool GameStarted = false;
         public bool GamePaused = false;
@@ -47,7 +49,6 @@ namespace TDS
                 await Task.Delay(4000);
                 StartGame();
                 Debugger.Instance.CreateLog("Starting next level.");
-
             }
             else
             {
@@ -69,9 +70,7 @@ namespace TDS
 
         private void FixedUpdate()
         {
-
             if (HasStarted && enemies.Count == 0) { HasStarted = false; WaveCompleted(); }
-
         }
 
         private void OnEnable()
@@ -79,8 +78,24 @@ namespace TDS
             if (PlayOnEnable) StartGame();
         }
 
+        public void StopGame()
+        {
+            CanSpawn = false;
+            foreach (GameObject obj in enemies)
+            {
+                if (obj != null)
+                {
+                    if (obj.TryGetComponent<Enemy>(out Enemy e))
+                    {
+                        e.Death();
+                    }
+                }
+            }
+        }
+
         public void StartGame()
         {
+            if (!CanSpawn) return;
             Level++;
             HasStarted = true;
             SpawnWave();
