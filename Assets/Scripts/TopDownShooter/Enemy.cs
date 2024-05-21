@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
 
     public void Death()
     {
-        SpawnManager.Instance.OnEnemyDeath(gameObject);
+        SpawnManager.Instance.OnEnemyDeath(this);
 
         DropCoin();
 
@@ -93,5 +93,5 @@ public class Enemy : MonoBehaviour
         Destroy(this.gameObject, 1f);
     }
 
-    private void CreateDeathFX() {if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
+    private void CreateDeathFX() {if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity, transform);
 }}

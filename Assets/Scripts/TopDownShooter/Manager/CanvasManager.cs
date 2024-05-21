@@ -42,14 +42,14 @@ namespace TDS
         private void OnDisable()
         {
             ResetTimer();
-            SpawnManager.Instance.StopGame();
+            //SpawnManager.Instance.StopGame();
             _gameOverScreen.gameObject.SetActive(false);
         }
 
         private void OnEnable()
         {
             ResetTimer();
-            SpawnManager.Instance.StopGame();
+            //SpawnManager.Instance.StopGame();
         }
 
         private void Start()
@@ -124,8 +124,8 @@ namespace TDS
 
         private async void TMPAnimation()
         {
-            await FadeInTMP(waveTMP, 1f);
-            await FadeOutTMP(waveTMP, 3f);
+            await FadeInTMP(waveTMP, 2f);
+            await FadeOutTMP(waveTMP, 4f);
 
             DisableWaveTMP();
         }

@@ -17,7 +17,8 @@ namespace TDS
         [SerializeField] private GameObject enemyPrefab;
         public int Level = 1;
 
-        [ReadOnly] public List<GameObject> enemies = new();
+        [ReadOnly] public List<Enemy> enemies = new();
+        [ReadOnly] public List<GameObject> items = new();
         //[ReadOnly] public List<GameObject items = new ();
 
         public Action WaveCompleted = () => Debug.Log("Wave Completed");
@@ -32,9 +33,9 @@ namespace TDS
 
         private void Awake()
         {
-            Instance = this;
+           Instance = this;
 
-           WaveCompleted += OnWaveCompleted;
+           //WaveCompleted += OnWaveCompleted;
         }
 
         private void OnDisable()
@@ -44,23 +45,21 @@ namespace TDS
 
         void Start()
         {
-            enemies = new List<GameObject>();
+            enemies = new List<Enemy>();
 
             if (PlayOnLoad) StartGame();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
-            if (HasStarted && enemies.Count == 0) { HasStarted = false; WaveCompleted(); }
-            else
-            {
-
-            }
+            if (HasStarted && enemies.Count == 0 && CanSpawn && Auto) { HasStarted = false; CanSpawn = true; WaveCompleted(); }
         }
 
         private void OnEnable()
         {
-            //WaveCompleted += OnWaveCompleted;
+            HasStarted = false;
+            CanSpawn = true;
+            WaveCompleted += OnWaveCompleted;
             if (!PlayOnEnable) return;
 
             Level = 0;
@@ -68,36 +67,52 @@ namespace TDS
             StartGame();
         }
 
+        public void AddItem(GameObject item)
+        {
+            items.Add(item);
+        }
+
         public void StopGame()
         {
             CanSpawn = false;
-            foreach (GameObject obj in enemies)
+            KillAllEnemies();
+        }
+
+        public void KillAllEnemies()
+        {
+            foreach (Enemy enemy in enemies)
             {
-                if (obj != null)
+                if (enemy != null)
                 {
-                    if (obj.TryGetComponent<Enemy>(out Enemy e))
-                    {
-                        e.Death();
-                    }
+                    enemy.Death();
                 }
             }
         }
 
         public void ReloadGame()
         {
+            // Reset Level & Conditiions
             CanSpawn = true;
+            HasStarted = false;
             Level = 0;
+            enemies.Clear();
+            
+            // Timer UI
             CanvasManager.Instance.ResetTimer();
+            
+            // Reset Manager
             TDSManager.Instance.Coins = 0;
-            TDSManager.Instance.Wave = 0;
+            TDSManager.Instance.Wave = Level;
+
+            //  *Start Game again*
             StartGame();
         }
 
         public void StartGame()
         {
-            if (!CanSpawn) return;
-            Level++;
-            Debug.Log("Start game. Level: " + Level);
+            if (!CanSpawn || HasStarted) return;
+            Level += 1;
+            Debug.Log("Start wave " + Level);
             HasStarted = true;
             SpawnWave();
         }
@@ -108,33 +123,31 @@ namespace TDS
 
             for (int i = 0; i < Level; i++)
             {
-                if (!CanSpawn) return;
+                //if (!CanSpawn) return;
                 Debug.Log("Level " + i + ".");
                 GameObject enemy = SpawnEnemy();
-                enemies.Add(enemy);
+                enemies.Add(enemy.GetComponent<Enemy>());
             }
         }
 
-        private async void OnWaveCompleted()
+        private void OnWaveCompleted()
         {
 
             if (Auto)
             {
-                Debug.Log("Next Level. Awaiting Delay");
-                await Task.Delay(1000);
-                Debug.Log("Delay Done. Starting next lvl");
+                // Has Started & CanSpawn has to be true to spawn
+
+                //await Task.Delay(1000);
+                HasStarted = false;
+                //CanSpawn = true;
                 StartGame();
-            }
-            else
-            {
-                Debugger.Instance.CreateLog("Auto not enabled");
             }
         }
 
-        public void OnEnemyDeath(GameObject obj)
+        public void OnEnemyDeath(Enemy enemy)
         {
-            enemies.Remove(obj);
-            if (enemies.Count <= 0) WaveCompleted();
+            enemies.Remove(enemy);
+            if (enemies.Count <= 0) { WaveCompleted(); HasStarted = false; }
         }
 
         public GameObject SpawnEnemy(Transform spawnPoint = null)

@@ -33,8 +33,6 @@ namespace TDS
         public void DecreaseSpeed(float amount) => stats.Speed -= amount;
 
 
-
-
         private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
