@@ -6,14 +6,15 @@ namespace TDS
     {
 
         public float AmountToIncrease = 2f;
-        public override void PickUp(GameObject obj)
+        public override void PickUp(GameObject obj, Item item)
         {
-            base.PickUp(obj);
+            base.PickUp(obj, item);
 
             if (obj.CompareTag("Player"))
             {
                 obj.GetComponent<Player>().IncreaseSpeed(AmountToIncrease);
             }
+
         }
     }
 

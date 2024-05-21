@@ -1,7 +1,6 @@
 using EditorAttributes;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace TDS
@@ -10,8 +9,7 @@ namespace TDS
     public class SpawnManager : MonoBehaviour
     {
 
-        public static SpawnManager Instance;
-
+        public static SpawnManager Instance;   
         [SerializeField] private List<Transform> _spawnPoints;
         [SerializeField] private GameObject enemyContainer;
         [SerializeField] private GameObject enemyPrefab;

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -21,6 +22,11 @@ namespace TDS
         [SerializeField] private Slider _timerSlider;
         [SerializeField] private float _maxDuration;
         [SerializeField] private float _duration;
+
+        [Header("Items")]
+        [SerializeField] private Transform _itemIconContainer;
+        [SerializeField] private GameObject _itemIconPrefab;
+
 
         [SerializeField] private TMP_Text coinTMP;
 
@@ -72,6 +78,22 @@ namespace TDS
         public void UpdateCoinTMP()
         {
             coinTMP.text = TDSManager.Instance.Coins.ToString();
+        }
+
+        public void UpdateItems(Item item)
+        {
+            if (item.itemType == ItemType.Coin) return;
+            if (item.itemType == ItemType.Shoes)
+            {
+                CreateItemIcon(item);
+            }
+        }
+
+        public void CreateItemIcon(Item item)
+        {
+            if (Instantiate(_itemIconPrefab, _itemIconContainer).TryGetComponent<SpriteRenderer>(out SpriteRenderer sr)) {
+                sr.sprite = item.Sprite;
+            }
         }
 
         public void UpdateTimer()
