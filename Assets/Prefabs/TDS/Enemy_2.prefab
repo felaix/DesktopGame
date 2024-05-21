@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_2
       objectReference: {fileID: 0}
+    - target: {fileID: 2803221075550037518, guid: 6dad4eff6f476fb4bb05e1b1b8d84648, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5821603518499995208, guid: 6dad4eff6f476fb4bb05e1b1b8d84648, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -20,6 +24,26 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 5930bc12f43d4c14684d08f25472ec90, type: 2}
+    - target: {fileID: 8078126427617985176, guid: 6dad4eff6f476fb4bb05e1b1b8d84648, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5055933
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078126427617985176, guid: 6dad4eff6f476fb4bb05e1b1b8d84648, type: 3}
+      propertyPath: m_Size.y
+      value: 0.63280916
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078126427617985176, guid: 6dad4eff6f476fb4bb05e1b1b8d84648, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078126427617985176, guid: 6dad4eff6f476fb4bb05e1b1b8d84648, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.11709632
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078126427617985176, guid: 6dad4eff6f476fb4bb05e1b1b8d84648, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.18359542
+      objectReference: {fileID: 0}
     - target: {fileID: 8760074104266714771, guid: 6dad4eff6f476fb4bb05e1b1b8d84648, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -12,16 +12,20 @@ namespace TDS
 
         [SerializeField] private TMP_Text waveTMP;
         [SerializeField] private TMP_Text playerHP;
+
+        [Header("Game over")]
         [SerializeField] private GameObject _gameOverScreen;
         [SerializeField] private GameObject _game;
 
+        [Header("Timer")]
         [SerializeField] private Slider _timerSlider;
+        [SerializeField] private float _maxDuration;
         [SerializeField] private float _duration;
 
-        private void Start()
-        {
-            _timerSlider.maxValue = _duration;
-        }
+        [SerializeField] private TMP_Text coinTMP;
+
+        private Color defaultWaveTMPColor;
+
 
         private void Awake()
         {
@@ -35,6 +39,41 @@ namespace TDS
             UpdateTimer();
         }
 
+        private void OnDisable()
+        {
+            ResetTimer();
+            SpawnManager.Instance.StopGame();
+            _gameOverScreen.gameObject.SetActive(false);
+        }
+
+        private void OnEnable()
+        {
+            ResetTimer();
+            SpawnManager.Instance.StopGame();
+        }
+
+        private void Start()
+        {
+            defaultWaveTMPColor = waveTMP.color;
+        }
+
+        public void ResetTimer()
+        {
+            _timerSlider.maxValue = _maxDuration;
+            _timerSlider.value = _maxDuration;
+            _duration = _maxDuration;
+        }
+
+        public void OnTimerCompleted()
+        {
+            SpawnManager.Instance.StopGame();
+        }
+
+        public void UpdateCoinTMP()
+        {
+            coinTMP.text = TDSManager.Instance.Coins.ToString();
+        }
+
         public void UpdateTimer()
         {
             float timer = Time.deltaTime;
@@ -42,7 +81,7 @@ namespace TDS
             if (_duration > 0)
             {
                 _duration -= timer;
-            }
+            }else OnTimerCompleted();
 
             _timerSlider.value = (_duration);
         }
@@ -54,7 +93,7 @@ namespace TDS
             playerHP.text = hp.ToString();
 
 
-            if (hp < 0)
+            if (hp <= 0)
             {
                 _gameOverScreen.SetActive(true);
                 _game.SetActive(false);
@@ -73,8 +112,8 @@ namespace TDS
         private async Task FadeInTMP(TMP_Text tmp, float delay)
         {
             EnableWaveTMP();
-            tmp.DOBlendableColor(Color.green, delay);
-            tmp.DOFade(0f, 0f);
+            tmp.transform.DOJump(tmp.transform.position, 1f, 2, .5f).SetEase(Ease.InOutBounce);
+            tmp.DOBlendableColor(defaultWaveTMPColor, delay);
             tmp.DOFade(1f, delay);
             await Task.Delay((int)delay * 1000);
         }
@@ -85,8 +124,8 @@ namespace TDS
 
         private async void TMPAnimation()
         {
-            await FadeInTMP(waveTMP, 2f);
-            await FadeOutTMP(waveTMP, 2f);
+            await FadeInTMP(waveTMP, 1f);
+            await FadeOutTMP(waveTMP, 3f);
 
             DisableWaveTMP();
         }

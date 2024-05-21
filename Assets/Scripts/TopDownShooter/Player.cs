@@ -29,6 +29,12 @@ namespace TDS
 
         }
 
+        public void IncreaseSpeed(float amount) => stats.Speed += amount;
+        public void DecreaseSpeed(float amount) => stats.Speed -= amount;
+
+
+
+
         private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -43,11 +49,18 @@ namespace TDS
         private void OnEnable()
         {
             SubscribeControls();
+            Heal(3);
         }
 
         private void OnDisable()
         {
             UnsubscribeControls();
+        }
+
+        public void Heal(int amount)
+        {
+            stats.HP += amount;
+            CanvasManager.Instance.UpdatePlayerHP(stats.HP);
         }
 
         public void DealDamage(int damage)
@@ -96,27 +109,34 @@ namespace TDS
         private void StopMoving(InputAction.CallbackContext context)
         {
             Debugger.Instance.CreateLog("Stop Move");
+            anim.SetBool("Idle", true);
             rb.velocity = Vector2.zero;
         }
 
         private void Move(InputAction.CallbackContext context)
         {
             Vector2 inputDirection = context.ReadValue<Vector2>();
-            Vector2 horizontalMovement = new Vector2(inputDirection.x, 0f).normalized;
-            Vector2 verticalMovement = new Vector2(0f, inputDirection.y).normalized;
+            //Vector2 horizontalMovement = new Vector2(inputDirection.x, 0f).normalized;
+            //Vector2 verticalMovement = new Vector2(0f, inputDirection.y).normalized;
 
-            if (horizontalMovement.magnitude > 0f)
+            Vector2 movement = inputDirection.normalized;
+
+            if (movement.magnitude > 0f)
             {
-                rb.velocity = horizontalMovement * stats.Speed;
-                direction = horizontalMovement;
+                anim.SetBool("Idle", false);
+
+                rb.velocity = movement * stats.Speed;
+                direction = movement;
             }
-            else if (verticalMovement.magnitude > 0f)
-            {
-                rb.velocity = verticalMovement * stats.Speed;
-                direction = verticalMovement;
-            }
+            //else if (verticalMovement.magnitude > 0f)
+            //{
+            //    rb.velocity = verticalMovement * stats.Speed;
+            //    direction = verticalMovement;
+            //}
             else
             {
+                Debug.Log("Idle");
+                anim.SetBool("Idle", true);
                 rb.velocity = Vector2.zero;
                 direction = Vector2.zero;
             }

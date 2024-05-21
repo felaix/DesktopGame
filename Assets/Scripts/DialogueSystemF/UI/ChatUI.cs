@@ -72,7 +72,7 @@ public class ChatUI : MonoBehaviour
 
     public void Respond(int index)
     {
-        Debug.Log("Respond index: " + index);
+        //Debug.Log("Respond index: " + index);
 
         CreateUserMessage(index);
         SetNewDialogue(dialogueSO.Choices[index].NextDialogue);
@@ -97,7 +97,7 @@ public class ChatUI : MonoBehaviour
     public void CreateNPCMessage()
     {
         // Instantiate NPC Message
-        Debug.Log("Create NPC Message");
+        //Debug.Log("Create NPC Message");
         GameObject npcMessageInstance = Instantiate(npcMessagePrefab, npcMessageContainer);
 
         npcMessageInstance.transform.localScale = Vector3.zero;

@@ -32,9 +32,10 @@ namespace TDS
             transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            Destroy(this.gameObject);
+            Enemy enemy = collision.transform.GetComponent<Enemy>();
+            if (enemy != null) Destroy(this.gameObject);
         }
 
     }

@@ -47,7 +47,7 @@ public class DialogueManager : MonoBehaviour
 
         while (dialogues.Count > 0)
         {
-            Debug.Log("Create Chat");
+            //Debug.Log("Create Chat");
             CreateChat(dialogues[0], dialogues[0].npc.ToString());
             dialogues.RemoveAt(0);
             yield return new WaitForSeconds(20f);
@@ -101,7 +101,7 @@ public class DialogueManager : MonoBehaviour
     public void SelectChat(int index)
     {
 
-        Debug.Log("Selecting chat " + index);
+        //Debug.Log("Selecting chat " + index);
 
         ColorBlock selectedColors = new ColorBlock
         {
