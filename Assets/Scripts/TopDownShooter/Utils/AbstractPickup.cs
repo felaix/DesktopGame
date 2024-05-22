@@ -32,15 +32,21 @@ public abstract class Item : MonoBehaviour
     public ItemType itemType;
     public Sprite Sprite;
 
-
     public void OnPickUp(Item item) 
-    { 
+    {
+        TDSManager.Instance.AddItem(item);
+
         if (item.itemType == ItemType.Coin)
         {
             CanvasManager.Instance.UpdateCoinTMP();
         }
 
         if (item.itemType == ItemType.Shoes)
+        {
+            CanvasManager.Instance.UpdateItems(this);
+        }
+
+        if (item.itemType == ItemType.Heart)
         {
             CanvasManager.Instance.UpdateItems(this);
         }
@@ -53,4 +59,7 @@ public enum ItemType
     Coin,
     Shoes,
     Shotgun,
+    Heart,
+    Life,
+    Explore
 } 

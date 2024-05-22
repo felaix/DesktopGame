@@ -5,49 +5,66 @@ namespace TDS
 {
     public class Player : MonoBehaviour
     {
-        private Stats stats;
-        private TDS_Controls input;
-        private Rigidbody2D rb;
-        private Gun gun;
-        private Animator anim;
+        private Stats _stats;
+        private TDS_Controls _input;
+        private Rigidbody2D _rb;
+        private Gun _gun;
+        private Animator _anim;
 
-        private Vector2 direction;
+        private Vector3 _initialPosition;
+        private Vector2 _direction;
 
         private void Awake()
         {
-            if (stats == null)
-            {
-                stats = new Stats();
-                stats.Initialize(3, 5f, 20);
-            }
-
-            if (input == null)
-            {
-                input = new TDS_Controls();
-                input.Enable();
-            }
-
+            CreateStats();
+            CreateInput();
         }
 
-        public void IncreaseSpeed(float amount) => stats.Speed += amount;
-        public void DecreaseSpeed(float amount) => stats.Speed -= amount;
+        public void IncreaseSpeed(float amount) => _stats.Speed += amount;
+        public void DecreaseSpeed(float amount) => _stats.Speed -= amount;
+        public void IncreaseMaxHP(int amount) => _stats.MaxHP += amount;
+        public void IncreaseHP(int amount) {_stats.HP += amount; if (_stats.HP > _stats.MaxHP) _stats.HP = _stats.MaxHP; }
+        private void CreateStats()
+        {
+            if (_stats == null)
+            {
+                _stats = new Stats();
+                _stats.Initialize(3, 5, 5f, 3);
+            }
+        }
 
+        private void CreateInput()
+        {
+            if (_input == null)
+            {
+                _input = new TDS_Controls();
+                _input.Enable();
+            }
+        }
 
         private void Start()
         {
-            rb = GetComponent<Rigidbody2D>();
-            gun = GetComponent<Gun>();
-            anim = GetComponent<Animator>();
+            _rb = GetComponent<Rigidbody2D>();
+            _gun = GetComponent<Gun>();
+            _anim = GetComponent<Animator>();
 
-            if (anim == null) Debugger.Instance.CreateWarningLog("Animator is missing");
-            if (gun == null) Debugger.Instance.CreateWarningLog("Gun is missing");
-            if (rb == null) Debugger.Instance.CreateWarningLog("Rigidbody2D is missing");
+            CreateStats();
+            CreateInput();
+            SubscribeControls();
+
+            _initialPosition = transform.position;
         }
 
         private void OnEnable()
         {
-            SubscribeControls();
+            //SubscribeControls();
             Heal(3);
+            //transform.position = Vector2.zero;
+        }
+
+        public void ResetPosition()
+        {
+            transform.position = _initialPosition;
         }
 
         private void OnDisable()
@@ -57,41 +74,47 @@ namespace TDS
 
         public void Heal(int amount)
         {
-            stats.HP += amount;
-            CanvasManager.Instance.UpdatePlayerHP(stats.HP);
+            IncreaseHP(amount);
+            CanvasManager.Instance.UpdatePlayerHP(_stats.HP, _stats.MaxHP);
+        }
+
+        public void Shield(int amount)
+        {
+            _stats.HP += amount;
+            CanvasManager.Instance.UpdatePlayerHP((int)_stats.HP, _stats.MaxHP);
         }
 
         public void DealDamage(int damage)
         {
 
-            Debug.Log(stats.HP + " " + stats);
+            Debug.Log(_stats.HP + " " + _stats);
 
-            stats.HP -= damage;
-            CanvasManager.Instance.UpdatePlayerHP(stats.HP);
+            _stats.HP -= damage;
+            CanvasManager.Instance.UpdatePlayerHP(_stats.HP, _stats.MaxHP);
 
-            if (stats.HP < 0) 
+            if (_stats.HP < 0) 
             { 
-                stats.HP = 0;
-                input.Disable();
+                _stats.HP = 0;
+                _input.Disable();
             }
         }
 
         #region Controls
         private void SubscribeControls()
         {
-            input.Player.Move.performed += Move;
-            input.Player.Fire.performed += Fire;
-            input.Player.Move.canceled += StopMoving;
+            _input.Player.Move.performed += Move;
+            _input.Player.Fire.performed += Fire;
+            _input.Player.Move.canceled += StopMoving;
 
-            input.Player.Fire.canceled -= Fire;
+            _input.Player.Fire.canceled -= Fire;
         }
         private void UnsubscribeControls()
         {
-            input.Player.Move.performed -= Move;
-            input.Player.Fire.performed -= Fire;
+            _input.Player.Move.performed -= Move;
+            _input.Player.Fire.performed -= Fire;
 
-            input.Player.Move.canceled -= StopMoving;
-            input.Player.Fire.canceled -= Fire;
+            _input.Player.Move.canceled -= StopMoving;
+            _input.Player.Fire.canceled -= Fire;
         }
 
         #endregion
@@ -99,7 +122,7 @@ namespace TDS
 
         private void Fire(InputAction.CallbackContext context)
         {
-            gun.ShootBullet(direction, stats.AttackSpeed);
+            _gun.ShootBullet(_direction, _stats.AttackSpeed);
         }
 
         #region Movement
@@ -107,8 +130,8 @@ namespace TDS
         private void StopMoving(InputAction.CallbackContext context)
         {
             Debugger.Instance.CreateLog("Stop Move");
-            anim.SetBool("Idle", true);
-            rb.velocity = Vector2.zero;
+            _anim.SetBool("Idle", true);
+            _rb.velocity = Vector2.zero;
         }
 
         private void Move(InputAction.CallbackContext context)
@@ -121,10 +144,10 @@ namespace TDS
 
             if (movement.magnitude > 0f)
             {
-                anim.SetBool("Idle", false);
+                _anim.SetBool("Idle", false);
 
-                rb.velocity = movement * stats.Speed;
-                direction = movement;
+                _rb.velocity = movement * _stats.Speed;
+                _direction = movement;
             }
             //else if (verticalMovement.magnitude > 0f)
             //{
@@ -134,12 +157,12 @@ namespace TDS
             else
             {
                 Debug.Log("Idle");
-                anim.SetBool("Idle", true);
-                rb.velocity = Vector2.zero;
-                direction = Vector2.zero;
+                _anim.SetBool("Idle", true);
+                _rb.velocity = Vector2.zero;
+                _direction = Vector2.zero;
             }
 
-            Rotate(direction);
+            Rotate(_direction);
         }
 
 
@@ -157,11 +180,11 @@ namespace TDS
             //if (scaleDirection.y == 0f) scaleDirection.y = 1f; 
             //if (scaleDirection.z == 0f) scaleDirection.z = 1f;
 
-            if (direction.x < 0f) anim.Play("Player_Walk_R"); 
-            if (direction.x > 0f) anim.Play("Player_Walk_R");
+            if (direction.x < 0f) _anim.Play("Player_Walk_R"); 
+            if (direction.x > 0f) _anim.Play("Player_Walk_R");
             
-            if (direction.y < 0f) anim.Play("Player_Walk_Down");
-            if (direction.y > 0f) anim.Play("Player_Walk_Up");
+            if (direction.y < 0f) _anim.Play("Player_Walk_Down");
+            if (direction.y > 0f) _anim.Play("Player_Walk_Up");
 
             transform.localScale = scaleDirection;
         }

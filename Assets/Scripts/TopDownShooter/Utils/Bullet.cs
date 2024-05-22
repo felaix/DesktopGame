@@ -36,6 +36,10 @@ namespace TDS
         {
             Enemy enemy = collision.transform.GetComponent<Enemy>();
             if (enemy != null) Destroy(this.gameObject);
+
+            else if (collision.gameObject.CompareTag("Player")) return;
+            
+            Destroy(this.gameObject);
         }
 
     }

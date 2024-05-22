@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -7,12 +8,16 @@ using UnityEngine.UI;
 
 namespace TDS
 {
+    [DefaultExecutionOrder(1)]
+
     public class CanvasManager : MonoBehaviour
     {
         public static CanvasManager Instance { get; private set; }
 
-        [SerializeField] private TMP_Text waveTMP;
-        [SerializeField] private TMP_Text playerHP;
+        [Header("TMP")]
+        [SerializeField] private TMP_Text _waveTMP;
+        [SerializeField] private TMP_Text _playerHealthTMP;
+        [SerializeField] private TMP_Text _coinTMP;
 
         [Header("Game over")]
         [SerializeField] private GameObject _gameOverScreen;
@@ -23,12 +28,14 @@ namespace TDS
         [SerializeField] private float _maxDuration;
         [SerializeField] private float _duration;
 
+
         [Header("Items")]
         [SerializeField] private Transform _itemIconContainer;
         [SerializeField] private GameObject _itemIconPrefab;
+        [SerializeField] private List<AP_Explore> _exploreItems;
 
-
-        [SerializeField] private TMP_Text coinTMP;
+        private List<Item> _items = new();
+        private bool _explored = false;
 
         private Color defaultWaveTMPColor;
 
@@ -60,7 +67,35 @@ namespace TDS
 
         private void Start()
         {
-            defaultWaveTMPColor = waveTMP.color;
+            defaultWaveTMPColor = _waveTMP.color;
+        }
+
+        public void RemoveExploreArea(AP_Explore item)
+        {
+            _exploreItems.Remove(item);
+        }
+
+        public void ActivateExploreArea()
+        {
+            List<AP_Explore> copy = _exploreItems;
+            if (copy.Count <= 0) return;
+
+            copy[0].gameObject.SetActive(true);
+            if (copy[0].AutoNext && copy[1] != null) copy[1].gameObject.SetActive(true);
+
+            copy.Clear();
+
+            //if (_exploreItems.Count == 0) return;
+            //if (_exploreItems[0] != null && _exploreItems[0].AutoNext && _exploreItems[1] != null) _exploreItems[1].gameObject.SetActive(true);
+            //if (_exploreItems[0] != null) _exploreItems[0].gameObject.SetActive(true);
+        }
+
+        public void ResetItems()
+        {
+            foreach(Transform item in _itemIconContainer)
+            {
+                Destroy(item.gameObject);
+            }
         }
 
         public void ResetTimer()
@@ -70,14 +105,21 @@ namespace TDS
             _duration = _maxDuration;
         }
 
+        public void ResetUI()
+        {
+            ResetTimer();
+            ResetItems();
+        }
+
         public void OnTimerCompleted()
         {
+            ActivateExploreArea();
             SpawnManager.Instance.StopGame();
         }
 
         public void UpdateCoinTMP()
         {
-            coinTMP.text = TDSManager.Instance.Coins.ToString();
+            _coinTMP.text = TDSManager.Instance.Coins.ToString();
         }
 
         public void UpdateItems(Item item)
@@ -87,12 +129,20 @@ namespace TDS
             {
                 CreateItemIcon(item);
             }
+            if (item.itemType == ItemType.Heart)
+            {
+                CreateItemIcon(item);
+            }
+            if (item.itemType == ItemType.Shotgun)
+            {
+                CreateItemIcon(item);
+            }
         }
 
         public void CreateItemIcon(Item item)
         {
-            if (Instantiate(_itemIconPrefab, _itemIconContainer).TryGetComponent<SpriteRenderer>(out SpriteRenderer sr)) {
-                sr.sprite = item.Sprite;
+            if (Instantiate(_itemIconPrefab, _itemIconContainer).TryGetComponent<Image>(out Image img)) {
+                img.sprite = item.Sprite;
             }
         }
 
@@ -108,12 +158,17 @@ namespace TDS
             _timerSlider.value = (_duration);
         }
 
-        public void UpdatePlayerHP(int hp)
+        public void UpdatePlayerHP(int hp, int maxHP = 3)
         {
-            playerHP.color = Color.clear;
-            playerHP.DOBlendableColor(Color.white, .25f).SetEase(Ease.InOutBounce);
-            playerHP.text = hp.ToString();
 
+            _playerHealthTMP.color = Color.clear;
+            _playerHealthTMP.transform.DOScale(Vector3.one, .25f).SetEase(Ease.InOutBounce);
+
+            if (hp == 1) _playerHealthTMP.color = Color.red;
+            else if (hp > maxHP) _playerHealthTMP.color = Color.yellow;
+            else _playerHealthTMP.color = Color.white;
+
+            _playerHealthTMP.text = hp.ToString();
 
             if (hp <= 0)
             {
@@ -140,21 +195,21 @@ namespace TDS
             await Task.Delay((int)delay * 1000);
         }
 
-        private void EnableWaveTMP() => waveTMP.gameObject.SetActive(true);
+        private void EnableWaveTMP() => _waveTMP.gameObject.SetActive(true);
 
-        private void DisableWaveTMP() => waveTMP.gameObject.SetActive(false);
+        private void DisableWaveTMP() => _waveTMP.gameObject.SetActive(false);
 
         private async void TMPAnimation()
         {
-            await FadeInTMP(waveTMP, 2f);
-            await FadeOutTMP(waveTMP, 4f);
+            await FadeInTMP(_waveTMP, 2f);
+            await FadeOutTMP(_waveTMP, 4f);
 
-            DisableWaveTMP();
+            if (_waveTMP != null) DisableWaveTMP();
         }
 
         public void ToggleWaveCompletedUI()
         {
-            waveTMP.text = "Wave " + SpawnManager.Instance.GetLevel() + " completed.";
+            _waveTMP.text = "Wave " + SpawnManager.Instance.GetLevel() + " completed.";
             TMPAnimation();
         }
 

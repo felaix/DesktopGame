@@ -1,10 +1,11 @@
 using DG.Tweening;
+using System.Threading.Tasks;
 using TDS;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private UnityEngine.Transform player;
+    private Transform player;
     private Animator animator;
     private SpriteRenderer sr;
     [SerializeField] private float speed = 20f;
@@ -17,7 +18,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        GetPlayer();
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
 
@@ -25,7 +26,13 @@ public class Enemy : MonoBehaviour
         if (animator == null) Debugger.Instance.CreateErrorLog("Animator not found!");
     }
 
-    private void Update()
+    private async void GetPlayer()
+    {
+        await Task.Delay(100);
+        player = SpawnManager.Instance.GetPlayer().transform;
+    }
+
+    private void LateUpdate()
     {
         if (player != null && DistanceToPlayer() > -2f && canMove)
         {
@@ -42,6 +49,8 @@ public class Enemy : MonoBehaviour
 
     private Vector3 GetRandomPositionNearPlayer()
     {
+
+        if (player == null) GetPlayer();
 
         float randomOffsetX = Random.Range(0, radius.x);
         float randomOffsetY = Random.Range(0, radius.y);
