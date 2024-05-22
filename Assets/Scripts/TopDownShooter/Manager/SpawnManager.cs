@@ -84,7 +84,7 @@ namespace TDS
             _items.Add(item);
         }
 
-        public async void KillAllEnemies()
+        public void KillAllEnemies()
         {
 
             if (_enemies.Count == 0) return;
@@ -93,7 +93,6 @@ namespace TDS
 
             foreach (Enemy enemy in copy)
             {
-                copy.Remove(enemy);
                 enemy.Death();
             }
 
@@ -172,7 +171,6 @@ namespace TDS
 
         private void OnWaveCompleted()
         {
-
             GameStarted = false;
 
             if (AutoCompleteWave) StartGame();

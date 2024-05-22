@@ -24,12 +24,13 @@ namespace TDS
         public void DecreaseSpeed(float amount) => _stats.Speed -= amount;
         public void IncreaseMaxHP(int amount) => _stats.MaxHP += amount;
         public void IncreaseHP(int amount) {_stats.HP += amount; if (_stats.HP > _stats.MaxHP) _stats.HP = _stats.MaxHP; }
+        public void IncreaseBullets(int amount) { _stats.NumOfBullets += amount; }
         private void CreateStats()
         {
             if (_stats == null)
             {
                 _stats = new Stats();
-                _stats.Initialize(3, 5, 5f, 3);
+                _stats.Initialize(3, 5, 20f, 3);
             }
         }
 
@@ -122,7 +123,7 @@ namespace TDS
 
         private void Fire(InputAction.CallbackContext context)
         {
-            _gun.ShootBullet(_direction, _stats.AttackSpeed);
+            _gun.ShootBullet(_direction, _stats.AttackSpeed, _stats.NumOfBullets);
         }
 
         #region Movement

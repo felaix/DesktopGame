@@ -50,6 +50,11 @@ public abstract class Item : MonoBehaviour
         {
             CanvasManager.Instance.UpdateItems(this);
         }
+
+        if (item.itemType == ItemType.BulletUpgrade)
+        {
+            CanvasManager.Instance.UpdateItems(this);
+        }
     }
 }
 
@@ -58,7 +63,7 @@ public enum ItemType
     None,
     Coin,
     Shoes,
-    Shotgun,
+    BulletUpgrade,
     Heart,
     Life,
     Explore

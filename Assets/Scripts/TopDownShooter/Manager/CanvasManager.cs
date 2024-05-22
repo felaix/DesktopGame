@@ -28,6 +28,8 @@ namespace TDS
         [SerializeField] private float _maxDuration;
         [SerializeField] private float _duration;
 
+        [Header("UI")]
+        [SerializeField] private GameObject _mainMenu;
 
         [Header("Items")]
         [SerializeField] private Transform _itemIconContainer;
@@ -68,6 +70,8 @@ namespace TDS
         private void Start()
         {
             defaultWaveTMPColor = _waveTMP.color;
+            _mainMenu.SetActive(true);
+            _game.SetActive(false);
         }
 
         public void RemoveExploreArea(AP_Explore item)
@@ -133,7 +137,7 @@ namespace TDS
             {
                 CreateItemIcon(item);
             }
-            if (item.itemType == ItemType.Shotgun)
+            if (item.itemType == ItemType.BulletUpgrade)
             {
                 CreateItemIcon(item);
             }

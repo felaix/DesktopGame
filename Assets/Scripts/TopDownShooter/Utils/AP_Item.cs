@@ -16,6 +16,7 @@ namespace TDS
                 if (item.itemType == ItemType.Shoes) player.IncreaseSpeed(AmountToIncrease);
                 if (item.itemType == ItemType.Heart) player.Shield((int)AmountToIncrease);
                 if (item.itemType == ItemType.Life) { player.IncreaseMaxHP((int)AmountToIncrease); player.Heal(99); }
+                if (item.itemType == ItemType.BulletUpgrade) { player.IncreaseBullets((int)AmountToIncrease); }
             }
 
         }
