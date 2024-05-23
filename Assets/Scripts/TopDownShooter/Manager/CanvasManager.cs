@@ -1,7 +1,6 @@
 using DG.Tweening;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,8 +13,10 @@ namespace TDS
     {
         public static CanvasManager Instance { get; private set; }
 
+        [Header("Prefabs")]
+        [SerializeField] private GameObject _playerPrefabTMP;
+
         [Header("TMP")]
-        [SerializeField] private TMP_Text _waveTMP;
         [SerializeField] private TMP_Text _playerHealthTMP;
         [SerializeField] private TMP_Text _coinTMP;
 
@@ -40,16 +41,22 @@ namespace TDS
         private List<Item> _items = new();
         private bool _explored = false;
 
-        private Color defaultWaveTMPColor;
+        //private Color defaultWaveTMPColor;
+        private Player _player;
 
 
         private void Awake()
         {
             if (Instance == null) { Instance = this ; } else Destroy(this);
 
-            SpawnManager.Instance.WaveCompleted += ToggleWaveCompletedUI;
+            SpawnManager.Instance.WaveCompleted += CreateWaveCompletedTMP;
         }
-        
+        private void Start()
+        {
+            _mainMenu.SetActive(true);
+            _game.SetActive(false);
+        }
+
         private void Update()
         {
             UpdateTimer();
@@ -58,22 +65,23 @@ namespace TDS
         private void OnDisable()
         {
             ResetTimer();
-            //SpawnManager.Instance.StopGame();
-            _gameOverScreen.gameObject.SetActive(false);
+            _gameOverScreen.SetActive(false);
         }
 
         private void OnEnable()
         {
             ResetTimer();
-            //SpawnManager.Instance.StopGame();
+
+            _player = SpawnManager.Instance.GetPlayer();
         }
 
-        private void Start()
+        public void OnTimerCompleted()
         {
-            defaultWaveTMPColor = _waveTMP.color;
-            _mainMenu.SetActive(true);
-            _game.SetActive(false);
+            ActivateExploreArea();
+            SpawnManager.Instance.StopGame();
         }
+
+        #region Explore Area
 
         public void RemoveExploreArea(AP_Explore item)
         {
@@ -89,12 +97,11 @@ namespace TDS
             if (copy[0].AutoNext && copy[1] != null) copy[1].gameObject.SetActive(true);
 
             copy.Clear();
-
-            //if (_exploreItems.Count == 0) return;
-            //if (_exploreItems[0] != null && _exploreItems[0].AutoNext && _exploreItems[1] != null) _exploreItems[1].gameObject.SetActive(true);
-            //if (_exploreItems[0] != null) _exploreItems[0].gameObject.SetActive(true);
         }
 
+        #endregion
+
+        #region Reset UI
         public void ResetItems()
         {
             foreach(Transform item in _itemIconContainer)
@@ -116,11 +123,9 @@ namespace TDS
             ResetItems();
         }
 
-        public void OnTimerCompleted()
-        {
-            ActivateExploreArea();
-            SpawnManager.Instance.StopGame();
-        }
+        #endregion
+
+        #region Update UI
 
         public void UpdateCoinTMP()
         {
@@ -141,13 +146,6 @@ namespace TDS
             if (item.itemType == ItemType.BulletUpgrade)
             {
                 CreateItemIcon(item);
-            }
-        }
-
-        public void CreateItemIcon(Item item)
-        {
-            if (Instantiate(_itemIconPrefab, _itemIconContainer).TryGetComponent<Image>(out Image img)) {
-                img.sprite = item.Sprite;
             }
         }
 
@@ -183,43 +181,66 @@ namespace TDS
 
         }
 
-        private async Task FadeOutTMP(TMP_Text tmp, float delay)
+        #endregion
+
+        #region Create
+        public void CreateItemIcon(Item item)
         {
+            if (Instantiate(_itemIconPrefab, _itemIconContainer).TryGetComponent<Image>(out Image img))
+            {
+                img.sprite = item.Sprite;
+            }
+        }
+
+        public void CreatePlayerTMP(string txt)
+        {
+            if (_player == null)
+            {
+                _player = SpawnManager.Instance.GetPlayer();
+                if (_player == null) return;
+            }
+
+            TMP_Text tmp = CreatePlayerTMP(_player.GetPlayerCanvas());
+            tmp.text = txt;
+
+            PlayerTMPAnimation(tmp);
+        }
+        public TMP_Text CreatePlayerTMP(Transform container) => Instantiate(_playerPrefabTMP, container).GetComponent<TMP_Text>();
+        public void CreateWaveCompletedTMP() => CreatePlayerTMP("Wave " + SpawnManager.Instance.GetLevel() + " completed.");
+
+        #endregion
+
+        #region Tweens
+
+        // ONLY FADE OUT
+        private Tween FadeOutTMP(TMP_Text tmp, float delay)
+        {
+            float randomDirectionX = Random.Range(-.4f, .4f);
+            Vector3 direction = new Vector3(randomDirectionX, 1f, 0f);
             tmp.DOBlendableColor(Color.white, delay);
-            tmp.DOFade(0f, delay);
-            await Task.Delay((int)delay * 1000);
-
+            tmp.transform.DOLocalMove(direction, delay);
+            return tmp.DOFade(0f, delay);
         }
 
-        private async Task FadeInTMP(TMP_Text tmp, float delay)
+        // ONLY JUMP IN
+        private Tween FadeJumpInTMP(TMP_Text tmp, float delay)
         {
-            EnableWaveTMP();
-            tmp.transform.DOJump(tmp.transform.position, .5f, 2, .5f).SetEase(Ease.InOutBounce);
-            tmp.DOBlendableColor(defaultWaveTMPColor, delay);
-            tmp.DOFade(1f, delay);
-            await Task.Delay((int)delay * 1000);
+            tmp.color = Color.clear;
+            tmp.transform.DOJump(tmp.transform.position, .7f, 1, delay).SetEase(Ease.InOutBounce);
+            Tween tween = tmp.DOBlendableColor(PrimaryColor, delay);
+
+            return tween;
         }
 
-        private void EnableWaveTMP() => _waveTMP.gameObject.SetActive(true);
-
-        private void DisableWaveTMP() => _waveTMP.gameObject.SetActive(false);
-
-        private async void TMPAnimation()
+        // JUMP IN AND OUT
+        public Tween PlayerTMPAnimation(TMP_Text tmp)
         {
-            await FadeInTMP(_waveTMP, 2f);
-            await FadeOutTMP(_waveTMP, 4f);
-
-            if (_waveTMP != null) DisableWaveTMP();
+            Tween tween = FadeJumpInTMP(tmp, .35f);
+            return tween.OnComplete(() => FadeOutTMP(tmp, .5f));
         }
 
-        public void ToggleWaveCompletedUI()
-        {
-            _waveTMP.text = "Wave " + SpawnManager.Instance.GetLevel() + " completed.";
-            TMPAnimation();
-        }
 
+        #endregion
         
-
-
     }
 }

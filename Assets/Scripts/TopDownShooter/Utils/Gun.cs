@@ -1,19 +1,21 @@
 using UnityEngine;
 using System.Threading.Tasks;
 using EditorAttributes;
+using UnityEngine.UI;
 
 namespace TDS
 {
     public class Gun : MonoBehaviour
     {
-        [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private GameObject _bulletPrefab;
+        [SerializeField] private Slider _delaySlider;
 
         [ReadOnly][SerializeField] private Bullet _currentBullet;
         [ReadOnly][SerializeField] private GunType _currentBulletType = GunType.Normal;
 
         [ReadOnly][SerializeField] private bool _canShoot;
 
-        [ReadOnly] public float GunSpeed = .2f;
+        public float GunSpeed = .4f;
         [ReadOnly] public float _delay;
 
         private void OnDisable()
@@ -21,15 +23,29 @@ namespace TDS
             Destroy(gameObject);
         }
 
+        public void ModifyGunSpeed(float spd)
+        {
+            GunSpeed = spd;
+            ModifySliderValues(_delay, spd);
+        }
+
+        public void ModifySliderValues(float currentValue, float maxValue)
+        {
+            _delaySlider.maxValue = maxValue;
+            _delaySlider.value = currentValue;
+        }
+
         public void UpgradeGun()
         {
             _currentBulletType = GunType.Shotgun;
+            ModifyGunSpeed(GunSpeed / 1.3f);
         }
 
         private void Update()
         {
             if (!_canShoot)
             {
+                ModifySliderValues(_delay, GunSpeed);
                 _delay += Time.deltaTime;
                 if (_delay >= GunSpeed) { _canShoot = true; _delay = 0; }
             }
@@ -45,12 +61,15 @@ namespace TDS
                 for (int i = 0; i < numOfBullets; i++)
                 {
                     // Spawn a bullet
-                    _currentBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity).GetComponent<Bullet>();
+                    _currentBullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity).GetComponent<Bullet>();
                     _currentBullet.Initialize(direction, spd, _currentBulletType);
 
                     // Delay 
                     //await Task.Delay((int)spd * 100);
                 }
+            }else
+            {
+                CanvasManager.Instance.CreatePlayerTMP("Gun reloading ...");
             }
         }
         

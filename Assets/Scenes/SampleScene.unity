@@ -385,7 +385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &53308721
 RectTransform:
   m_ObjectHideFlags: 0
@@ -402,7 +402,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -40}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 312.01, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &53308722
@@ -7743,9 +7743,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddab18b69bd4d364e82a96ac636a410c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 0}
+  _bulletPrefab: {fileID: 0}
+  _delaySlider: {fileID: 0}
   _currentBullet: {fileID: 0}
   _currentBulletType: 0
+  _canShoot: 0
+  GunSpeed: 2
+  _delay: 0
 --- !u!1001 &615584541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17326,8 +17330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67fcb7fb0d3b0c14a9445e796109b524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnManager: {fileID: 2058459832}
   npcNode: {fileID: 11400000, guid: da1121bc64363744fbb17720c847faa4, type: 2}
+  item: {fileID: 6910727406683006814, guid: 75f82e834011a734eb995ae71d69662e, type: 3}
 --- !u!1 &1598151905
 GameObject:
   m_ObjectHideFlags: 0
@@ -19129,7 +19133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a2d24cf87e7d5748af19fa704d7b74d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waveTMP: {fileID: 53308722}
+  _playerPrefabTMP: {fileID: 4236188926118505280, guid: 67fce882c8f8eb640a72211f54502a13, type: 3}
   _playerHealthTMP: {fileID: 1733911211}
   _coinTMP: {fileID: 1135848225}
   _gameOverScreen: {fileID: 462167035}

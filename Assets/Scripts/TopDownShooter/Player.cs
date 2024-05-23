@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace TDS
 {
@@ -14,13 +15,14 @@ namespace TDS
         private Vector3 _initialPosition;
         private Vector2 _direction;
 
-
         private void Awake()
         {
             CreateStats();
             CreateInput();
         }
 
+        public Slider GetDelaySlider() => GetPlayerCanvas().GetChild(0).GetComponent<Slider>();
+        public Transform GetPlayerCanvas() => transform.GetChild(2);
         public void IncreaseSpeed(float amount) => _stats.Speed += amount;
         public void DecreaseSpeed(float amount) => _stats.Speed -= amount;
         public void IncreaseMaxHP(int amount) => _stats.MaxHP += amount;
