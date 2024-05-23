@@ -7771,7 +7771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5145534792332813531, guid: ecb33b6726683914cbfbe46453b47241, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -199.76003
+      value: -199.76009
       objectReference: {fileID: 0}
     - target: {fileID: 5145534792332813531, guid: ecb33b6726683914cbfbe46453b47241, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7908,7 +7908,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddab18b69bd4d364e82a96ac636a410c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  _currentBullet: {fileID: 0}
+  _currentBulletType: 0
 --- !u!1001 &615584541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8031,7 +8033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5637264047911702877, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -249.76003
+      value: -249.76009
       objectReference: {fileID: 0}
     - target: {fileID: 5637264047911702877, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -19370,7 +19372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5637264047911702877, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -209.76003
+      value: -209.76009
       objectReference: {fileID: 0}
     - target: {fileID: 5637264047911702877, guid: 09d1df18b53fb624d894de65a26e4fa7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -19628,7 +19630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5145534792332813531, guid: ecb33b6726683914cbfbe46453b47241, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -159.88002
+      value: -159.88008
       objectReference: {fileID: 0}
     - target: {fileID: 5145534792332813531, guid: ecb33b6726683914cbfbe46453b47241, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -20073,6 +20075,7 @@ MonoBehaviour:
   _maxDuration: 20
   _duration: 20
   _mainMenu: {fileID: 1175572054}
+  PrimaryColor: {r: 1, g: 0.6666667, b: 0.36862746, a: 1}
   _itemIconContainer: {fileID: 78001065}
   _itemIconPrefab: {fileID: 5848346578118429076, guid: 6f4f91e2a549d714989e357353d3d95f, type: 3}
   _exploreItems:

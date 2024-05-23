@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 349883086672428924}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.36, y: 0.52, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -142,7 +142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddab18b69bd4d364e82a96ac636a410c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 8803353518120318760, guid: 178d1d48c83be8e4fa5230c45470f876, type: 3}
+  bulletPrefab: {fileID: 5974789971913885984, guid: 178d1d48c83be8e4fa5230c45470f876, type: 3}
+  _currentBullet: {fileID: 0}
+  _currentBulletType: 0
 --- !u!95 &8891438226244466331
 Animator:
   serializedVersion: 5

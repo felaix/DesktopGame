@@ -1,40 +1,75 @@
+using EditorAttributes;
+using System;
 using UnityEngine;
 
 namespace TDS
 {
+    [RequireComponent(typeof(Collider2D))]
+    [Serializable]
     public class Bullet : MonoBehaviour
     {
+        [ReadOnly][SerializeField] public GunType Type;
+        [ReadOnly] [SerializeField] private Vector2 _direction = new Vector2(1, 0);
+        [ReadOnly][SerializeField] private float _speed;
 
-        private Vector2 direction = new Vector2(1, 0);
-        [SerializeField] private float speed = 5f;
-
-        public void Initialize(Vector2 dir, float spd)
+        public void Initialize(Vector2 dir, float spd, GunType type = GunType.Normal)
         {
-            direction = dir;
-            speed = spd;
+            _direction = dir;
+            _speed = spd;
+            Type = type;
         }
 
         void Update()
         {
-            Move(direction * speed);
-            Rotate(direction * speed);
+            Move(_direction * _speed);
+            Rotate(_direction * _speed);
         }
 
-        public void Move(Vector3 targetPos)
+        public void Move(Vector3 direction)
         {
-            transform.position += targetPos * Time.deltaTime;
+            if (Type.Equals(GunType.Normal))
+            {
+                transform.position += direction * Time.deltaTime;
+                Debug.Log("Move Direction: " + direction);
+            }
+            if (Type.Equals(GunType.Shotgun))
+            {
+                transform.position += GetRandomOffset(direction) * Time.deltaTime;
+
+            }
+        }
+
+        public Vector3 GetRandomOffset(Vector3 dir)
+        {
+            float randomAngle = UnityEngine.Random.Range(-30f, 30f);
+            return new Vector2(dir.x, dir.y + randomAngle);
         }
 
         public void ManipulateDirection(Vector2 dir)
         {
-            direction = dir;
+            _direction = dir;
         }
 
         private void Rotate(Vector2 direction)
         {
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-            transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            if (Type.Equals(GunType.Normal))
+            {
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+                //Debug.Log("Angle: " + angle);
+                transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            }
+
+            if (Type.Equals(GunType.Shotgun))
+            {
+                float randomMultiplier = UnityEngine.Random.Range(0f, 4f);
+                float angle = Mathf.Atan2(direction.y * randomMultiplier, direction.x * randomMultiplier) * Mathf.Rad2Deg;
+
+                //Debug.Log("Angle: " + angle);
+                transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
+            }
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -47,6 +82,12 @@ namespace TDS
             Destroy(this.gameObject);
         }
 
+    }
+
+    public enum GunType
+    {
+        Normal,
+        Shotgun,
     }
 
 }

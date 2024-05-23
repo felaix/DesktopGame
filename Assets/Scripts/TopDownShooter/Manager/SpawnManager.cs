@@ -195,7 +195,7 @@ namespace TDS
         }
 
         public int GetLevel() => Level;
-        public async void CreateNewPlayer() { if (_player != null) Destroy(_player.gameObject); await Task.Delay(100); _player = Instantiate(_playerPrefab, _playerSpawnPoint.transform.position, Quaternion.identity).GetComponent<Player>(); }
+        public async void CreateNewPlayer() { if (_player != null) Destroy(_player.gameObject); await Task.Delay(100); _player = Instantiate(_playerPrefab, _playerSpawnPoint).GetComponent<Player>(); }
     }
 
 }

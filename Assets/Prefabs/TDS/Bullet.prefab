@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyAtStart: 1
-  delay: 1
+  delay: 10
 --- !u!114 &8803353518120318760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,7 +115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cecd3c7e81fbb574a814dbe0e723a249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  Type: 1
+  Speed: 10000
 --- !u!61 &-735749430333289376
 BoxCollider2D:
   m_ObjectHideFlags: 0

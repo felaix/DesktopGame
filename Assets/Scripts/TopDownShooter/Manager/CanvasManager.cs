@@ -30,6 +30,7 @@ namespace TDS
 
         [Header("UI")]
         [SerializeField] private GameObject _mainMenu;
+        public Color PrimaryColor;
 
         [Header("Items")]
         [SerializeField] private Transform _itemIconContainer;
@@ -169,7 +170,7 @@ namespace TDS
             _playerHealthTMP.transform.DOScale(Vector3.one, .25f).SetEase(Ease.InOutBounce);
 
             if (hp == 1) _playerHealthTMP.color = Color.red;
-            else if (hp > maxHP) _playerHealthTMP.color = Color.yellow;
+            else if (hp >= maxHP) _playerHealthTMP.color = PrimaryColor;
             else _playerHealthTMP.color = Color.white;
 
             _playerHealthTMP.text = hp.ToString();

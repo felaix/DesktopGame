@@ -23,14 +23,14 @@ namespace TDS
         public void IncreaseSpeed(float amount) => _stats.Speed += amount;
         public void DecreaseSpeed(float amount) => _stats.Speed -= amount;
         public void IncreaseMaxHP(int amount) => _stats.MaxHP += amount;
-        public void IncreaseHP(int amount) {_stats.HP += amount; if (_stats.HP > _stats.MaxHP) _stats.HP = _stats.MaxHP; }
-        public void IncreaseBullets(int amount) { _stats.NumOfBullets += amount; }
+        public void IncreaseHP(int amount) {_stats.HP += amount; if (_stats.HP >= _stats.MaxHP) _stats.HP = _stats.MaxHP; }
+        public void IncreaseBullets(int amount) { _stats.NumOfBullets += amount; _gun.UpgradeGun(); }
         private void CreateStats()
         {
             if (_stats == null)
             {
                 _stats = new Stats();
-                _stats.Initialize(3, 5, 20f, 3);
+                _stats.Initialize(3, 5, 10f, 3);
             }
         }
 
@@ -70,6 +70,7 @@ namespace TDS
 
         private void OnDisable()
         {
+            Destroy(gameObject);
             UnsubscribeControls();
         }
 
