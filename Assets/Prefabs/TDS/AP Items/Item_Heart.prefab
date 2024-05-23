@@ -220,10 +220,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 55182249036307014}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2.2990656, y: -1.5}
-  m_SizeDelta: {x: 8, y: 8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 2.2990656, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6731374874051874151
 CanvasRenderer:
@@ -446,6 +446,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 4
   Sprite: {fileID: 21300000, guid: 70e098ac9368f274ea98019df70b396b, type: 3}
+  SpawnOffset: {x: 0.1, y: 0.1}
+  AutoDestroy: 1
   AmountToIncrease: 1
 --- !u!198 &2481712172435224125
 ParticleSystem:
@@ -5339,10 +5341,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 55182249036307014}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1.0490655, y: -1.5}
-  m_SizeDelta: {x: 0.56, y: 0.56}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1.0490655, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6781158401560970678
 CanvasRenderer:

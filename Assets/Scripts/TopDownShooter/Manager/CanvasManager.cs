@@ -194,7 +194,7 @@ namespace TDS
         private async Task FadeInTMP(TMP_Text tmp, float delay)
         {
             EnableWaveTMP();
-            tmp.transform.DOJump(tmp.transform.position, 1f, 2, .5f).SetEase(Ease.InOutBounce);
+            tmp.transform.DOJump(tmp.transform.position, .5f, 2, .5f).SetEase(Ease.InOutBounce);
             tmp.DOBlendableColor(defaultWaveTMPColor, delay);
             tmp.DOFade(1f, delay);
             await Task.Delay((int)delay * 1000);

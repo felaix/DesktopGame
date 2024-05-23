@@ -19,7 +19,6 @@ namespace TDS
 
         private void OnEnable()
         {
-            Debug.Log("Explore area activated");
             transform.DOMove(new Vector3(transform.position.x + 1f, transform.position.y, transform.position.z), 1f).SetEase(Ease.InOutBack);
         }
 
@@ -29,6 +28,7 @@ namespace TDS
 
             Camera camera = Camera.main;
             camera.transform.DOMove(new Vector3(camera.transform.position.x + Offset.x, camera.transform.position.y + Offset.y, camera.transform.position.z + Offset.z), Duration);
+
 
             CanvasManager.Instance.RemoveExploreArea(this);
 

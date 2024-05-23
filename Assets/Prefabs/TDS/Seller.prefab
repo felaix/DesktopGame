@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5655598766970731847}
   - component: {fileID: 8891438226244466331}
   - component: {fileID: 4535663745248380729}
+  - component: {fileID: 613329265743192266}
   m_Layer: 0
   m_Name: Seller
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 349883086672428924}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.36, y: 0.52, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7599462414755604693}
@@ -78,9 +79,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 1163862871, guid: 7d4786c359a5b7c448c0c5ef46782c78, type: 3}
+  m_Sprite: {fileID: -1464985244, guid: 2ada607ae5480e84286491c418b84a2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
   m_Size: {x: 1, y: 1}
@@ -126,7 +127,7 @@ Animator:
   m_GameObject: {fileID: 349883086672428924}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 86aafd49afcee1e4485249574007a226, type: 2}
+  m_Controller: {fileID: 9100000, guid: b4e06582e7a6fb4439352a73e52110ba, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -166,10 +167,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.036638737, y: -1.2823664}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -180,8 +181,31 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.3888645, y: 3.5647318}
   m_EdgeRadius: 0
+--- !u!114 &613329265743192266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349883086672428924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c562edb594dea84cb7e32ac6c505905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 7
+  Sprite: {fileID: -1866422981, guid: 2ada607ae5480e84286491c418b84a2c, type: 3}
+  SpawnOffset: {x: 0.1, y: 0.1}
+  AutoDestroy: 0
+  ItemsToSpawn:
+  - {fileID: 6063491099522433376, guid: 07a6ad9fa05fce64ca9c4230457b0590, type: 3}
+  - {fileID: 6910727406683006814, guid: 75f82e834011a734eb995ae71d69662e, type: 3}
+  - {fileID: 4511329600087135352, guid: 65c57d17ad1889d489f0c22bf9b27e00, type: 3}
+  - {fileID: 8752367277505045047, guid: 54bdb7c1ef7f7074daa6846f04085f37, type: 3}
+  ItemSpawnOffset: {x: -1, y: 0, z: 0}
+  OffsetModifier: {x: 2, y: 0, z: 0}
 --- !u!1 &2375647516394249247
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,7 +216,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5821107705933860577}
   - component: {fileID: 7810454532438860211}
-  - component: {fileID: 1284352690892895786}
   m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
@@ -209,7 +232,7 @@ Transform:
   m_GameObject: {fileID: 2375647516394249247}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: -532.90955}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -257,7 +280,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.11764707, g: 0.11764707, b: 0.11764707, a: 0.7921569}
+  m_Color: {r: 0.050980397, g: 0.16862746, b: 0.27058825, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -267,18 +290,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!210 &1284352690892895786
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2375647516394249247}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 3
-  m_SortAtRoot: 0
 --- !u!1 &7692264004603338550
 GameObject:
   m_ObjectHideFlags: 0

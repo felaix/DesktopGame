@@ -14,6 +14,7 @@ namespace TDS
         private Vector3 _initialPosition;
         private Vector2 _direction;
 
+
         private void Awake()
         {
             CreateStats();

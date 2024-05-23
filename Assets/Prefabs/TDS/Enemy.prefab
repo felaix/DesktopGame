@@ -148,8 +148,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   deathFX: {fileID: 2845294590406298908, guid: e4d7c5fcc74f2cb40bfcc3e722c892d9, type: 3}
-  coinPrefab: {fileID: 2747778039181928328, guid: dfefc173c933d424e8b573072f428382, type: 3}
   radius: {x: -5, y: -2, z: 2}
+  _dropItem: {fileID: 479234380389975994, guid: dfefc173c933d424e8b573072f428382, type: 3}
 --- !u!95 &6357536865326113543
 Animator:
   serializedVersion: 5

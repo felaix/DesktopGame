@@ -11,9 +11,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float speed = 20f;
 
     [SerializeField] private GameObject deathFX;
-    [SerializeField] private GameObject coinPrefab;
     [SerializeField] private Vector3 radius;
 
+    [SerializeField] private Item _dropItem;
     private bool canMove = true;
 
     private void Start()
@@ -76,24 +76,26 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void DropCoin()
+    private void DropItem()
     {
-        Transform coin = Instantiate(coinPrefab, transform.position, Quaternion.identity).transform;
-        coin.DOJump(new Vector3((transform.position.x + .1f), (transform.position.y + .1f), 0),.5f, 2, .35f);
+
+        SpawnManager.Instance.SpawnItem(_dropItem, transform.position);
+        //Transform item = Instantiate(_dropItem, transform.position, Quaternion.identity, transform.GetComponentInParent<Transform>()).transform;
+        //item.DOJump(new Vector3((transform.position.x + .1f), (transform.position.y + .1f), 0),.5f, 2, .35f);
     }
 
     public void Death()
     {
         SpawnManager.Instance.OnEnemyDeath(this);
 
-        DropCoin();
+        DropItem();
 
         canMove = false;
 
         CreateDeathFX();
 
-        sr?.DOBlendableColor(Color.red, .1f);
-        sr?.DOBlendableColor(Color.white, .2f);
+        //sr.DOBlendableColor(Color.red, .1f);
+        sr.DOBlendableColor(Color.white, .2f);
 
         if (animator != null) animator.Play("Enemy_Death");
 

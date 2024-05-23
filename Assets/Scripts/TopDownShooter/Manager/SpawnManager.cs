@@ -3,6 +3,7 @@ using EditorAttributes;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace TDS
@@ -12,34 +13,38 @@ namespace TDS
     {
         public static SpawnManager Instance;
 
-        [Header("Informations"), HelpBox("Development flow informations read only")]
+        [Header("Development Conditions"), HelpBox("Development flow informations")]
         [ReadOnly] public int Level = 1;
         [ReadOnly] public bool GameStarted = false;
         [ReadOnly] public bool CanSpawn = true;
+        [ReadOnly] public bool PlayOnEnable = false;
+        [ReadOnly] public bool AutoCompleteWave = false;
+        [ReadOnly] public bool CreatePlayer = true;
+
+        private List<Enemy> _enemies = new();
+        private List<Item> _items = new();
 
         [Header("Prefabs")]
         [SerializeField] private GameObject _playerPrefab;
         [SerializeField] private GameObject _enemyPrefab;
+        [SerializeField] private GameObject _itemPrefab;
 
-        [Header("Spawn Points & Container")]
+        [Header("Spawn Points")]
         [SerializeField] private List<Transform> _spawnPoints;
         [SerializeField] private Transform _playerSpawnPoint;
-        [SerializeField] private GameObject enemyContainer;
+
+        [Header("Container")]
+        [SerializeField] private Transform _gameContainer;
+        private Transform _enemyContainer;
+        private Transform _itemContainer;
 
 
-        private List<Enemy> _enemies = new();
-        private List<GameObject> _items = new();
-
-        public Action WaveCompleted = () => Debug.Log("Wave Completed");
-
-
-        public bool PlayOnEnable = false;
-        public bool AutoCompleteWave = false;
-        public bool CreatePlayer = true;
-
-        public Player GetPlayer() => _player;
         private Player _player;
 
+        public Player GetPlayer() => _player;
+
+        public Action WaveCompleted = () => Debug.Log("Wave Completed");
+        
         private void Awake()
         {
            Instance = this;
@@ -69,6 +74,9 @@ namespace TDS
 
         private void OnEnable()
         {
+
+            CreateContainer();
+
             GameStarted = false;
             CanSpawn = true;
             WaveCompleted += OnWaveCompleted;
@@ -79,9 +87,20 @@ namespace TDS
             StartGame();
         }
 
-        public void AddItem(GameObject item)
+        private void CreateContainer()
+        {
+            if (_itemContainer == null) { _itemContainer = Instantiate(new GameObject(), _gameContainer).GetComponent<Transform>(); _itemContainer.name = "Item Container"; }
+            if (_enemyContainer == null) { _enemyContainer = Instantiate(new GameObject(), _gameContainer).GetComponent<Transform>(); _enemyContainer.name = "Enemy Container"; }
+        }
+
+        public void AddItem(Item item)
         {
             _items.Add(item);
+        }
+
+        public void RemoveItem(Item item)
+        {
+            _items.Remove(item);
         }
 
         public void KillAllEnemies()
@@ -99,10 +118,25 @@ namespace TDS
             copy.Clear();
         }
 
+        public void DestroyAllItems()
+        {
+            if (_items.Count == 0) return;
+
+            List<Item> copy = _items;
+
+            foreach(Item item in copy)
+            {
+                Destroy(item.gameObject);
+            }
+
+            _items.Clear();
+        }
+
         public void StopGame()
         {
             CanSpawn = false;
             KillAllEnemies();
+            //DestroyAllItems();
         }
 
         public void ReloadGame()
@@ -116,10 +150,11 @@ namespace TDS
             // Reload UI
             CanvasManager.Instance.ResetUI();
 
-            // Reset Manager
+            // Destroy all Items
+            DestroyAllItems();
+
+            // Reset Stats
             TDSManager.Instance.ResetStats();
-            //TDSManager.Instance.Coins = 0;
-            //TDSManager.Instance.Wave = Level;
 
             CreateNewPlayer();
 
@@ -182,10 +217,19 @@ namespace TDS
             if (_enemies.Count <= 0) { WaveCompleted(); GameStarted = false; }
         }
 
+        public Transform GetPlayerSpawnPoint() => _playerSpawnPoint;
+
+        public Transform SpawnItem(Item item, Vector3 pos = new())
+        {
+            if (pos == null) pos = _itemContainer.position;
+            if (item == null) return null;
+            else return Instantiate(item, pos, Quaternion.identity, _itemContainer).transform;
+        }
+
         public GameObject SpawnEnemy(Transform spawnPoint = null)
         {
             if (spawnPoint == null) spawnPoint = GetRandomSpawnPoint();
-            return Instantiate(_enemyPrefab, spawnPoint.position, Quaternion.identity, enemyContainer.transform);
+            return Instantiate(_enemyPrefab, spawnPoint.position, Quaternion.identity, _enemyContainer);
         }
 
         public Transform GetRandomSpawnPoint()

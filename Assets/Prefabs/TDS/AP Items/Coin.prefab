@@ -144,3 +144,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 1
+  Sprite: {fileID: 21300000, guid: 5ba47f21bbf1dd7488f6210a7fc17196, type: 3}
