@@ -2,9 +2,10 @@ using UnityEngine;
 
 namespace TDS
 {
-    public class AP_Item : AbstractPickup
+    public class AP_Item : Collectable
     {
-        public float AmountToIncrease = 1;
+        public Stats StatToIncrease = new Stats();
+        public string CollectText = "";
         public override void PickUp(GameObject obj, Item item)
         {
             base.PickUp(obj, item);
@@ -13,10 +14,16 @@ namespace TDS
             {
                 Player player = obj.GetComponent<Player>();
 
-                if (item.itemType == ItemType.Shoes) player.IncreaseSpeed(AmountToIncrease);
-                if (item.itemType == ItemType.Heart) player.Shield((int)AmountToIncrease);
-                if (item.itemType == ItemType.Life) { player.IncreaseMaxHP((int)AmountToIncrease); player.Heal(99); }
-                if (item.itemType == ItemType.BulletUpgrade) { player.IncreaseBullets((int)AmountToIncrease); }
+                CanvasManager.Instance.CreateItemIcon(item);
+                CanvasManager.Instance.CreatePlayerTMP(CollectText);
+
+                player.IncreaseStats(StatToIncrease);
+
+
+                //if (item.ItemData.ItemType == ItemType.Shoes) player.IncreaseSpeed(AmountToIncrease);
+                //if (item.ItemData.ItemType == ItemType.Heart) player.Shield((int)AmountToIncrease);
+                //if (item.ItemData.ItemType == ItemType.Life) { player.IncreaseMaxHP((int)AmountToIncrease); player.Heal(99); }
+                //if (item.ItemData.ItemType == ItemType.BulletUpgrade) { player.IncreaseBullets((int)AmountToIncrease); }
             }
 
         }

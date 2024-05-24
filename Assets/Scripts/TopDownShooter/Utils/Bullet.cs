@@ -1,6 +1,7 @@
 using EditorAttributes;
 using System;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace TDS
 {
@@ -30,19 +31,19 @@ namespace TDS
         public void Move(Vector3 direction)
         {
 
-            if (Type.Equals(GunType.Shotgun))
-            {
-                ManipulateDirection(GetRandomOffset(direction));
-            }
+            //if (Type.Equals(GunType.Shotgun))
+            //{
+            //    ManipulateDirection(GetRandomOffset(direction));
+            //}
 
-            transform.position += direction * Time.deltaTime;
+            transform.position += GetRandomOffset(direction) * Time.deltaTime;
         }
 
-        public Vector3 GetRandomOffset(Vector3 dir)
+        public Vector3 GetRandomOffset(Vector2 dir)
         {
-            dir.Normalize();
-            float randomAngle = UnityEngine.Random.Range(-.7f, .7f);
-            return new Vector3(dir.x + randomAngle, dir.y + randomAngle, 0f);
+            //dir.Normalize();
+            float randomAngle = UnityEngine.Random.Range(-_speed, _speed);
+            return new Vector2(dir.x + randomAngle, dir.y + randomAngle);
         }
 
         public void ManipulateDirection(Vector2 dir)
@@ -76,15 +77,14 @@ namespace TDS
 
             //}
         }
-
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
             Enemy enemy = collision.transform.GetComponent<Enemy>();
             if (enemy != null) Destroy(this.gameObject);
-
+            else if (collision.gameObject.CompareTag("Wall")) Destroy(this.gameObject);
             else if (collision.gameObject.CompareTag("Player")) return;
-            
-            Destroy(this.gameObject);
+
+            //Destroy(this.gameObject);
         }
 
     }

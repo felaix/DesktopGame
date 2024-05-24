@@ -6,7 +6,7 @@ namespace TDS
 {
     public class Player : MonoBehaviour
     {
-        private Stats _stats;
+        [SerializeField] private Stats _stats;
         private TDS_Controls _input;
         private Rigidbody2D _rb;
         private Gun _gun;
@@ -17,25 +17,46 @@ namespace TDS
 
         private void Awake()
         {
-            CreateStats();
+            //CreateStats();
             CreateInput();
         }
 
         public Slider GetDelaySlider() => GetPlayerCanvas().GetChild(0).GetComponent<Slider>();
         public Transform GetPlayerCanvas() => transform.GetChild(2);
+        public int GetPlayerLuck() => _stats.Luck;
         public void IncreaseSpeed(float amount) => _stats.Speed += amount;
         public void DecreaseSpeed(float amount) => _stats.Speed -= amount;
         public void IncreaseMaxHP(int amount) => _stats.MaxHP += amount;
-        public void IncreaseHP(int amount) {_stats.HP += amount; if (_stats.HP >= _stats.MaxHP) _stats.HP = _stats.MaxHP; }
+        public void IncreaseHP(int amount) { _stats.HP += amount; if (_stats.HP >= _stats.MaxHP) _stats.HP = _stats.MaxHP; }
         public void IncreaseBullets(int amount) { _stats.NumOfBullets += amount; _gun.UpgradeGun(); }
-        private void CreateStats()
+        public void IncreaseStats(Stats stats)
         {
-            if (_stats == null)
-            {
-                _stats = new Stats();
-                _stats.Initialize(3, 5, 10f, 3);
-            }
+            _stats.AttackSpeed += stats.AttackSpeed;
+            _stats.Speed += stats.Speed;
+            _stats.NumOfBullets += stats.NumOfBullets;
+            _stats.Luck += stats.Luck;
+            _stats.HP += stats.HP;
+            _stats.MaxHP += stats.MaxHP;
+            _stats.Coins += stats.Coins;
+
+            CanvasManager.Instance.UpdatePlayerHP(_stats.HP, _stats.MaxHP);
+
+            if (stats.NumOfBullets >= 1) { _gun.UpgradeGun(); }
         }
+
+        public void DecreaseStats(Stats stats)
+        {
+            _stats.AttackSpeed -= stats.AttackSpeed;
+            _stats.Speed -= stats.Speed;
+            _stats.NumOfBullets -= stats.NumOfBullets;
+            _stats.Luck -= stats.Luck;
+            _stats.HP -= stats.HP;
+            _stats.MaxHP -= stats.MaxHP;
+            _stats.Coins -= stats.Coins;
+
+            CanvasManager.Instance.UpdatePlayerHP(_stats.HP, _stats.MaxHP);
+        }
+
 
         private void CreateInput()
         {
@@ -52,7 +73,7 @@ namespace TDS
             _gun = GetComponent<Gun>();
             _anim = GetComponent<Animator>();
 
-            CreateStats();
+            //CreateStats();
             CreateInput();
             SubscribeControls();
 
@@ -91,14 +112,11 @@ namespace TDS
 
         public void DealDamage(int damage)
         {
-
-            Debug.Log(_stats.HP + " " + _stats);
-
             _stats.HP -= damage;
             CanvasManager.Instance.UpdatePlayerHP(_stats.HP, _stats.MaxHP);
 
-            if (_stats.HP < 0) 
-            { 
+            if (_stats.HP < 0)
+            {
                 _stats.HP = 0;
                 _input.Disable();
             }
@@ -127,6 +145,7 @@ namespace TDS
 
         private void Fire(InputAction.CallbackContext context)
         {
+            Debug.Log($"Shooting bullet in direction {_direction}, speed: {_stats.AttackSpeed}, bullets: {_stats.NumOfBullets} ");
             _gun.ShootBullet(_direction, _stats.AttackSpeed, _stats.NumOfBullets);
         }
 
@@ -181,13 +200,13 @@ namespace TDS
             Vector3 scaleDirection = direction;
             scaleDirection.y = 1f;
             scaleDirection.z = 1f;
-            if (scaleDirection.x == 0f) scaleDirection.x = 1f; 
+            if (scaleDirection.x == 0f) scaleDirection.x = 1f;
             //if (scaleDirection.y == 0f) scaleDirection.y = 1f; 
             //if (scaleDirection.z == 0f) scaleDirection.z = 1f;
 
-            if (direction.x < 0f) _anim.Play("Player_Walk_R"); 
+            if (direction.x < 0f) _anim.Play("Player_Walk_R");
             if (direction.x > 0f) _anim.Play("Player_Walk_R");
-            
+
             if (direction.y < 0f) _anim.Play("Player_Walk_Down");
             if (direction.y > 0f) _anim.Play("Player_Walk_Up");
 

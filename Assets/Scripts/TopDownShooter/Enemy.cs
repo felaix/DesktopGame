@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TDS;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private Item _dropItem;
     private bool canMove = true;
+
+    private bool isDead = false;
 
     private void Start()
     {
@@ -66,14 +69,19 @@ public class Enemy : MonoBehaviour
 
         if (collision.CompareTag("Bullet"))
         {
-            Death();
+            Death(true);
         }
 
         else if (collision.CompareTag("Player"))
         {
             collision.GetComponent<Player>()?.DealDamage(1);
-            Death();
+            Death(false);
         }
+    }
+
+    public void SetDropItem(Item item)
+    {
+        _dropItem = item;
     }
 
     private void DropItem()
@@ -84,11 +92,15 @@ public class Enemy : MonoBehaviour
         //item.DOJump(new Vector3((transform.position.x + .1f), (transform.position.y + .1f), 0),.5f, 2, .35f);
     }
 
-    public void Death()
+    public void Death(bool dropItem = true)
     {
+        if (isDead) return;
+
+        isDead = true;
+
         SpawnManager.Instance.OnEnemyDeath(this);
 
-        DropItem();
+        if (dropItem) DropItem();
 
         canMove = false;
 
@@ -103,6 +115,5 @@ public class Enemy : MonoBehaviour
 
         Destroy(this.gameObject, 1f);
     }
-
     private void CreateDeathFX() {if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity, transform);
 }}

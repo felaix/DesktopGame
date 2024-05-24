@@ -1,11 +1,11 @@
 using DG.Tweening;
-using System.Threading.Tasks;
+using System;
 using TDS;
+using TMPro;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 [RequireComponent (typeof(Collider2D))]
-public abstract class AbstractPickup : Item
+public abstract class Collectable : Item
 {
     private Transform playerTransform;
     public bool AutoDestroy = true;
@@ -19,6 +19,7 @@ public abstract class AbstractPickup : Item
         }           
 
     }
+
     public virtual void PickUp(GameObject obj, Item item)
     {
         if (AutoDestroy)
@@ -33,22 +34,47 @@ public abstract class AbstractPickup : Item
     }
 }
 
+[Serializable]
+public struct ItemData
+{
+    //public ItemType ItemType;
+    public Sprite Sprite;
+    public int Cost;
+}
+
 public abstract class Item : MonoBehaviour
 {
-    public ItemType itemType;
-    public Sprite Sprite;
+
+    public ItemData ItemData;
+    //public ItemType ItemType;
+    //public Sprite Sprite;
     public Vector2 SpawnOffset = new(0f, 0f);
+    private TMP_Text _costTMP;
 
     private void Start()
     {
         if (TryGetComponent<SpriteRenderer>(out SpriteRenderer sr))
         {
-            sr.sprite = Sprite;
+            sr.sprite = ItemData.Sprite;
         }
 
         if (TryGetComponent<Transform>(out Transform t))
         {
             t.DOJump(new Vector3((transform.position.x + SpawnOffset.x), (transform.position.y + SpawnOffset.y), 0), .5f, 2, .35f);
+
+
+            if (ItemData.Cost > 0)
+            {
+                // Get coin TMP
+                Transform _canvas = t.GetChild(1);
+                if (_canvas == null) { Debug.Log("no _canvas found"); return; }
+                _costTMP = _canvas.GetChild(0).GetComponentInChildren<TMP_Text>();
+                if (_costTMP == null) {Debug.Log("no _costTMP found"); return; }
+                _costTMP.text = ItemData.Cost.ToString();
+
+                _canvas.gameObject.SetActive(true);
+            }
+
         }
 
         SpawnManager.Instance.AddItem(this);
@@ -65,30 +91,32 @@ public abstract class Item : MonoBehaviour
         TDSManager.Instance.AddItem(item);
         SpawnManager.Instance.RemoveItem(item);
 
-        if (item.itemType == ItemType.Coin)
-        {
-            CanvasManager.Instance.UpdateCoinTMP();
-        }
+        CanvasManager.Instance.UpdateItems(this);
 
-        if (item.itemType == ItemType.Shoes)
-        {
-            CanvasManager.Instance.UpdateItems(this);
-        }
+        //if (item.ItemData.ItemType == ItemType.Coin)
+        //{
+        //    CanvasManager.Instance.UpdateCoinTMP();
+        //}
 
-        if (item.itemType == ItemType.Heart)
-        {
-            CanvasManager.Instance.UpdateItems(this);
-        }
+        //if (item.ItemData.ItemType == ItemType.Shoes)
+        //{
+        //    CanvasManager.Instance.UpdateItems(this);
+        //}
 
-        if (item.itemType == ItemType.BulletUpgrade)
-        {
-            CanvasManager.Instance.UpdateItems(this);
-        }
+        //if (item.ItemData.ItemType == ItemType.Heart)
+        //{
+        //    CanvasManager.Instance.UpdateItems(this);
+        //}
 
-        if (item.itemType == ItemType.Seller)
-        {
+        //if (item.ItemData.ItemType == ItemType.BulletUpgrade)
+        //{
+        //    CanvasManager.Instance.UpdateItems(this);
+        //}
 
-        }
+        //if (item.ItemData.ItemType == ItemType.Seller)
+        //{
+
+        //}
     }
 }
 

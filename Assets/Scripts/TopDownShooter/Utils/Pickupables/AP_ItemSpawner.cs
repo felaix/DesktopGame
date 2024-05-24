@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace TDS
 {
-    public class AP_ItemSpawner : AbstractPickup
+    public class AP_ItemSpawner : Collectable
     {
 
         public List<Item> ItemsToSpawn;

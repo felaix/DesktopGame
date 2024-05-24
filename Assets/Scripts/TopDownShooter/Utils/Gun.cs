@@ -37,7 +37,7 @@ namespace TDS
 
         public void UpgradeGun()
         {
-            _currentBulletType = GunType.Shotgun;
+            //_currentBulletType = GunType.Shotgun;
             ModifyGunSpeed(GunSpeed / 1.3f);
         }
 
@@ -56,18 +56,21 @@ namespace TDS
             if (_canShoot)
             {
 
-                _canShoot = false;
-
                 for (int i = 0; i < numOfBullets; i++)
                 {
+                    Debug.Log("Instantiating bullet " + i);
+
                     // Spawn a bullet
                     _currentBullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity).GetComponent<Bullet>();
                     _currentBullet.Initialize(direction, spd, _currentBulletType);
 
                     // Delay 
-                    //await Task.Delay((int)spd * 100);
                 }
-            }else
+
+                _canShoot = false;
+
+            }
+            else
             {
                 CanvasManager.Instance.CreatePlayerTMP("Gun reloading ...");
             }

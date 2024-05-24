@@ -130,23 +130,28 @@ namespace TDS
         public void UpdateCoinTMP()
         {
             _coinTMP.text = TDSManager.Instance.Coins.ToString();
+            _coinTMP.transform.DOScale(1f, .1f);
         }
 
         public void UpdateItems(Item item)
         {
-            if (item.itemType == ItemType.Coin) return;
-            if (item.itemType == ItemType.Shoes)
-            {
-                CreateItemIcon(item);
-            }
-            if (item.itemType == ItemType.Heart)
-            {
-                CreateItemIcon(item);
-            }
-            if (item.itemType == ItemType.BulletUpgrade)
-            {
-                CreateItemIcon(item);
-            }
+
+            CreateItemIcon(item);
+            UpdateCoinTMP();
+
+            //if (item.ItemData.ItemType == ItemType.Coin) return;
+            //if (item.ItemData.ItemType == ItemType.Shoes)
+            //{
+            //    CreateItemIcon(item);
+            //}
+            //if (item.ItemData.ItemType == ItemType.Heart)
+            //{
+            //    CreateItemIcon(item);
+            //}
+            //if (item.ItemData.ItemType == ItemType.BulletUpgrade)
+            //{
+            //    CreateItemIcon(item);
+            //}
         }
 
         public void UpdateTimer()
@@ -186,10 +191,15 @@ namespace TDS
         #region Create
         public void CreateItemIcon(Item item)
         {
-            if (Instantiate(_itemIconPrefab, _itemIconContainer).TryGetComponent<Image>(out Image img))
+            var itemIcon = Instantiate(_itemIconPrefab, _itemIconContainer);
+
+            if (itemIcon.TryGetComponent<Image>(out Image img))
             {
-                img.sprite = item.Sprite;
+                img.sprite = item.ItemData.Sprite;
+                img.transform.DOMoveY(img.transform.position.x + 10f, 2f);
+                img.DOFade(0f, 2f);
             }
+
         }
 
         public void CreatePlayerTMP(string txt)

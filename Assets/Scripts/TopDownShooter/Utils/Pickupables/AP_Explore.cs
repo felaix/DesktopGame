@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace TDS
 {
-    public class AP_Explore : AbstractPickup
+    public class AP_Explore : Collectable
     {
         [Header("Camera Transition")]
         public Vector3 Offset;

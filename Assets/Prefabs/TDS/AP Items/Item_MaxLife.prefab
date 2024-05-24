@@ -295,11 +295,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3dabf70e572b64ea07cbdca9374a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 5
-  Sprite: {fileID: 0}
+  ItemData:
+    Sprite: {fileID: -739586292, guid: a3885f2063c90df43aec7e0a7bf3936d, type: 3}
+    Cost: 10
   SpawnOffset: {x: 0.1, y: 0.1}
   AutoDestroy: 1
-  AmountToIncrease: 1
+  StatToIncrease:
+    HP: 0
+    MaxHP: 1
+    Speed: 0
+    AttackSpeed: 0
+    NumOfBullets: 0
+    Luck: 0
+    Coins: 0
+  CollectText: +1 MAX HP
 --- !u!198 &564426942441197722
 ParticleSystem:
   m_ObjectHideFlags: 0

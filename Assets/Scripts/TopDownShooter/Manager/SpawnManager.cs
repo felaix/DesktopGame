@@ -2,8 +2,8 @@ using DG.Tweening;
 using EditorAttributes;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace TDS
@@ -27,7 +27,9 @@ namespace TDS
         [Header("Prefabs")]
         [SerializeField] private GameObject _playerPrefab;
         [SerializeField] private GameObject _enemyPrefab;
-        [SerializeField] private GameObject _itemPrefab;
+
+        [Header("Items")]
+        [SerializeField] private List<Item> _itemsToDrop;
 
         [Header("Spawn Points")]
         [SerializeField] private List<Transform> _spawnPoints;
@@ -112,7 +114,7 @@ namespace TDS
 
             foreach (Enemy enemy in copy)
             {
-                enemy.Death();
+                enemy.Death(false);
             }
 
             copy.Clear();
@@ -184,11 +186,16 @@ namespace TDS
 
         public void SpawnWave()
         {
-            for (int i = 0; i < Level; i++)
+            for (int i = 0; i <= Level; i++)
             {
-                GameObject enemy = SpawnEnemy();
+                Enemy enemy = SpawnEnemy();
                 _enemies.Add(enemy.GetComponent<Enemy>());
             }
+        }
+
+        public int GetRandomNumber(int min, int max)
+        {
+            return UnityEngine.Random.Range(min, max+1);
         }
 
         public void SetNewSpawnPoints(List<Transform> spawnPoints)
@@ -226,10 +233,15 @@ namespace TDS
             else return Instantiate(item, pos, Quaternion.identity, _itemContainer).transform;
         }
 
-        public GameObject SpawnEnemy(Transform spawnPoint = null)
+        public Enemy SpawnEnemy(Transform spawnPoint = null, Item itemToDrop = null)
         {
             if (spawnPoint == null) spawnPoint = GetRandomSpawnPoint();
-            return Instantiate(_enemyPrefab, spawnPoint.position, Quaternion.identity, _enemyContainer);
+            
+            Enemy enemy = Instantiate(_enemyPrefab, spawnPoint.position, Quaternion.identity, _enemyContainer).GetComponent<Enemy>();
+
+            enemy.SetDropItem(GetRandomItem());
+
+            return enemy;
         }
 
         public Transform GetRandomSpawnPoint()
@@ -238,8 +250,10 @@ namespace TDS
             return _spawnPoints[r];
         }
 
+        public Item GetRandomItem() => _itemsToDrop[UnityEngine.Random.Range(0, _itemsToDrop.Count + 1)];
         public int GetLevel() => Level;
         public async void CreateNewPlayer() { if (_player != null) Destroy(_player.gameObject); await Task.Delay(100); _player = Instantiate(_playerPrefab, _playerSpawnPoint).GetComponent<Player>(); }
+
     }
 
 }
