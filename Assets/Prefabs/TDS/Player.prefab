@@ -108,7 +108,7 @@ MonoBehaviour:
     HP: 3
     MaxHP: 3
     Speed: 3
-    AttackSpeed: 5
+    AttackSpeed: 6
     NumOfBullets: 2
     Luck: 0
     Coins: 0

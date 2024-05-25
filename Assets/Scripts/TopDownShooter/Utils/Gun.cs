@@ -58,7 +58,7 @@ namespace TDS
 
                 for (int i = 0; i < numOfBullets; i++)
                 {
-                    Debug.Log("Instantiating bullet " + i);
+                    //Debug.Log("Instantiating bullet " + i);
 
                     // Spawn a bullet
                     _currentBullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity).GetComponent<Bullet>();

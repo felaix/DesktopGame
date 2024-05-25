@@ -1,8 +1,8 @@
 using DG.Tweening;
 using EditorAttributes;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -17,8 +17,8 @@ namespace TDS
         [ReadOnly] public int Level = 1;
         [ReadOnly] public bool GameStarted = false;
         [ReadOnly] public bool CanSpawn = true;
-        [ReadOnly] public bool PlayOnEnable = false;
-        [ReadOnly] public bool AutoCompleteWave = false;
+        public bool PlayOnEnable = false;
+        [ReadOnly] public bool AutoCompleteWave = true;
         [ReadOnly] public bool CreatePlayer = true;
 
         private List<Enemy> _enemies = new();
@@ -30,6 +30,7 @@ namespace TDS
 
         [Header("Items")]
         [SerializeField] private List<Item> _itemsToDrop;
+        [SerializeField] private List<Item> _luckyItemsToDrop;
 
         [Header("Spawn Points")]
         [SerializeField] private List<Transform> _spawnPoints;
@@ -40,52 +41,60 @@ namespace TDS
         private Transform _enemyContainer;
         private Transform _itemContainer;
 
+        [Header("Delay")]
+        [SerializeField] private int _delayBetweenWaves;
 
         private Player _player;
 
         public Player GetPlayer() => _player;
 
         public Action WaveCompleted = () => Debug.Log("Wave Completed");
+        public Action GameStart = () => Debug.Log("Game started");
         
         private void Awake()
         {
            Instance = this;
 
-           //WaveCompleted += OnWaveCompleted;
+            if (CreatePlayer && _player == null)
+            {
+                CreateNewPlayer();
+            }
+
+            WaveCompleted += OnWaveCompleted;
         }
 
         private void OnDisable()
         {
             WaveCompleted -= OnWaveCompleted;
+
+            _enemies.Clear();
+            _items.Clear();
+
+            Destroy(_itemContainer);
+            Destroy(_enemyContainer);
         }
 
         void Start()
         {
             _enemies = new List<Enemy>();
-
-            if (CreatePlayer)
-            {
-                CreateNewPlayer();
-            }
         }
 
         private void Update()
         {
-            if (GameStarted && _enemies.Count == 0 && CanSpawn && AutoCompleteWave) { GameStarted = false; CanSpawn = true; WaveCompleted(); }
+            //if (GameStarted && _enemies.Count == 0 && CanSpawn && AutoCompleteWave) { GameStarted = false; CanSpawn = true; WaveCompleted(); }
         }
 
         private void OnEnable()
         {
-
             CreateContainer();
+
+            if (!PlayOnEnable) return;
 
             GameStarted = false;
             CanSpawn = true;
-            WaveCompleted += OnWaveCompleted;
-            if (!PlayOnEnable) return;
+            //WaveCompleted += OnWaveCompleted;
 
             Level = 0;
-            CanSpawn = true;
             StartGame();
         }
 
@@ -107,17 +116,16 @@ namespace TDS
 
         public void KillAllEnemies()
         {
-
             if (_enemies.Count == 0) return;
 
             List<Enemy> copy = _enemies;
 
-            foreach (Enemy enemy in copy)
+            for (int i = 0; i < copy.Count; i++)
             {
-                enemy.Death(false);
+                _enemies[i].Death();
             }
 
-            copy.Clear();
+            _enemies.Clear();
         }
 
         public void DestroyAllItems()
@@ -158,6 +166,7 @@ namespace TDS
             // Reset Stats
             TDSManager.Instance.ResetStats();
 
+            // Create a new Player
             CreateNewPlayer();
 
             // Reset Camera
@@ -174,23 +183,31 @@ namespace TDS
             if (!CanSpawn || GameStarted) return;
 
             // Increase wave level
-            Level += 1;
-            TDSManager.Instance.Wave = Level;
+
+            if (Level < 5)
+            {
+                Level += 1;
+                TDSManager.Instance.Wave = Level;
+            }
+
 
             // Set Started to true
             GameStarted = true;
 
             // Spawn wave
-            SpawnWave();
+            StartCoroutine(SpawnWaveCoroutine());
         }
 
-        public void SpawnWave()
+        public IEnumerator SpawnWaveCoroutine()
         {
-            for (int i = 0; i <= Level; i++)
-            {
-                Enemy enemy = SpawnEnemy();
-                _enemies.Add(enemy.GetComponent<Enemy>());
-            }
+            yield return new WaitForSeconds(_delayBetweenWaves);
+
+                for (int i = 0; i < Level; i++)
+                {
+                    if (!CanSpawn) continue;
+                    Enemy enemy = SpawnEnemy();
+                    _enemies.Add(enemy);
+                }
         }
 
         public int GetRandomNumber(int min, int max)
@@ -215,13 +232,13 @@ namespace TDS
         {
             GameStarted = false;
 
-            if (AutoCompleteWave) StartGame();
+            if (CanSpawn) StartGame();
         }
 
         public void OnEnemyDeath(Enemy enemy)
         {
             _enemies.Remove(enemy);
-            if (_enemies.Count <= 0) { WaveCompleted(); GameStarted = false; }
+            if (_enemies.Count <= 0) { WaveCompleted(); }
         }
 
         public Transform GetPlayerSpawnPoint() => _playerSpawnPoint;
@@ -239,7 +256,11 @@ namespace TDS
             
             Enemy enemy = Instantiate(_enemyPrefab, spawnPoint.position, Quaternion.identity, _enemyContainer).GetComponent<Enemy>();
 
-            enemy.SetDropItem(GetRandomItem());
+            int luck = 0;
+
+            if (_player != null) luck = _player.GetPlayerLuck();
+
+            enemy.SetDropItem(GetItemByLuck(luck));
 
             return enemy;
         }
@@ -250,7 +271,19 @@ namespace TDS
             return _spawnPoints[r];
         }
 
-        public Item GetRandomItem() => _itemsToDrop[UnityEngine.Random.Range(0, _itemsToDrop.Count + 1)];
+        public Item GetItemByLuck(int luck)
+        {
+            if (luck < 1)
+            {
+                int NoItem = UnityEngine.Random.Range(0, 2);
+                if (NoItem == 0) return null;
+                return GetRandomItem();
+            }
+            else return GetRandomLuckyItem();
+        }
+        public Item GetRandomItem() => _itemsToDrop[UnityEngine.Random.Range(0, _itemsToDrop.Count)];
+        public Item GetRandomLuckyItem() => _luckyItemsToDrop[UnityEngine.Random.Range(0, _itemsToDrop.Count)];
+
         public int GetLevel() => Level;
         public async void CreateNewPlayer() { if (_player != null) Destroy(_player.gameObject); await Task.Delay(100); _player = Instantiate(_playerPrefab, _playerSpawnPoint).GetComponent<Player>(); }
 

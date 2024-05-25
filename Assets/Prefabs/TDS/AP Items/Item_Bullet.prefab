@@ -588,7 +588,7 @@ MonoBehaviour:
     NumOfBullets: 1
     Luck: 0
     Coins: 0
-  CollectText: +1 Bullet
+  CollectText: Gun Upgrade
 --- !u!198 &2090368249808683926
 ParticleSystem:
   m_ObjectHideFlags: 0

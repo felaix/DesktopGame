@@ -8,7 +8,7 @@ public class Cheater : MonoBehaviour
     public Item item;
 
     [Button("Create new Chat")] public void CreateDialogue() => DialogueManager.Instance.CreateChat(npcNode, npcNode.npc.ToString());
-    [Button("Spawn Wave")] public void SpawnEnemy () => SpawnManager.Instance.SpawnWave();
+    [Button("Spawn Wave")] public void SpawnEnemy () => SpawnManager.Instance.StartCoroutine(SpawnManager.Instance.SpawnWaveCoroutine());
     [Button("Spawn Item")] public void SpawnItem() => SpawnManager.Instance.SpawnItem(item, SpawnManager.Instance.GetPlayerSpawnPoint().position);
 
 }

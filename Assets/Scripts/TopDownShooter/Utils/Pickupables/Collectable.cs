@@ -10,6 +10,8 @@ public abstract class Collectable : Item
     private Transform playerTransform;
     public bool AutoDestroy = true;
 
+    private bool _pickedUp;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -22,6 +24,8 @@ public abstract class Collectable : Item
 
     public virtual void PickUp(GameObject obj, Item item)
     {
+        if (_pickedUp) return;
+
         if (AutoDestroy)
         {
             transform.DOMove(playerTransform.position, .5f);
@@ -30,6 +34,7 @@ public abstract class Collectable : Item
         }
 
         if (item != null) { item.OnPickUp(item); }
+        _pickedUp = true;
         //await Task.Delay(1000);
     }
 }

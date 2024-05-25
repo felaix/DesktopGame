@@ -88,15 +88,14 @@ namespace TDS
             _exploreItems.Remove(item);
         }
 
-        public void ActivateExploreArea()
+        public void AddExploreArea(AP_Explore item)
         {
-            List<AP_Explore> copy = _exploreItems;
-            if (copy.Count <= 0) return;
+            _exploreItems.Add(item);
+        }
 
-            copy[0].gameObject.SetActive(true);
-            if (copy[0].AutoNext && copy[1] != null) copy[1].gameObject.SetActive(true);
-
-            copy.Clear();
+        public void ActivateExploreArea() 
+        {
+            if (_exploreItems[0] != null) _exploreItems[0].gameObject.SetActive(true);
         }
 
         #endregion
@@ -115,6 +114,7 @@ namespace TDS
             _timerSlider.maxValue = _maxDuration;
             _timerSlider.value = _maxDuration;
             _duration = _maxDuration;
+            SpawnManager.Instance.CanSpawn = true;
         }
 
         public void ResetUI()
@@ -199,7 +199,6 @@ namespace TDS
                 img.transform.DOMoveY(img.transform.position.x + 10f, 2f);
                 img.DOFade(0f, 2f);
             }
-
         }
 
         public void CreatePlayerTMP(string txt)
