@@ -1,6 +1,5 @@
 using DG.Tweening;
 using System.Collections.Generic;
-using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,7 +35,7 @@ namespace TDS
         [Header("Items")]
         [SerializeField] private Transform _itemIconContainer;
         [SerializeField] private GameObject _itemIconPrefab;
-        [SerializeField] private List<AP_Explore> _exploreItems;
+        //[SerializeField] private List<AP_Explore> _exploreItems;
 
         private List<Item> _items = new();
         private bool _explored = false;
@@ -77,26 +76,25 @@ namespace TDS
 
         public void OnTimerCompleted()
         {
-            ActivateExploreArea();
             SpawnManager.Instance.StopGame();
         }
 
         #region Explore Area
 
-        public void RemoveExploreArea(AP_Explore item)
-        {
-            _exploreItems.Remove(item);
-        }
+        //public void RemoveExploreArea(AP_Explore item)
+        //{
+        //    _exploreItems.Remove(item);
+        //}
 
-        public void AddExploreArea(AP_Explore item)
-        {
-            _exploreItems.Add(item);
-        }
+        //public void AddExploreArea(AP_Explore item)
+        //{
+        //    _exploreItems.Add(item);
+        //}
 
-        public void ActivateExploreArea() 
-        {
-            if (_exploreItems[0] != null) _exploreItems[0].gameObject.SetActive(true);
-        }
+        //public void ActivateExploreArea() 
+        //{
+        //    if (_exploreItems[0] != null) _exploreItems[0].gameObject.SetActive(true);
+        //}
 
         #endregion
 
@@ -135,23 +133,8 @@ namespace TDS
 
         public void UpdateItems(Item item)
         {
-
             CreateItemIcon(item);
             UpdateCoinTMP();
-
-            //if (item.ItemData.ItemType == ItemType.Coin) return;
-            //if (item.ItemData.ItemType == ItemType.Shoes)
-            //{
-            //    CreateItemIcon(item);
-            //}
-            //if (item.ItemData.ItemType == ItemType.Heart)
-            //{
-            //    CreateItemIcon(item);
-            //}
-            //if (item.ItemData.ItemType == ItemType.BulletUpgrade)
-            //{
-            //    CreateItemIcon(item);
-            //}
         }
 
         public void UpdateTimer()

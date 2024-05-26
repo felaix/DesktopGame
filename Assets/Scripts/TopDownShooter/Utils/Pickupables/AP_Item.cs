@@ -14,7 +14,7 @@ namespace TDS
             {
                 Player player = obj.GetComponent<Player>();
 
-                CanvasManager.Instance.CreateItemIcon(item);
+                //CanvasManager.Instance.CreateItemIcon(item);
                 CanvasManager.Instance.CreatePlayerTMP(CollectText);
 
                 player.IncreaseStats(StatToIncrease);

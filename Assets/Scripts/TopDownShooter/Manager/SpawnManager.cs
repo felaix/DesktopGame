@@ -33,16 +33,23 @@ namespace TDS
         [SerializeField] private List<Item> _luckyItemsToDrop;
 
         [Header("Spawn Points")]
-        [SerializeField] private List<Transform> _spawnPoints;
+        [SerializeField] private Transform _spawnPointContainer;
         [SerializeField] private Transform _playerSpawnPoint;
+        
+        private List<Transform> _spawnPoints = new();
+        private List<AP_Explore> _exploreItems = new();
 
         [Header("Container")]
         [SerializeField] private Transform _gameContainer;
+
         private Transform _enemyContainer;
         private Transform _itemContainer;
 
         [Header("Delay")]
         [SerializeField] private int _delayBetweenWaves;
+
+
+        private List<Transform> _initialSpawnPoints;
 
         private Player _player;
 
@@ -69,14 +76,16 @@ namespace TDS
 
             _enemies.Clear();
             _items.Clear();
+            //_exploreItems.Clear();
 
-            Destroy(_itemContainer);
-            Destroy(_enemyContainer);
+            if (_itemContainer != null) Destroy(_itemContainer.gameObject);
+            if (_enemyContainer != null) Destroy(_enemyContainer.gameObject);
         }
 
         void Start()
         {
             _enemies = new List<Enemy>();
+            _initialSpawnPoints = _spawnPoints;
         }
 
         private void Update()
@@ -90,12 +99,22 @@ namespace TDS
 
             if (!PlayOnEnable) return;
 
-            GameStarted = false;
-            CanSpawn = true;
+            //GameStarted = false;
+            //CanSpawn = true;
             //WaveCompleted += OnWaveCompleted;
 
             Level = 0;
             StartGame();
+        }
+
+        public void AddExploreItem(AP_Explore item)
+        {
+            _exploreItems.Add(item);
+        }
+
+        public void RemoveExploreItem(AP_Explore item)
+        {
+            _exploreItems.Remove(item);
         }
 
         private void CreateContainer()
@@ -126,18 +145,19 @@ namespace TDS
             }
 
             _enemies.Clear();
+            WaveCompleted();
         }
 
         public void DestroyAllItems()
         {
-            if (_items.Count == 0) return;
+            //if (_items.Count == 0) return;
 
-            List<Item> copy = _items;
+            //List<Item> copy = _items;
 
-            foreach(Item item in copy)
-            {
-                Destroy(item.gameObject);
-            }
+            //foreach(Item item in copy)
+            //{
+            //    Destroy(item.gameObject);
+            //}
 
             _items.Clear();
         }
@@ -146,7 +166,24 @@ namespace TDS
         {
             CanSpawn = false;
             KillAllEnemies();
+            EnableAllExploreAreas();
             //DestroyAllItems();
+        }
+
+        private void EnableAllExploreAreas()
+        {
+            for (int i = 0; i < _exploreItems.Count; i++)
+            {
+                if (_exploreItems[i] != null) _exploreItems[i].gameObject.SetActive(true);
+            }
+        }
+
+        public void DisableAllExploreAreas()
+        {
+            foreach (AP_Explore item in _exploreItems)
+            {
+                item.gameObject.SetActive(false);
+            }
         }
 
         public void ReloadGame()
@@ -169,6 +206,10 @@ namespace TDS
             // Create a new Player
             CreateNewPlayer();
 
+            // Reset Spawn Points
+            _spawnPoints.Clear();
+            _spawnPoints = CreateSpawnPoints(5, _exploreItems[0].transform.position);
+
             // Reset Camera
             Vector3 camStartPos = new Vector3(-15f, 0f, -10f);
             Camera camera = Camera.main;
@@ -183,13 +224,8 @@ namespace TDS
             if (!CanSpawn || GameStarted) return;
 
             // Increase wave level
-
-            if (Level < 5)
-            {
-                Level += 1;
-                TDSManager.Instance.Wave = Level;
-            }
-
+            Level += 1;
+            TDSManager.Instance.Wave = Level;
 
             // Set Started to true
             GameStarted = true;
@@ -208,6 +244,8 @@ namespace TDS
                     Enemy enemy = SpawnEnemy();
                     _enemies.Add(enemy);
                 }
+
+            GameStarted = false;
         }
 
         public int GetRandomNumber(int min, int max)
@@ -218,7 +256,7 @@ namespace TDS
         public void SetNewSpawnPoints(List<Transform> spawnPoints)
         {
             // Destroy & clear old spawn points
-            _spawnPoints.ForEach(p => Destroy(p.gameObject));
+            //_spawnPoints.ForEach(p => Destroy(p.gameObject));
             _spawnPoints.Clear();
 
             // Assign new List of spawnPoints
@@ -239,6 +277,41 @@ namespace TDS
         {
             _enemies.Remove(enemy);
             if (_enemies.Count <= 0) { WaveCompleted(); }
+        }
+
+        private Transform CreateSpawnPointArea(Vector3 pos)
+        {
+            GameObject spawnPointArea = new GameObject();
+            spawnPointArea.name = "Spawn Point Area";
+            spawnPointArea.transform.SetParent(_spawnPointContainer);
+            spawnPointArea.transform.position = pos;
+            return spawnPointArea.transform;
+        }
+
+        private List<Transform> CreateSpawnPoints(int length, Vector3 centerPos, float radius = 1f)
+        {
+            Transform area = CreateSpawnPointArea(centerPos);
+            List<Transform> spawnPoints = new List<Transform>();
+
+            for (int i = 0; i < length; i++)
+            {
+                GameObject spawnPoint = new GameObject();
+                Transform t = spawnPoint.transform;
+
+                spawnPoint.name = $"SpawnPoint {i}";
+
+                t.SetParent(area);
+
+                float angle = i * Mathf.PI * 2 / length;
+                float x = Mathf.Cos(angle) * radius;
+                float y = Mathf.Sin(angle) * radius;
+
+                t.position = new Vector2(centerPos.x + x, centerPos.y + y);
+
+                spawnPoints.Add(t);
+            }
+
+            return spawnPoints;
         }
 
         public Transform GetPlayerSpawnPoint() => _playerSpawnPoint;

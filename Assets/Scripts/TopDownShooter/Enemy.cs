@@ -82,6 +82,7 @@ public class Enemy : MonoBehaviour
     public void SetDropItem(Item item)
     {
         _dropItem = item;
+        if (_dropItem != null) _dropItem.ItemData.Cost = 0;
     }
 
     private void DropItem()

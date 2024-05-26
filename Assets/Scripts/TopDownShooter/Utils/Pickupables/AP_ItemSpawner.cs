@@ -22,7 +22,9 @@ namespace TDS
                 SpawnManager.Instance.SpawnItem(buyable, transform.position + ItemSpawnOffset + OffsetModifier);
             }
 
-            ItemsToSpawn.Clear();
+            //this.enabled = false;
+
+            //ItemsToSpawn.Clear();
         }
     }
 

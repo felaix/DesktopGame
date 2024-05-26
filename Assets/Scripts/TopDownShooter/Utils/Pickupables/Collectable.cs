@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using TDS;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent (typeof(Collider2D))]
@@ -9,34 +10,55 @@ public abstract class Collectable : Item
 {
     private Transform playerTransform;
     public bool AutoDestroy = true;
+    public bool AutoDisable = false;
 
-    private bool _pickedUp;
+    private bool _pickedUp = false;
+
+    private void OnEnable()
+    {
+        _pickedUp = false;
+    }
+
+    private void OnDisable()
+    {
+        _pickedUp = false;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             playerTransform = collision.transform;
-            PickUp(collision.gameObject, (Item)this);
+            if (!_pickedUp) PickUp(collision.gameObject, (Item)this);
         }           
-
     }
 
     public virtual void PickUp(GameObject obj, Item item)
     {
         if (_pickedUp) return;
+        _pickedUp = true;
+
+        if (item != null) { item.OnPickUp(item); }
+
+        if (!AutoDestroy && !AutoDisable) return;
 
         if (AutoDestroy)
         {
             transform.DOMove(playerTransform.position, .5f);
             transform.DOScale(0f, .5f);
             if (gameObject != null) Destroy(gameObject, 1f);
+        }else if (AutoDisable)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            if (gameObject != null) gameObject.SetActive(false);
         }
 
-        if (item != null) { item.OnPickUp(item); }
-        _pickedUp = true;
         //await Task.Delay(1000);
     }
+
 }
 
 [Serializable]
@@ -70,8 +92,8 @@ public abstract class Item : MonoBehaviour
 
             if (ItemData.Cost > 0)
             {
-                // Get coin TMP
                 Transform _canvas = t.GetChild(1);
+
                 if (_canvas == null) { Debug.Log("no _canvas found"); return; }
                 _costTMP = _canvas.GetChild(0).GetComponentInChildren<TMP_Text>();
                 if (_costTMP == null) {Debug.Log("no _costTMP found"); return; }
@@ -79,7 +101,6 @@ public abstract class Item : MonoBehaviour
 
                 _canvas.gameObject.SetActive(true);
             }
-
         }
 
         SpawnManager.Instance.AddItem(this);
@@ -88,40 +109,18 @@ public abstract class Item : MonoBehaviour
     private void OnDisable()
     {
         SpawnManager.Instance.RemoveItem(this);
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     public void OnPickUp(Item item) 
     {
         TDSManager.Instance.AddItem(item);
+
+        // Remove because it isn't in the scene anymore
         SpawnManager.Instance.RemoveItem(item);
 
+        // UI Animation in the right upper corner.
         CanvasManager.Instance.UpdateItems(this);
-
-        //if (item.ItemData.ItemType == ItemType.Coin)
-        //{
-        //    CanvasManager.Instance.UpdateCoinTMP();
-        //}
-
-        //if (item.ItemData.ItemType == ItemType.Shoes)
-        //{
-        //    CanvasManager.Instance.UpdateItems(this);
-        //}
-
-        //if (item.ItemData.ItemType == ItemType.Heart)
-        //{
-        //    CanvasManager.Instance.UpdateItems(this);
-        //}
-
-        //if (item.ItemData.ItemType == ItemType.BulletUpgrade)
-        //{
-        //    CanvasManager.Instance.UpdateItems(this);
-        //}
-
-        //if (item.ItemData.ItemType == ItemType.Seller)
-        //{
-
-        //}
     }
 }
 

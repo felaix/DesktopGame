@@ -195,10 +195,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c562edb594dea84cb7e32ac6c505905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 7
-  Sprite: {fileID: -1866422981, guid: 2ada607ae5480e84286491c418b84a2c, type: 3}
+  ItemData:
+    Sprite: {fileID: -448113686, guid: f5750bdc96c29184ca8573ff4e580dea, type: 3}
+    Cost: 0
   SpawnOffset: {x: 0.1, y: 0.1}
   AutoDestroy: 0
+  AutoDisable: 0
   ItemsToSpawn:
   - {fileID: 6063491099522433376, guid: 07a6ad9fa05fce64ca9c4230457b0590, type: 3}
   - {fileID: 6910727406683006814, guid: 75f82e834011a734eb995ae71d69662e, type: 3}
