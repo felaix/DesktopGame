@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
@@ -14,6 +13,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Transform chatButtonContainer;
     [SerializeField] private Transform chatContainer;
 
+    [SerializeField] private GameObject notificationPrefab;
+
     private List<ChatButton> chatButtons = new();
     private List<GameObject> chats = new();
 
@@ -23,7 +24,12 @@ public class DialogueManager : MonoBehaviour
     private bool canAnswer = false;
     public bool GetCanAnswer() => canAnswer;
     public void SetCanAnswer(bool can) => canAnswer = can;
-    public void SetNotification(int index) { if (currentChat == chats[index]) return; else chatButtons[index].IncreaseUnreadMessages(); }
+    public void SetNotification(int index) { if (currentChat == chats[index]) return; else chatButtons[index].IncreaseUnreadMessages(); CreateNotification(chatButtons[index]); }
+    public void CreateNotification(ChatButton btn) 
+    {
+        NotificationUI notification = Instantiate(notificationPrefab, chatContainer.parent.transform).GetComponent<NotificationUI>();
+        notification.CreateNotification(btn.Username);
+    }
 
     private void Awake()
     {
