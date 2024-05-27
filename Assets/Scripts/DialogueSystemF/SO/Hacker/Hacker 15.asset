@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Hacker 15
   m_EditorClassIdentifier: 
   Dialogue: I think music is great, User
-  npc: 5
+  Npc: 5
+  SFXSound: 
+  MusicSound: 
   Delay: 1
   Choices:
   - ChoiceText: Wait, how do you know my name?

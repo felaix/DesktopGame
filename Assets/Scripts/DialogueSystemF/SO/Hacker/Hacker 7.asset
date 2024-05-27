@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Hacker 7
   m_EditorClassIdentifier: 
   Dialogue: theres always a deep lesson concealed within it.
-  npc: 5
+  Npc: 5
+  SFXSound: 
+  MusicSound: 
   Delay: 1
   Choices: []
   NextNode: {fileID: 11400000, guid: 2b3e4ba321353e549bd878c5943c006c, type: 2}

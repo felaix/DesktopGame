@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Dialogue_8
   m_EditorClassIdentifier: 
   Dialogue: wait. brb
-  npc: 2
+  Npc: 2
+  SFXSound: 
+  MusicSound: 
   Delay: 0.1
   Choices: []
   NextNode: {fileID: 11400000, guid: 3622daf09da01b249ae9ce61bc5450c1, type: 2}
+  TriggerDialogue: {fileID: 0}

@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: Dialogue_10
   m_EditorClassIdentifier: 
   Dialogue: last week a girl got hacked
-  npc: 2
+  Npc: 2
+  SFXSound: 
+  MusicSound: 
   Delay: 0.1
   Choices:
   - ChoiceText: and?
     NextDialogue: {fileID: 11400000, guid: 08c02fd7c731c474a94a433fd5e7294f, type: 2}
   NextNode: {fileID: 0}
+  TriggerDialogue: {fileID: 0}

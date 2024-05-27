@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: David_M
   m_EditorClassIdentifier: 
   Dialogue: Hey
-  npc: 2
+  Npc: 2
+  SFXSound: 
+  MusicSound: 
   Delay: 0.1
   Choices:
   - ChoiceText: Not much, just chilling. How about you?

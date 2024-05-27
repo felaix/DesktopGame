@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Hacker 14
   m_EditorClassIdentifier: 
   Dialogue: Do you like music?
-  npc: 5
+  Npc: 5
+  SFXSound: 
+  MusicSound: 
   Delay: 1
   Choices:
   - ChoiceText: yes

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Hacker
   m_EditorClassIdentifier: 
   Dialogue: hi
-  npc: 5
+  Npc: 5
+  SFXSound: 
+  MusicSound: 
   Delay: 1
   Choices:
   - ChoiceText: who are you?

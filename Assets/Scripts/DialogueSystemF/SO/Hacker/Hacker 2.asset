@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Hacker 2
   m_EditorClassIdentifier: 
   Dialogue: how are you?
-  npc: 5
+  Npc: 5
+  SFXSound: 
+  MusicSound: 
   Delay: 5
   Choices:
   - ChoiceText: i'm good, thanks. wbu?

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Hacker 8
   m_EditorClassIdentifier: 
   Dialogue: although you may not see it at that time.
-  npc: 5
+  Npc: 5
+  SFXSound: 
+  MusicSound: 
   Delay: 0.1
   Choices:
   - ChoiceText: wow, thank you

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Hacker 16
   m_EditorClassIdentifier: 
   Dialogue: I know a lot of things.
-  npc: 5
+  Npc: 5
+  SFXSound: 
+  MusicSound: 
   Delay: 1
   Choices:
   - ChoiceText: This is getting weird. How do you know my name?

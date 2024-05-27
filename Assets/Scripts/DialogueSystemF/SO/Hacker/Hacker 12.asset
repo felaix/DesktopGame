@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Hacker 12
   m_EditorClassIdentifier: 
   Dialogue: HAHAHA xD me too
-  npc: 5
+  Npc: 5
+  SFXSound: 
+  MusicSound: 
   Delay: 5
   Choices: []
   NextNode: {fileID: 11400000, guid: 9c1862102642d424eb44f45f01f2a1a3, type: 2}

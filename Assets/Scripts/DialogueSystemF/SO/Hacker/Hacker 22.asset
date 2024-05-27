@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Hacker 22
   m_EditorClassIdentifier: 
   Dialogue: Do you hear that?
-  npc: 5
+  Npc: 5
+  SFXSound: 
+  MusicSound: HidingHorror
   Delay: 1
   Choices: []
   NextNode: {fileID: 0}

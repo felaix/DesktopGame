@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Hacker 26
   m_EditorClassIdentifier: 
   Dialogue: What are you talking?
-  npc: 5
+  Npc: 5
+  SFXSound: 
+  MusicSound: 
   Delay: 3
   Choices: []
   NextNode: {fileID: 11400000, guid: 13ee731e344ac2c4e9a32a10ea4171ac, type: 2}

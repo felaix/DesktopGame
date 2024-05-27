@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Hacker 18
   m_EditorClassIdentifier: 
   Dialogue: Let's just keep talking.
-  npc: 5
+  Npc: 5
+  SFXSound: 
+  MusicSound: 
   Delay: 1
   Choices: []
   NextNode: {fileID: 11400000, guid: 1d868b344f313044ab50e7b798cdfa24, type: 2}

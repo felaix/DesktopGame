@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Dialogue_5
   m_EditorClassIdentifier: 
   Dialogue: Did you read the news?
-  npc: 2
+  Npc: 2
+  SFXSound: 
+  MusicSound: 
   Delay: 0.1
   Choices:
   - ChoiceText: ???
@@ -21,3 +23,4 @@ MonoBehaviour:
   - ChoiceText: No?
     NextDialogue: {fileID: 11400000, guid: 489721f9de5f2b34a9f9aec3feb024f6, type: 2}
   NextNode: {fileID: 0}
+  TriggerDialogue: {fileID: 0}

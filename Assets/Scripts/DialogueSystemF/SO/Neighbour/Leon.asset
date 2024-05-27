@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Leon
   m_EditorClassIdentifier: 
   Dialogue: Hello, here's Leon Wrinkler. Your neighbour.
-  npc: 4
+  Npc: 4
+  SFXSound: 
+  MusicSound: 
   Delay: 1
   Choices:
   - ChoiceText: Hi, what's up?

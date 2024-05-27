@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Hacker 19
   m_EditorClassIdentifier: 
   Dialogue: Do you hear that?
-  npc: 5
-  Delay: 1
+  Npc: 5
+  SFXSound: 
+  MusicSound: HidingHorror
+  Delay: 0.1
   Choices:
-  - ChoiceText: what?
-    NextDialogue: {fileID: 0}
+  - ChoiceText: what?? how are you doing this??
+    NextDialogue: {fileID: 11400000, guid: 0be340c5f6d6aa34ca01baa9a826474c, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

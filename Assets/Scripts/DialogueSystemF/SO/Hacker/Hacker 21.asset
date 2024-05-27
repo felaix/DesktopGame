@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Hacker 21
   m_EditorClassIdentifier: 
   Dialogue: Do you hear that?
-  npc: 5
+  Npc: 5
+  SFXSound: 
+  MusicSound: HidingHorror
   Delay: 1
   Choices:
-  - ChoiceText: No, seriously, how do you know my name?
+  - ChoiceText: what?? how?? turn it off!
     NextDialogue: {fileID: 0}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

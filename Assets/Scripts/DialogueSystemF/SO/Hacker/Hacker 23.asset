@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Hacker 23
   m_EditorClassIdentifier: 
   Dialogue: I love cats!!
-  npc: 5
+  Npc: 5
+  SFXSound: 
+  MusicSound: 
   Delay: 1
   Choices: []
   NextNode: {fileID: 11400000, guid: a0ca7a2803624914a9fe541710b1af95, type: 2}

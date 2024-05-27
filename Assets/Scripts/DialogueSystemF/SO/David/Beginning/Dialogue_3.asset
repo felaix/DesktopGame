@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Dialogue_3
   m_EditorClassIdentifier: 
   Dialogue: Anything exciting planned for the weekend?
-  npc: 2
+  Npc: 2
+  SFXSound: 
+  MusicSound: 
   Delay: 0.1
   Choices:
   - ChoiceText: Not really, probably just hanging out with friends.
@@ -23,3 +25,4 @@ MonoBehaviour:
   - ChoiceText: Nope.
     NextDialogue: {fileID: 11400000, guid: 8da12e3981ed50f44afad73439ff5635, type: 2}
   NextNode: {fileID: 0}
+  TriggerDialogue: {fileID: 0}

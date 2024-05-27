@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Leon 4
   m_EditorClassIdentifier: 
   Dialogue: It's right in front of your door
-  npc: 4
+  Npc: 4
+  SFXSound: 
+  MusicSound: 
   Delay: 1
   Choices:
   - ChoiceText: what??

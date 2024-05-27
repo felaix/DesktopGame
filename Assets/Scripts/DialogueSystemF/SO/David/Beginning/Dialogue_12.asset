@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Dialogue_12
   m_EditorClassIdentifier: 
   Dialogue: the hacker did something really terrible.
-  npc: 2
+  Npc: 2
+  SFXSound: 
+  MusicSound: 
   Delay: 2
   Choices:
   - ChoiceText: what happened?

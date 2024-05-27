@@ -291,6 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  SFXOnClick: ButtonClick
 --- !u!210 &3499736765835634550
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -300,6 +301,6 @@ SortingGroup:
   m_GameObject: {fileID: 2650649521864563991}
   m_Enabled: 1
   m_SortingLayerID: -853446677
-  m_SortingLayer: 3
+  m_SortingLayer: -2
   m_SortingOrder: 3
   m_SortAtRoot: 0

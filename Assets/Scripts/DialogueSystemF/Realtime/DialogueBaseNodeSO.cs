@@ -6,7 +6,10 @@ using UnityEngine;
 public class DialogueBaseNodeSO : ScriptableObject
 {
     public string Dialogue;
-    public NPC npc;
+    public NPC Npc;
+
+    public string SFXSound;
+    public string MusicSound;
 
     public float Delay = 1f;
 
@@ -22,8 +25,8 @@ public class DialogueBaseNodeSO : ScriptableObject
     public bool SkipChoices() => NextNode != null;
     public DialogueBaseNodeSO GetChoiceNode(int index) => Choices[index].NextDialogue;
 
-    public string GetTriggerNPCName() => TriggerDialogue.npc.ToString();
-    public string GetNPCName() => npc.ToString();
+    public string GetTriggerNPCName() => TriggerDialogue.Npc.ToString();
+    public string GetNPCName() => Npc.ToString();
     public virtual void Intialize(string dialogue, List<Choice> choices)
     {
         Dialogue = dialogue;

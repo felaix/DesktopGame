@@ -111,11 +111,15 @@ public class ChatUI : MonoBehaviour
         dialogueTMP.text = dialogueSO.Dialogue;
         savedNPCMsgTMP = dialogueTMP;
 
+        if (dialogueSO.MusicSound != "") SoundManager.Instance.PlayMusic(dialogueSO.MusicSound);
+        if (dialogueSO.SFXSound != "") SoundManager.Instance.PlaySFX(dialogueSO.SFXSound);
+
         // Animate Message
         npcMessageCoroutine = StartCoroutine(NPCMessageSpawnCoroutine((RectTransform)npcMessageInstance.transform, dialogueTMP, timeTMP));
 
-        // Trigger a new chat
+        // Trigger Sound
 
+        // Trigger a new chat
         if (dialogueSO.TriggerDialogue != null) DialogueManager.Instance.CreateChat(dialogueSO.TriggerDialogue, dialogueSO.GetTriggerNPCName());
     }
     public void CreateChoiceButtons()

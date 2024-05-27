@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: DialogueBaseNode
   m_EditorClassIdentifier: 
   Dialogue: Hey, what's up?
-  npc: 2
+  Npc: 2
+  SFXSound: 
+  MusicSound: 
   Delay: 0.1
   Choices:
   - ChoiceText: Not much, just chilling. How about you?
@@ -21,6 +23,4 @@ MonoBehaviour:
   - ChoiceText: Hey David :) not much, wbu?
     NextDialogue: {fileID: 11400000, guid: 4862030a53187364cb604c0c64e26363, type: 2}
   NextNode: {fileID: 0}
-  trigger:
-    Dialogue: {fileID: 0}
-    Npc: 0
+  TriggerDialogue: {fileID: 0}

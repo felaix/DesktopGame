@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Leon 1
   m_EditorClassIdentifier: 
   Dialogue: I'm heading home at the moment
-  npc: 4
+  Npc: 4
+  SFXSound: 
+  MusicSound: 
   Delay: 1
   Choices: []
   NextNode: {fileID: 11400000, guid: 7952c627661db1f469f486aa937eccd9, type: 2}

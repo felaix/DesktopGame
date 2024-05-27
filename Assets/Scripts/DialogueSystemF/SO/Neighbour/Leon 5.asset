@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Leon 5
   m_EditorClassIdentifier: 
   Dialogue: (send image here)
-  npc: 4
+  Npc: 4
+  SFXSound: 
+  MusicSound: 
   Delay: 1
   Choices:
   - ChoiceText: what??

@@ -8,6 +8,7 @@ public class DialogueResponseButton : MonoBehaviour
     private Button btn;
     private Transform container;
     private ChatUI chat;
+    public string SFXOnClick;
 
     public void SetChat(ChatUI c) { chat = c; }
     public ChatUI GetChat() { return chat; }
@@ -29,6 +30,7 @@ public class DialogueResponseButton : MonoBehaviour
     {
         container.gameObject.SetActive(false);
         chat.Respond(index);
+        SoundManager.Instance.PlaySFX(SFXOnClick);
         //DialogueManager.Instance.OnRespond(index);
 
         //if (gameObject != null) Destroy(gameObject, .1f);

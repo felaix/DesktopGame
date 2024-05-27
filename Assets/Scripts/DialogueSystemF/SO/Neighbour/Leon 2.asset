@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Leon 2
   m_EditorClassIdentifier: 
   Dialogue: And i saw something weird
-  npc: 4
+  Npc: 4
+  SFXSound: 
+  MusicSound: 
   Delay: 1
   Choices: []
   NextNode: {fileID: 11400000, guid: 7270cb4ad89b052499db040418cd608e, type: 2}

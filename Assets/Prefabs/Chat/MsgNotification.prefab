@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8340673469439912650}
   - component: {fileID: 2101966803402672487}
   - component: {fileID: 3853820530924212933}
+  - component: {fileID: 7296108099060474680}
   m_Layer: 5
   m_Name: MsgNotification
   m_TagString: Untagged
@@ -117,10 +118,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dd914508b5a7e14cac464110d59c626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReceivedMessage: 
-  NPC: 0
-  _msgTMP: {fileID: 0}
   _npcTMP: {fileID: 5208318211837901065}
+--- !u!114 &7296108099060474680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157076806319310610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82433ca978f2bcc43a6418414648392d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyAtStart: 1
+  delay: 2
 --- !u!1 &8808444463861564563
 GameObject:
   m_ObjectHideFlags: 0

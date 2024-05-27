@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
@@ -24,11 +25,13 @@ public class DialogueManager : MonoBehaviour
     private bool canAnswer = false;
     public bool GetCanAnswer() => canAnswer;
     public void SetCanAnswer(bool can) => canAnswer = can;
-    public void SetNotification(int index) { if (currentChat == chats[index]) return; else chatButtons[index].IncreaseUnreadMessages(); CreateNotification(chatButtons[index]); }
+    public void SetNotification(int index) { if (currentChat == chats[index]) {SoundManager.Instance.PlaySFX("NotificationInsideChat"); return; } else chatButtons[index].IncreaseUnreadMessages(); CreateNotification(chatButtons[index]); }
     public void CreateNotification(ChatButton btn) 
     {
         NotificationUI notification = Instantiate(notificationPrefab, chatContainer.parent.transform).GetComponent<NotificationUI>();
         notification.CreateNotification(btn.Username);
+
+        SoundManager.Instance.PlaySFX("NotificationOutsideChat");
     }
 
     private void Awake()
@@ -54,7 +57,7 @@ public class DialogueManager : MonoBehaviour
         while (dialogues.Count > 0)
         {
             //Debug.Log("Create Chat");
-            CreateChat(dialogues[0], dialogues[0].npc.ToString());
+            CreateChat(dialogues[0], dialogues[0].Npc.ToString());
             dialogues.RemoveAt(0);
             yield return new WaitForSeconds(20f);
         }
@@ -78,7 +81,7 @@ public class DialogueManager : MonoBehaviour
         ChatUI chatUI = chat.GetComponent<ChatUI>();
         chatUI.SetIndex(chats.Count);
 
-        if (createBtn) CreateChatButton(chatUI.GetIndex(), chatUI.dialogueSO.npc.ToString());
+        if (createBtn) CreateChatButton(chatUI.GetIndex(), chatUI.dialogueSO.Npc.ToString());
     }
 
     public void CreateChat(DialogueBaseNodeSO dialogue, string name)
@@ -102,6 +105,8 @@ public class DialogueManager : MonoBehaviour
         currentChat = chats[index - 1];
 
         SelectChat(index - 1);
+
+        SoundManager.Instance.PlaySFX("ButtonClick");
     }
 
     public void SelectChat(int index)

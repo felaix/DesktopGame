@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Hacker 10
   m_EditorClassIdentifier: 
   Dialogue: Fortnite is awesome! Do you play any sports?
-  npc: 5
+  Npc: 5
+  SFXSound: 
+  MusicSound: 
   Delay: 1
   Choices:
   - ChoiceText: Yeah, i play soccer sometimes. It's fun.

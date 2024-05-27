@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Hacker 3
   m_EditorClassIdentifier: 
   Dialogue: I'm doing well. What's your favorite game to play?
-  npc: 5
+  Npc: 5
+  SFXSound: 
+  MusicSound: 
   Delay: 3
   Choices:
   - ChoiceText: Fornite
