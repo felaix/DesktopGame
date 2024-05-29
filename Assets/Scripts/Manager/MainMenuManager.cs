@@ -1,6 +1,6 @@
 using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,7 +27,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void OnEnable()
     {
-        if (onLoad) EnableLoadingText();
+        if (onLoad) StartCoroutine(EnableLoadingText());
 
         _startButton.onClick.AddListener(OnButtonClick);
     }
@@ -47,7 +47,7 @@ public class MainMenuManager : MonoBehaviour
     {
         _bg.gameObject.SetActive(true);
         BlendInImage(_bg, delay);
-        EnableLoadingText();
+        StartCoroutine(EnableLoadingText());
     }
 
     public void BlendInImage(Image img, float delay)
@@ -56,11 +56,11 @@ public class MainMenuManager : MonoBehaviour
         img.color = _transparent;
         img.DOBlendableColor(color, delay);
     }
-         
-    private async void EnableLoadingText()
+
+    private IEnumerator EnableLoadingText()
     {
         Image img = _mainLoadingIcon.GetComponent<Image>();
-        if (img != null )
+        if (img != null)
         {
             Color color = img.color;
             img.color = _transparent;
@@ -71,21 +71,21 @@ public class MainMenuManager : MonoBehaviour
         for (int i = 0; i < tps.Count; i++)
         {
             tps[i].gameObject.SetActive(true);
-            await StartTypingAnimation(tps[i]);
+            yield return StartCoroutine(StartTypingAnimation(tps[i]));
         }
 
         GameManager.Instance.LoadLevel(1, 1f);
         Destroy(this);
     }
 
-    private async Task StartTypingAnimation(TMP_Text tmp)
+    private IEnumerator StartTypingAnimation(TMP_Text tmp)
     {
         string msg = tmp.text;
         tmp.text = "";
-        await TypeText(tmp, msg);
+        yield return StartCoroutine(TypeText(tmp, msg));
     }
 
-    private async Task TypeText(TMP_Text tmp, string msg)
+    private IEnumerator TypeText(TMP_Text tmp, string msg)
     {
         tmp.color = _transparent;
 
@@ -93,13 +93,8 @@ public class MainMenuManager : MonoBehaviour
         {
             tmp.DOBlendableColor(Color.white, typingSpeed);
             tmp.text += c;
-            await Wait(typingSpeed);
+            yield return new WaitForSeconds(typingSpeed);
         }
-    }
-
-    private async Task Wait(float speed)
-    {
-        await Task.Delay((int)(speed * 1000));
     }
 
     void Start()
@@ -109,7 +104,6 @@ public class MainMenuManager : MonoBehaviour
 
     void Update()
     {
-
         if (_mainLoadingIcon == null) return;
 
         if (Time.time - _startTime >= _timeStep)

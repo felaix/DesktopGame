@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,10 +15,16 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public async void LoadLevel(int lvl, float delay)
+    public void LoadLevel(int lvl, float delay)
     {
-        await Task.Delay((int)(delay*1000));
+        StartCoroutine(LoadSceneCoroutine(lvl, delay));
+    }
+    
+    private IEnumerator LoadSceneCoroutine(int lvl, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
         SceneManager.LoadScene(lvl);
-    } 
+    }
 
 }

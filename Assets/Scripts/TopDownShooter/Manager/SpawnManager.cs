@@ -340,7 +340,7 @@ namespace TDS
 
         public Transform GetRandomSpawnPoint()
         {
-            int r = UnityEngine.Random.Range(0, _spawnPoints.Count);
+            int r = UnityEngine.Random.Range(0, _spawnPoints.Count - 1);
             return _spawnPoints[r];
         }
 
