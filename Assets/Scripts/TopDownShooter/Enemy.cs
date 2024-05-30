@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
     private Vector3 GetRandomPositionNearPlayer()
     {
 
-        if (player == null) GetPlayer();
+        if (player == null) return Vector3.zero;
 
         float randomOffsetX = Random.Range(0, radius.x);
         float randomOffsetY = Random.Range(0, radius.y);

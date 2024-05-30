@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 namespace TDS
 {
-    [DefaultExecutionOrder(1)]
-
+    [DefaultExecutionOrder(-1)]
     public class CanvasManager : MonoBehaviour
     {
         public static CanvasManager Instance { get; private set; }
@@ -159,7 +158,7 @@ namespace TDS
             else if (hp >= maxHP) _playerHealthTMP.color = PrimaryColor;
             else _playerHealthTMP.color = Color.white;
 
-            _playerHealthTMP.text = hp.ToString();
+            _playerHealthTMP.text = hp.ToString() + " / " + maxHP.ToString();
 
             if (hp <= 0)
             {

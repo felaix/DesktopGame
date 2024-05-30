@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace TDS
 {
-    [DefaultExecutionOrder(-1)]
+    [DefaultExecutionOrder(-2)]
     public class SpawnManager : MonoBehaviour
     {
         public static SpawnManager Instance;
@@ -62,11 +62,6 @@ namespace TDS
         {
            Instance = this;
 
-            if (CreatePlayer && _player == null)
-            {
-                CreateNewPlayer();
-            }
-
             WaveCompleted += OnWaveCompleted;
         }
 
@@ -86,6 +81,11 @@ namespace TDS
         {
             _enemies = new List<Enemy>();
             _initialSpawnPoints = _spawnPoints;
+
+            if (CreatePlayer && _player == null)
+            {
+                CreateNewPlayer();
+            }
         }
 
         private void Update()
@@ -148,17 +148,8 @@ namespace TDS
             WaveCompleted();
         }
 
-        public void DestroyAllItems()
+        public void ClearItems()
         {
-            //if (_items.Count == 0) return;
-
-            //List<Item> copy = _items;
-
-            //foreach(Item item in copy)
-            //{
-            //    Destroy(item.gameObject);
-            //}
-
             _items.Clear();
         }
 
@@ -167,7 +158,6 @@ namespace TDS
             CanSpawn = false;
             KillAllEnemies();
             EnableAllExploreAreas();
-            //DestroyAllItems();
         }
 
         private void EnableAllExploreAreas()
@@ -197,8 +187,8 @@ namespace TDS
             // Reload UI
             CanvasManager.Instance.ResetUI();
 
-            // Destroy all Items
-            DestroyAllItems();
+            // Clear Items
+            ClearItems();
 
             // Reset Stats
             TDSManager.Instance.ResetStats();
@@ -207,10 +197,24 @@ namespace TDS
             CreateNewPlayer();
 
             // Reset Spawn Points
-            _spawnPoints.Clear();
-            _spawnPoints = CreateSpawnPoints(5, _exploreItems[0].transform.position);
+            if (_spawnPoints == null)
+            {
+                Debug.LogError("Spawnpoints null!");
+            }
+            else
+            {
+                _spawnPoints.Clear();
+                if (_exploreItems != null && _exploreItems.Count > 0)
+                {
+                    _spawnPoints = CreateSpawnPoints(5, _exploreItems[0].transform.position);
+                }
+                else
+                {
+                    Debug.LogError("ExploreItems is null or empty!");
+                }
+            }
 
-            // Reset Camera
+            // *Reset Camera + Transition to the beginning*
             Vector3 camStartPos = new Vector3(-15f, 0f, -10f);
             Camera camera = Camera.main;
             camera.transform.DOMove(camStartPos, 1f);
@@ -290,7 +294,19 @@ namespace TDS
 
         private List<Transform> CreateSpawnPoints(int length, Vector3 centerPos, float radius = 1f)
         {
+            if (length <= 0)
+            {
+                Debug.LogError("Error: Length must be greater than 0.");
+                return new List<Transform>();
+            }
+
             Transform area = CreateSpawnPointArea(centerPos);
+            if (area == null)
+            {
+                Debug.LogError("Error: Failed to create spawn point area.");
+                return new List<Transform>();
+            }
+
             List<Transform> spawnPoints = new List<Transform>();
 
             for (int i = 0; i < length; i++)
@@ -327,6 +343,8 @@ namespace TDS
         {
             if (spawnPoint == null) spawnPoint = GetRandomSpawnPoint();
             
+            if (spawnPoint == null) return null;
+
             Enemy enemy = Instantiate(_enemyPrefab, spawnPoint.position, Quaternion.identity, _enemyContainer).GetComponent<Enemy>();
 
             int luck = 0;
@@ -340,8 +358,17 @@ namespace TDS
 
         public Transform GetRandomSpawnPoint()
         {
-            int r = UnityEngine.Random.Range(0, _spawnPoints.Count - 1);
-            return _spawnPoints[r];
+            // Returns a random spawn point
+
+            if (_spawnPoints == null || _spawnPoints.Count == 0) return null;
+
+            int maxRange = _spawnPoints.Count;
+
+            int r = UnityEngine.Random.Range(0, maxRange++);
+
+            if (_spawnPoints[r].transform == null) return null;
+
+            return _spawnPoints[r].transform;
         }
 
         public Item GetItemByLuck(int luck)
@@ -358,7 +385,7 @@ namespace TDS
         public Item GetRandomLuckyItem() => _luckyItemsToDrop[UnityEngine.Random.Range(0, _itemsToDrop.Count)];
 
         public int GetLevel() => Level;
-        public async void CreateNewPlayer() { if (_player != null) Destroy(_player.gameObject); await Task.Delay(100); _player = Instantiate(_playerPrefab, _playerSpawnPoint).GetComponent<Player>(); }
+        public void CreateNewPlayer() { if (_player != null) { Destroy(_player.gameObject); } _player = Instantiate(_playerPrefab, _playerSpawnPoint).GetComponent<Player>(); }
 
     }
 

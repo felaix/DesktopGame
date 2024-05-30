@@ -73,7 +73,6 @@ namespace TDS
             _gun = GetComponent<Gun>();
             _anim = GetComponent<Animator>();
 
-            //CreateStats();
             CreateInput();
             SubscribeControls();
 
@@ -82,9 +81,8 @@ namespace TDS
 
         private void OnEnable()
         {
-            //SubscribeControls();
-            Heal(3);
-            //transform.position = Vector2.zero;
+            _stats.HP = _stats.MaxHP;
+            CanvasManager.Instance.UpdatePlayerHP(_stats.HP, _stats.MaxHP);
         }
 
         public void ResetPosition()

@@ -18,9 +18,14 @@ namespace TDS
         [Header("Next Explore Area")]
         public AP_Explore nextExploreArea;
 
-        private void Start()
+        private void Awake()
         {
             SpawnManager.Instance.AddExploreItem(this);
+        }
+
+        private void Start()
+        {
+            //SpawnManager.Instance.AddExploreItem(this);
             gameObject.SetActive(false);
         }
 
