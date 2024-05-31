@@ -29,9 +29,9 @@ public class Enemy : MonoBehaviour
         if (animator == null) Debugger.Instance.CreateErrorLog("Animator not found!");
     }
 
-    private async void GetPlayer()
+    private void GetPlayer()
     {
-        await Task.Delay(100);
+        //await Task.Delay(100);
         player = SpawnManager.Instance.GetPlayer().transform;
     }
 

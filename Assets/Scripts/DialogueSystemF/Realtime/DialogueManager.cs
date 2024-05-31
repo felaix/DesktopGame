@@ -57,7 +57,7 @@ public class DialogueManager : MonoBehaviour
         while (dialogues.Count > 0)
         {
             //Debug.Log("Create Chat");
-            CreateChat(dialogues[0], dialogues[0].Npc.ToString());
+            CreateChat(dialogues[0], dialogues[0].NPCData.Name.ToString());
             dialogues.RemoveAt(0);
             yield return new WaitForSeconds(20f);
         }
@@ -81,7 +81,7 @@ public class DialogueManager : MonoBehaviour
         ChatUI chatUI = chat.GetComponent<ChatUI>();
         chatUI.SetIndex(chats.Count);
 
-        if (createBtn) CreateChatButton(chatUI.GetIndex(), chatUI.dialogueSO.Npc.ToString());
+        if (createBtn) CreateChatButton(chatUI.GetIndex(), chatUI.dialogueSO.NPCData.Name.ToString());
     }
 
     public void CreateChat(DialogueBaseNodeSO dialogue, string name)

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChatUI : MonoBehaviour
 {
@@ -103,7 +104,7 @@ public class ChatUI : MonoBehaviour
         npcMessageInstance.transform.localScale = Vector3.zero;
 
         // Set Time
-        TMP_Text timeTMP = npcMessageInstance.transform.GetChild(1).GetComponent<TMP_Text>();
+        TMP_Text timeTMP = npcMessageInstance.transform.GetChild(2).GetComponent<TMP_Text>();
         savedNPCTimeTMP = timeTMP;
 
         // Set Dialogue Text
@@ -111,11 +112,22 @@ public class ChatUI : MonoBehaviour
         dialogueTMP.text = dialogueSO.Dialogue;
         savedNPCMsgTMP = dialogueTMP;
 
+        Image img = npcMessageInstance.transform.GetChild(0).GetComponent<Image>();
+        img.sprite = dialogueSO.PhotoToSend;
+
+        //Image imgComp = npcMessageInstance.transform.GetChild(0).GetComponent<Image>();
+        //imgComp.sprite = dialogueSO.PhotoToSend;
+
+
         if (dialogueSO.MusicSound != "") SoundManager.Instance.PlayMusic(dialogueSO.MusicSound);
         if (dialogueSO.SFXSound != "") SoundManager.Instance.PlaySFX(dialogueSO.SFXSound);
 
         // Animate Message
-        npcMessageCoroutine = StartCoroutine(NPCMessageSpawnCoroutine((RectTransform)npcMessageInstance.transform, dialogueTMP, timeTMP));
+        npcMessageCoroutine = StartCoroutine(NPCMessageSpawnCoroutine((RectTransform)npcMessageInstance.transform, dialogueTMP, timeTMP, dialogueTMP.text, img));
+
+
+        //if (imgComp.sprite == null) imgComp.gameObject.SetActive(false);
+        //else imgComp.gameObject.SetActive(true);
 
         // Trigger Sound
 
@@ -201,7 +213,7 @@ public class ChatUI : MonoBehaviour
 
     private void SetTMPText(TMP_Text tmp, string txt) {if (tmp != null) tmp.text = txt;}
 
-    private IEnumerator NPCMessageSpawnCoroutine(RectTransform t, TMP_Text msgTMP, TMP_Text timeTMP, string txt = "")
+    private IEnumerator NPCMessageSpawnCoroutine(RectTransform t, TMP_Text msgTMP, TMP_Text timeTMP, string txt = "", Image img = null)
     {
         savedNpcRect = t;
         if (txt == "") originalTxt = msgTMP.text;
@@ -242,6 +254,14 @@ public class ChatUI : MonoBehaviour
 
         t.DOScale(new Vector3(1f,1f,1f), .5f);
         SetTMPText(msgTMP, originalTxt);
+
+
+        if (img.sprite != null)
+        {
+            //imgComp.sprite = dialogueSO.PhotoToSend;
+            img.gameObject.SetActive(true);
+        }
+        else { img.gameObject.SetActive(false); }
 
         DialogueManager.Instance.SetNotification(this.GetIndex() - 1);
         DialogueManager.Instance.SetChatStatus(this.GetIndex() - 1, "online");

@@ -1,3 +1,4 @@
+using EditorAttributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DialogueBaseNode", menuName = "Dialogue Node")]
 public class DialogueBaseNodeSO : ScriptableObject
 {
+
+    [Header("NPC")]
+    public NPCData NPCData;
+    //public NPCNames NPCData.Name;
+
+    [Header("Dialog")]
     public string Dialogue;
-    public NPC Npc;
+    public Sprite PhotoToSend;
 
     public string SFXSound;
     public string MusicSound;
@@ -21,12 +28,13 @@ public class DialogueBaseNodeSO : ScriptableObject
 
     [Header("Trigger Node")]
     public DialogueBaseNodeSO TriggerDialogue;
+
+    public Sprite GetProfilePicture() => NPCData.ProfilePicture;
     public string GetChoiceText(int index) => Choices[index].ChoiceText;
     public bool SkipChoices() => NextNode != null;
     public DialogueBaseNodeSO GetChoiceNode(int index) => Choices[index].NextDialogue;
-
-    public string GetTriggerNPCName() => TriggerDialogue.Npc.ToString();
-    public string GetNPCName() => Npc.ToString();
+    public string GetTriggerNPCName() => TriggerDialogue.NPCData.Name.ToString();
+    public string GetNPCName() => NPCData.Name.ToString();
     public virtual void Intialize(string dialogue, List<Choice> choices)
     {
         Dialogue = dialogue;
@@ -42,12 +50,20 @@ public class Choice
 }
 
 [Serializable]
-public enum NPC
+public struct NPCData
+{
+    public Sprite ProfilePicture;
+    public NPCNames Name;
+}
+
+[Serializable]
+public enum NPCNames
 {
     Mum,
     Dad,
     David,
     Hacker,
     Leon,
-    Unknown
+    Unknown,
+    Nancy
 }

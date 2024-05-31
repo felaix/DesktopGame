@@ -21,14 +21,10 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField] private Button _startButton;
 
-    public bool onLoad = false;
-
     private float _startTime;
 
     private void OnEnable()
     {
-        if (onLoad) StartCoroutine(EnableLoadingText());
-
         _startButton.onClick.AddListener(OnButtonClick);
     }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,12 +44,39 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySFX(string sfx)
     {
-        sounds.ForEach(s => { if (s.Name == sfx) _sfxSource.PlayOneShot(s.Audio); });
+        sounds.ForEach(s => { 
+            if (s.Name == sfx) 
+
+                _sfxSource.PlayOneShot(s.SingleAudio);
+
+                if (s.Random && s.OneShot) {_sfxSource.PlayOneShot(s.MultipleAudio[UnityEngine.Random.Range(0, s.MultipleAudio.Count)]); return; }
+
+                if (s.Random) StartCoroutine(PlayMultipleAudio(.1f, s));
+        });
+
     }
 
     public void PlayMusic(string music)
     {
-        sounds.ForEach(s => { if (s.Name == music) _sfxSource.PlayOneShot(s.Audio); });
+        sounds.ForEach(s => { if (s.Name == music) _sfxSource.PlayOneShot(s.SingleAudio); });
+    }
+
+    private IEnumerator PlayMultipleAudio(float delay, Sound sound)
+    {
+        List<AudioClip> clipCopyList = sound.MultipleAudio;
+
+        for (int i = 0; i < clipCopyList.Count; i++)
+        {
+            yield return new WaitForSeconds(delay);
+
+            if (!sound.Random) _sfxSource.PlayOneShot(clipCopyList[i]);
+
+            else
+            {
+                int randomIndex = UnityEngine.Random.Range(0, clipCopyList.Count);
+                _sfxSource.PlayOneShot(clipCopyList[randomIndex]);
+            }
+        }
     }
 }
 
@@ -56,5 +84,9 @@ public class SoundManager : MonoBehaviour
 public struct Sound
 {
     public string Name;
-    public AudioClip Audio;
+    public AudioClip SingleAudio;
+
+    public List<AudioClip> MultipleAudio;
+    public bool Random;
+    public bool OneShot;
 }
