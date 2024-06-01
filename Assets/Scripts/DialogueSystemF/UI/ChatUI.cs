@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -115,21 +116,34 @@ public class ChatUI : MonoBehaviour
         Image img = npcMessageInstance.transform.GetChild(0).GetComponent<Image>();
         img.sprite = dialogueSO.PhotoToSend;
 
-        //Image imgComp = npcMessageInstance.transform.GetChild(0).GetComponent<Image>();
-        //imgComp.sprite = dialogueSO.PhotoToSend;
+        bool scaled = false;
 
+        Button btn = npcMessageInstance.AddComponent<Button>();
+        btn.onClick.AddListener(() => 
+        {
+            if (scaled && img.sprite != null)
+            {
+                Debug.Log("Scaled img down");
+                img.transform.DOScale(Vector3.one, .5f);
+                scaled = false;
+                return;
+            }
 
+            if (!scaled && img.sprite != null) 
+            {
+                scaled = true;
+                Image copy = img;
+                Debug.Log("Scale image up");
+                copy.transform.DOScale(new Vector3(1.5f, 1.5f,1.5f), .5f);
+            }
+        });
+
+        // Trigger Sound
         if (dialogueSO.MusicSound != "") SoundManager.Instance.PlayMusic(dialogueSO.MusicSound);
         if (dialogueSO.SFXSound != "") SoundManager.Instance.PlaySFX(dialogueSO.SFXSound);
 
         // Animate Message
         npcMessageCoroutine = StartCoroutine(NPCMessageSpawnCoroutine((RectTransform)npcMessageInstance.transform, dialogueTMP, timeTMP, dialogueTMP.text, img));
-
-
-        //if (imgComp.sprite == null) imgComp.gameObject.SetActive(false);
-        //else imgComp.gameObject.SetActive(true);
-
-        // Trigger Sound
 
         // Trigger a new chat
         if (dialogueSO.TriggerDialogue != null) DialogueManager.Instance.CreateChat(dialogueSO.TriggerDialogue, dialogueSO.GetTriggerNPCName());
