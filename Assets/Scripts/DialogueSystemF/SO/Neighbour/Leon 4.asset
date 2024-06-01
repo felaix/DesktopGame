@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
   m_Name: Leon 4
   m_EditorClassIdentifier: 
-  Dialogue: It's right in front of your door
-  Npc: 4
+  NPCData:
+    ProfilePicture: {fileID: 0}
+    Name: 4
+  Dialogue: right in front of your window
+  PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 
   Delay: 1

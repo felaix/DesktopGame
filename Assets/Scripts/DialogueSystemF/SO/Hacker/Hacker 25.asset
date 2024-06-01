@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
   m_Name: Hacker 25
   m_EditorClassIdentifier: 
+  NPCData:
+    ProfilePicture: {fileID: 0}
+    Name: 5
   Dialogue: Why? you can trust me.
-  Npc: 5
+  PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 
   Delay: 1
