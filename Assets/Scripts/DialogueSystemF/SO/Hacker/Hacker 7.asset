@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCData:
     ProfilePicture: {fileID: 0}
-    Name: 5
+    Name: 3
   Dialogue: theres always a deep lesson concealed within it.
   PhotoToSend: {fileID: 0}
   SFXSound: 

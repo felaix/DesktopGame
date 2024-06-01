@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCData:
     ProfilePicture: {fileID: 0}
-    Name: 4
-  Dialogue: right in front of your window
+    Name: 0
+  Dialogue: It's right in front of your door
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 
