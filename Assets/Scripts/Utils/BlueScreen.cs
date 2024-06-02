@@ -13,8 +13,7 @@ public class BlueScreen : MonoBehaviour
     }
 
     private IEnumerator BlueScreenAnimation()
-    {
-
+    {   
         float goal = 100f;
         float currentPercentage = 0f;
 
@@ -24,7 +23,5 @@ public class BlueScreen : MonoBehaviour
             currentPercentage += 1f;
             _tmp.text = currentPercentage.ToString() + "% complete.";
         }
-
     }
-
-}
+} 

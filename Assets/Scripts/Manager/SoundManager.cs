@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -24,6 +25,23 @@ public class SoundManager : MonoBehaviour
     {
         _sfxSource = GetComponentInChildren<AudioSource>();
         _musicSource = transform.GetChild(1).GetComponent<AudioSource>();
+    }
+
+    public void UpdateMasterSlider(Slider slider)
+    {
+        _sfxSource.maxDistance = slider.value;
+        _musicSource.maxDistance = slider.value;
+    }
+
+    public void UpdateMusicSlider(Slider slider)
+    {
+        _musicSource.volume = slider.value;
+    }
+
+
+    public void UpdateSFXSlider(Slider slider)
+    {
+        _sfxSource.volume = slider.value;
     }
 
     public void SetSFXVolume(float volume)
@@ -58,7 +76,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlayMusic(string music)
     {
-        sounds.ForEach(s => { if (s.Name == music) _sfxSource.PlayOneShot(s.SingleAudio); });
+        sounds.ForEach(s => { if (s.Name == music) _musicSource.PlayOneShot(s.SingleAudio); });
     }
 
     private IEnumerator PlayMultipleAudio(float delay, Sound sound)
