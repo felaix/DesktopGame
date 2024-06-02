@@ -185,7 +185,7 @@ namespace TDS
             _enemies.Clear();
 
             // Reload UI
-            CanvasManager.Instance.ResetUI();
+            TDSCanvasManager.Instance.ResetUI();
 
             // Clear Items
             ClearItems();

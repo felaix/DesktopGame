@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCData:
     ProfilePicture: {fileID: 0}
-    Name: 3
+    Name: 5
   Dialogue: well.. do you like anime?
   PhotoToSend: {fileID: 0}
   SFXSound: 

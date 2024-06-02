@@ -54,9 +54,11 @@ public class DialogueManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
+        Debug.Log("Start Chat");
+
         while (dialogues.Count > 0)
         {
-            //Debug.Log("Create Chat");
+            Debug.Log("Create Chat");
             CreateChat(dialogues[0], dialogues[0].NPCData.Name.ToString());
             dialogues.RemoveAt(0);
             yield return new WaitForSeconds(20f);

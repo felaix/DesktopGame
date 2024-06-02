@@ -52,7 +52,7 @@ namespace TDS
 
             if (AutoTimer)
             {
-                CanvasManager.Instance.ResetTimer();
+                TDSCanvasManager.Instance.ResetTimer();
                 SpawnManager.Instance.StartGame();
             }
 

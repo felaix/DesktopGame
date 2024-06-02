@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCData:
     ProfilePicture: {fileID: 0}
-    Name: 0
+    Name: 5
   Dialogue: Hello, here's Leon Wrinkler. Your neighbour.
   PhotoToSend: {fileID: 0}
   SFXSound: 

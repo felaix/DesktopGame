@@ -72,7 +72,7 @@ namespace TDS
             }
             else
             {
-                CanvasManager.Instance.CreatePlayerTMP("Gun reloading ...");
+                TDSCanvasManager.Instance.CreatePlayerTMP("Gun reloading ...");
             }
         }
         

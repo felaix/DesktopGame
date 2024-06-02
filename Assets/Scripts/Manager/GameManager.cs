@@ -7,9 +7,12 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     private static Debugger dbgr;
 
+
+
     private void Awake()
     {
         if (!Instance) Instance = this;
+        else Destroy(this);
         if (!dbgr) dbgr = gameObject.AddComponent<Debugger>();
 
         DontDestroyOnLoad(gameObject);

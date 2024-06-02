@@ -7,9 +7,9 @@ using UnityEngine.UI;
 namespace TDS
 {
     [DefaultExecutionOrder(-1)]
-    public class CanvasManager : MonoBehaviour
+    public class TDSCanvasManager : MonoBehaviour
     {
-        public static CanvasManager Instance { get; private set; }
+        public static TDSCanvasManager Instance { get; private set; }
 
         [Header("Prefabs")]
         [SerializeField] private GameObject _playerPrefabTMP;

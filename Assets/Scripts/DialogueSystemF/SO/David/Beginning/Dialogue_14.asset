@@ -15,8 +15,8 @@ MonoBehaviour:
   NPCData:
     ProfilePicture: {fileID: 0}
     Name: 2
-  Dialogue: cu
-  PhotoToSend: {fileID: 0}
+  Dialogue: 
+  PhotoToSend: {fileID: 21300000, guid: 84387a57b961e014a804a98d237057d5, type: 3}
   SFXSound: 
   MusicSound: 
   Delay: 0.1

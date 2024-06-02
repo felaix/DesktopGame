@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCData:
     ProfilePicture: {fileID: 0}
-    Name: 3
+    Name: 5
   Dialogue: HAHAHA xD me too
   PhotoToSend: {fileID: 0}
   SFXSound: 

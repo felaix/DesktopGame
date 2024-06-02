@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCData:
     ProfilePicture: {fileID: 0}
-    Name: 3
+    Name: 5
   Dialogue: a friend :) and what is your name?
   PhotoToSend: {fileID: 0}
   SFXSound: 

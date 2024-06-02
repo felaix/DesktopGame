@@ -16,7 +16,7 @@ MonoBehaviour:
     ProfilePicture: {fileID: 21300000, guid: 8e47158417a74ae43a5fc12946e04719, type: 3}
     Name: 6
   Dialogue: 
-  PhotoToSend: {fileID: 21300000, guid: 5c7664d5e47eed44ca2fcdbd5ccf2285, type: 3}
+  PhotoToSend: {fileID: 21300000, guid: 84387a57b961e014a804a98d237057d5, type: 3}
   SFXSound: 
   MusicSound: 
   Delay: 1

@@ -39,7 +39,7 @@ namespace TDS
             _stats.MaxHP += stats.MaxHP;
             _stats.Coins += stats.Coins;
 
-            CanvasManager.Instance.UpdatePlayerHP(_stats.HP, _stats.MaxHP);
+            TDSCanvasManager.Instance.UpdatePlayerHP(_stats.HP, _stats.MaxHP);
 
             if (stats.NumOfBullets >= 1) { _gun.UpgradeGun(); }
         }
@@ -54,7 +54,7 @@ namespace TDS
             _stats.MaxHP -= stats.MaxHP;
             _stats.Coins -= stats.Coins;
 
-            CanvasManager.Instance.UpdatePlayerHP(_stats.HP, _stats.MaxHP);
+            TDSCanvasManager.Instance.UpdatePlayerHP(_stats.HP, _stats.MaxHP);
         }
 
 
@@ -82,7 +82,7 @@ namespace TDS
         private void OnEnable()
         {
             _stats.HP = _stats.MaxHP;
-            CanvasManager.Instance.UpdatePlayerHP(_stats.HP, _stats.MaxHP);
+            TDSCanvasManager.Instance.UpdatePlayerHP(_stats.HP, _stats.MaxHP);
         }
 
         public void ResetPosition()
@@ -99,19 +99,19 @@ namespace TDS
         public void Heal(int amount)
         {
             IncreaseHP(amount);
-            CanvasManager.Instance.UpdatePlayerHP(_stats.HP, _stats.MaxHP);
+            TDSCanvasManager.Instance.UpdatePlayerHP(_stats.HP, _stats.MaxHP);
         }
 
         public void Shield(int amount)
         {
             _stats.HP += amount;
-            CanvasManager.Instance.UpdatePlayerHP((int)_stats.HP, _stats.MaxHP);
+            TDSCanvasManager.Instance.UpdatePlayerHP((int)_stats.HP, _stats.MaxHP);
         }
 
         public void DealDamage(int damage)
         {
             _stats.HP -= damage;
-            CanvasManager.Instance.UpdatePlayerHP(_stats.HP, _stats.MaxHP);
+            TDSCanvasManager.Instance.UpdatePlayerHP(_stats.HP, _stats.MaxHP);
 
             if (_stats.HP < 0)
             {

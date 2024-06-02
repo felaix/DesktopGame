@@ -15,7 +15,7 @@ MonoBehaviour:
   NPCData:
     ProfilePicture: {fileID: 0}
     Name: 2
-  Dialogue: I have to go now. I'll tell u later
+  Dialogue: I have to go now. Here...
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 

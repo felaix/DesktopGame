@@ -1,13 +1,17 @@
 using TDS;
 using UnityEngine;
 
-public class AP_Coin : Collectable
+namespace TDS
 {
-    public override void PickUp(GameObject obj, Item item)
+    public class AP_Coin : Collectable
     {
-        base.PickUp(obj, item);
+        public override void PickUp(GameObject obj, Item item)
+        {
+            base.PickUp(obj, item);
 
-        TDSManager.Instance.AddCoins(1);
-        CanvasManager.Instance.UpdateCoinTMP();
+            TDSManager.Instance.AddCoins(1);
+            TDSCanvasManager.Instance.UpdateCoinTMP();
+        }
     }
+
 }
