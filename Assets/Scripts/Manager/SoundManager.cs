@@ -62,6 +62,9 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySFX(string sfx)
     {
+
+        if (sfx == "STOP_SFX") { _sfxSource.Stop(); }
+
         sounds.ForEach(s => { 
             if (s.Name == sfx) 
 
@@ -76,6 +79,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlayMusic(string music)
     {
+        if (music == "STOP_MUSIC") { _musicSource.Stop(); }
         sounds.ForEach(s => { if (s.Name == music) _musicSource.PlayOneShot(s.SingleAudio); });
     }
 

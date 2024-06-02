@@ -10,20 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
-  m_Name: DialogueBaseNode
+  m_Name: Hacker 31
   m_EditorClassIdentifier: 
   NPCData:
     ProfilePicture: {fileID: 0}
-    Name: 2
-  Dialogue: Hey, here's David. What's up?
+    Name: 5
+  Dialogue: Alright.
   PhotoToSend: {fileID: 0}
   SFXSound: 
-  MusicSound: 
-  Delay: 0.1
+  MusicSound: STOP_MUSIC
+  Delay: 0.5
   Choices:
-  - ChoiceText: Not much, just chilling. How about you?
-    NextDialogue: {fileID: 11400000, guid: 4862030a53187364cb604c0c64e26363, type: 2}
-  - ChoiceText: Hey David :) not much, wbu?
-    NextDialogue: {fileID: 11400000, guid: 4862030a53187364cb604c0c64e26363, type: 2}
+  - ChoiceText: thank you.
+    NextDialogue: {fileID: 11400000, guid: 854385d45fc35a047b8ad14847905a85, type: 2}
+  - ChoiceText: how did you do that?
+    NextDialogue: {fileID: 11400000, guid: 854385d45fc35a047b8ad14847905a85, type: 2}
+  - ChoiceText: (say nothing)
+    NextDialogue: {fileID: 11400000, guid: 854385d45fc35a047b8ad14847905a85, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

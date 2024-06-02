@@ -22,6 +22,6 @@ MonoBehaviour:
   Delay: 0.5
   Choices:
   - ChoiceText: STOP. IT. NOW!
-    NextDialogue: {fileID: 0}
+    NextDialogue: {fileID: 11400000, guid: 9a55d19ac8d68a744b4a37766e64959d, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

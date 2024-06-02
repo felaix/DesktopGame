@@ -21,5 +21,5 @@ MonoBehaviour:
   MusicSound: 
   Delay: 0.1
   Choices: []
-  NextNode: {fileID: 0}
+  NextNode: {fileID: 11400000, guid: 2fca6a881a3564744987427d458427ae, type: 2}
   TriggerDialogue: {fileID: 0}

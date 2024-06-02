@@ -7612,9 +7612,9 @@ MonoBehaviour:
   chatContainer: {fileID: 749300779}
   notificationPrefab: {fileID: 1157076806319310610, guid: de6ee04b7c0823846814387eeaf3ae0f, type: 3}
   dialogues:
-  - {fileID: 11400000, guid: 7f9aaa9660882ec4dacaa097281441c1, type: 2}
   - {fileID: 11400000, guid: a93a6bf9b7abbf545a22ba5000ed9c74, type: 2}
   - {fileID: 11400000, guid: da1121bc64363744fbb17720c847faa4, type: 2}
+  - {fileID: 11400000, guid: 7f9aaa9660882ec4dacaa097281441c1, type: 2}
 --- !u!114 &287825892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7737,6 +7737,11 @@ MonoBehaviour:
     OneShot: 0
   - Name: HidingHorror
     SingleAudio: {fileID: 8300000, guid: 73e25654c67d1e1458b83a7b08b089e3, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 0
+  - Name: PEMusic
+    SingleAudio: {fileID: 8300000, guid: cb1e0e7c4a9e41843969013b68bfbe60, type: 3}
     MultipleAudio: []
     Random: 0
     OneShot: 0
@@ -15062,7 +15067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6666667, b: 0.36862746, a: 1}
+  m_Color: {r: 0, g: 0.4784314, b: 0.8000001, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -21351,7 +21356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6666667, b: 0.36862746, a: 1}
+  m_Color: {r: 0, g: 0.4784314, b: 0.8000001, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

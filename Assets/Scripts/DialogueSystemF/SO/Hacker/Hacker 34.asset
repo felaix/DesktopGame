@@ -10,22 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
-  m_Name: Dialogue_5
+  m_Name: Hacker 34
   m_EditorClassIdentifier: 
   NPCData:
     ProfilePicture: {fileID: 0}
-    Name: 2
-  Dialogue: Did you read the news i told you about at work?
+    Name: 5
+  Dialogue: will determine what happens next.
   PhotoToSend: {fileID: 0}
   SFXSound: 
-  MusicSound: 
+  MusicSound: PEMusic
   Delay: 0.1
   Choices:
-  - ChoiceText: Oh, i forgot that
-    NextDialogue: {fileID: 11400000, guid: 489721f9de5f2b34a9f9aec3feb024f6, type: 2}
-  - ChoiceText: No
-    NextDialogue: {fileID: 11400000, guid: 489721f9de5f2b34a9f9aec3feb024f6, type: 2}
+  - ChoiceText: what did i do to you?
+    NextDialogue: {fileID: 11400000, guid: 07d8f0c744ef9fd4295693c8e2ac62d8, type: 2}
+  - ChoiceText: why are you doing this?
+    NextDialogue: {fileID: 11400000, guid: 07d8f0c744ef9fd4295693c8e2ac62d8, type: 2}
+  - ChoiceText: stop, please
+    NextDialogue: {fileID: 11400000, guid: 07d8f0c744ef9fd4295693c8e2ac62d8, type: 2}
   - ChoiceText: (say nothing)
-    NextDialogue: {fileID: 11400000, guid: 489721f9de5f2b34a9f9aec3feb024f6, type: 2}
+    NextDialogue: {fileID: 11400000, guid: 44c62ff9339988046a8ecf2719ec3e86, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}
