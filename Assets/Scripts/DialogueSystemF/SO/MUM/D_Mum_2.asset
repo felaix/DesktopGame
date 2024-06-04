@@ -12,8 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
   m_Name: D_Mum_2
   m_EditorClassIdentifier: 
+  NPCData:
+    ProfilePicture: {fileID: 0}
+    Name: 0
   Dialogue: My smart little boy <3
-  npc: 0
+  OnClickAction: 2
+  PhotoToSend: {fileID: 0}
+  SFXSound: 
+  MusicSound: 
   Delay: 0.1
   Choices:
   - ChoiceText: Mum i'm not a little boy anymore.
@@ -21,6 +27,4 @@ MonoBehaviour:
   - ChoiceText: <3
     NextDialogue: {fileID: 11400000, guid: 208ac453dee31414b98b012d1d44e84d, type: 2}
   NextNode: {fileID: 0}
-  trigger:
-    Dialogue: {fileID: 0}
-    Npc: 0
+  TriggerDialogue: {fileID: 0}

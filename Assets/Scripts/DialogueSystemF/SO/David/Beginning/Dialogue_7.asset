@@ -16,6 +16,7 @@ MonoBehaviour:
     ProfilePicture: {fileID: 0}
     Name: 2
   Dialogue: :x
+  OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 

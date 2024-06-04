@@ -1,7 +1,9 @@
-using EditorAttributes;
+using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "DialogueBaseNode", menuName = "Dialogue Node")]
 public class DialogueBaseNodeSO : ScriptableObject
@@ -13,6 +15,8 @@ public class DialogueBaseNodeSO : ScriptableObject
 
     [Header("Dialog")]
     public string Dialogue;
+    public OnClickEvent OnClickAction;
+    //public OnClickEvent OnClickAction;
     public Sprite PhotoToSend;
 
     public string SFXSound;
@@ -54,6 +58,15 @@ public struct NPCData
 {
     public Sprite ProfilePicture;
     public NPCNames Name;
+}
+
+[Serializable]
+public enum OnClickEvent
+{
+    Null,
+    ScaleImage,
+    DownloadVirus,
+    PrintHelloWorld
 }
 
 [Serializable]

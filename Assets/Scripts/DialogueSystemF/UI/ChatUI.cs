@@ -1,9 +1,11 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ChatUI : MonoBehaviour
@@ -98,44 +100,35 @@ public class ChatUI : MonoBehaviour
 
     public void CreateNPCMessage()
     {
+
         // Instantiate NPC Message
-        //Debug.Log("Create NPC Message");
         GameObject npcMessageInstance = Instantiate(npcMessagePrefab, npcMessageContainer);
 
+        // Set Scale to 0 for animation
         npcMessageInstance.transform.localScale = Vector3.zero;
 
-        // Set Time
+        // Set & Save Time TMP
         TMP_Text timeTMP = npcMessageInstance.transform.GetChild(2).GetComponent<TMP_Text>();
         savedNPCTimeTMP = timeTMP;
 
-        // Set Dialogue Text
+        // Set & Save Dialogue TMP
         TMP_Text dialogueTMP = npcMessageInstance.GetComponentInChildren<TMP_Text>();
         dialogueTMP.text = dialogueSO.Dialogue;
         savedNPCMsgTMP = dialogueTMP;
 
+        // Set Image in case the message contains a photo.
         Image img = npcMessageInstance.transform.GetChild(0).GetComponent<Image>();
         img.sprite = dialogueSO.PhotoToSend;
 
-        bool scaled = false;
+        // Trigger On Click Action
 
         Button btn = npcMessageInstance.AddComponent<Button>();
+        ActionInvoker.Instance.SaveButtonEvent(btn, dialogueSO.OnClickAction, img != null ? img.transform : null);
+
         btn.onClick.AddListener(() => 
         {
-            if (scaled && img.sprite != null)
-            {
-                Debug.Log("Scaled img down");
-                img.transform.DOScale(Vector3.one, .5f);
-                scaled = false;
-                return;
-            }
-
-            if (!scaled && img.sprite != null) 
-            {
-                scaled = true;
-                Image copy = img;
-                Debug.Log("Scale image up");
-                copy.transform.DOScale(new Vector3(1.5f, 1.5f,1.5f), .5f);
-            }
+            ActionInvoker.Instance.InvokeButton(btn);
+            //ActionInvoker.Instance.InvokeOnClickEvent(btn, invoked, dialogueSO.OnClickAction, img.transform);
         });
 
         // Trigger Sound
