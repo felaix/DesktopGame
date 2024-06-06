@@ -12,12 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
   m_Name: D_Mum_0
   m_EditorClassIdentifier: 
-  Dialogue: Hey sweetheart, how was your day?
-  npc: 0
+  NPCData:
+    ProfilePicture: {fileID: 0}
+    Name: 0
+  Dialogue: Hey sweetheart, how is your day?
+  OnClickAction: 0
+  PhotoToSend: {fileID: 0}
+  SFXSound: 
+  MusicSound: 
   Delay: 0.1
   Choices:
-  - ChoiceText: Great Mum, i aced the math test!
+  - ChoiceText: Great, mum. What about you?
     NextDialogue: {fileID: 11400000, guid: 7c6593dbed0edde43a879b5d4b59501f, type: 2}
   - ChoiceText: Good.
     NextDialogue: {fileID: 11400000, guid: 7c6593dbed0edde43a879b5d4b59501f, type: 2}
+  - ChoiceText: I hate my life
+    NextDialogue: {fileID: 0}
+  - ChoiceText: (say nothing)
+    NextDialogue: {fileID: 0}
   NextNode: {fileID: 0}
+  TriggerDialogue: {fileID: 0}

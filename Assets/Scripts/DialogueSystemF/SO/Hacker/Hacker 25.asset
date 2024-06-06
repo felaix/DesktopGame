@@ -16,14 +16,17 @@ MonoBehaviour:
     ProfilePicture: {fileID: 0}
     Name: 5
   Dialogue: Why? you can trust me.
+  OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 
   Delay: 1
   Choices:
   - ChoiceText: Then tell me who you are.
+    Trait: 1
     NextDialogue: {fileID: 11400000, guid: 95e5fd69356f6eb46b80f2b51ea34731, type: 2}
   - ChoiceText: I don't know you.
+    Trait: 3
     NextDialogue: {fileID: 11400000, guid: 95e5fd69356f6eb46b80f2b51ea34731, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

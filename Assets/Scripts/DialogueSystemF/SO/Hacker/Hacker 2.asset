@@ -16,16 +16,20 @@ MonoBehaviour:
     ProfilePicture: {fileID: 0}
     Name: 5
   Dialogue: how are you?
+  OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 
   Delay: 5
   Choices:
   - ChoiceText: i'm good, thanks. wbu?
+    Trait: 2
     NextDialogue: {fileID: 11400000, guid: 32b65b7ec01c36449b464727ed8ee09c, type: 2}
   - ChoiceText: idk. i'm worried about a few things.
+    Trait: 1
     NextDialogue: {fileID: 11400000, guid: 5c433e85cc9022548880b3832a310a3f, type: 2}
   - ChoiceText: (ignore)
+    Trait: 3
     NextDialogue: {fileID: 11400000, guid: 65317ddddb2c15c48a43c2024c0e5abc, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

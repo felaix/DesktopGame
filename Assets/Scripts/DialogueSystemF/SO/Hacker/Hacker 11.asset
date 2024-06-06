@@ -16,18 +16,23 @@ MonoBehaviour:
     ProfilePicture: {fileID: 0}
     Name: 5
   Dialogue: Nice! Do you have any pets?
+  OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 
   Delay: 1
   Choices:
   - ChoiceText: yes, a cat.
+    Trait: 0
     NextDialogue: {fileID: 11400000, guid: 119e71b1616a48945afa80ad90f49c7d, type: 2}
   - ChoiceText: yes, a dog.
+    Trait: 0
     NextDialogue: {fileID: 11400000, guid: 79476ad824f90614a9026d8ab6c22ecb, type: 2}
   - ChoiceText: no
+    Trait: 0
     NextDialogue: {fileID: 11400000, guid: 67512201b6610b8439574cf9fe1f51d7, type: 2}
   - ChoiceText: i won't tell you
+    Trait: 3
     NextDialogue: {fileID: 11400000, guid: a018fd0de2e284045908e325d7c0089b, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

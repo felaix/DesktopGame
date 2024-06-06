@@ -16,18 +16,23 @@ MonoBehaviour:
     ProfilePicture: {fileID: 0}
     Name: 5
   Dialogue: Fortnite is awesome! Do you play any sports?
+  OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 
   Delay: 1
   Choices:
   - ChoiceText: Yeah, i play soccer sometimes. It's fun.
+    Trait: 2
     NextDialogue: {fileID: 11400000, guid: 110c3547db7567b43ada82be99360cde, type: 2}
   - ChoiceText: Of course. I'm not lazy. I play rocket league.
+    Trait: 1
     NextDialogue: {fileID: 11400000, guid: ee5203f2e24dc2d44a37a9e3d375213b, type: 2}
   - ChoiceText: No, not really
+    Trait: 0
     NextDialogue: {fileID: 11400000, guid: 9c1862102642d424eb44f45f01f2a1a3, type: 2}
   - ChoiceText: Sometimes
+    Trait: 0
     NextDialogue: {fileID: 11400000, guid: 9c1862102642d424eb44f45f01f2a1a3, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

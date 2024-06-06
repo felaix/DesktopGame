@@ -180,6 +180,8 @@ public class ChatUI : MonoBehaviour
         TMP_Text userTMP = userMessageInstance.GetComponentInChildren<TMP_Text>();
         userTMP.text = dialogueSO.GetChoiceText(choice);
 
+        GameManager.Instance.AddPlayerTrait(dialogueSO.GetTrait(choice));  
+
         // Ensure the layout updates after adding a new message
         //LayoutRebuilder.ForceRebuildLayoutImmediate(container.GetComponent<RectTransform>());
 

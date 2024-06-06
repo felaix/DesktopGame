@@ -16,16 +16,20 @@ MonoBehaviour:
     ProfilePicture: {fileID: 0}
     Name: 5
   Dialogue: isn't it fun for you?
+  OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 
   Delay: 0.1
   Choices:
   - ChoiceText: no
+    Trait: 3
     NextDialogue: {fileID: 11400000, guid: 44c62ff9339988046a8ecf2719ec3e86, type: 2}
   - ChoiceText: not really
+    Trait: 2
     NextDialogue: {fileID: 11400000, guid: 44c62ff9339988046a8ecf2719ec3e86, type: 2}
   - ChoiceText: yes, i do have so much fun.
+    Trait: 1
     NextDialogue: {fileID: 11400000, guid: 44c62ff9339988046a8ecf2719ec3e86, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

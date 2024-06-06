@@ -16,14 +16,20 @@ MonoBehaviour:
     ProfilePicture: {fileID: 0}
     Name: 5
   Dialogue: hi
+  OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 
   Delay: 1
   Choices:
   - ChoiceText: who are you?
+    Trait: 0
     NextDialogue: {fileID: 11400000, guid: 213bf7c5c7019e64e911088bcdc059ac, type: 2}
   - ChoiceText: hi
+    Trait: 2
+    NextDialogue: {fileID: 11400000, guid: 889df53e1907d404e97d4c3992aed0ec, type: 2}
+  - ChoiceText: (say nothing)
+    Trait: 3
     NextDialogue: {fileID: 11400000, guid: 889df53e1907d404e97d4c3992aed0ec, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

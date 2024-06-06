@@ -15,19 +15,24 @@ MonoBehaviour:
   NPCData:
     ProfilePicture: {fileID: 0}
     Name: 5
-  Dialogue: will determine what happens next.
+  Dialogue: tells something about you.
+  OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: PEMusic
   Delay: 0.1
   Choices:
   - ChoiceText: what did i do to you?
+    Trait: 1
     NextDialogue: {fileID: 11400000, guid: 07d8f0c744ef9fd4295693c8e2ac62d8, type: 2}
   - ChoiceText: why are you doing this?
+    Trait: 2
     NextDialogue: {fileID: 11400000, guid: 07d8f0c744ef9fd4295693c8e2ac62d8, type: 2}
   - ChoiceText: stop, please
+    Trait: 1
     NextDialogue: {fileID: 11400000, guid: 07d8f0c744ef9fd4295693c8e2ac62d8, type: 2}
   - ChoiceText: (say nothing)
+    Trait: 3
     NextDialogue: {fileID: 11400000, guid: 44c62ff9339988046a8ecf2719ec3e86, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

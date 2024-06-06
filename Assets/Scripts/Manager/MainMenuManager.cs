@@ -70,7 +70,7 @@ public class MainMenuManager : MonoBehaviour
             yield return StartCoroutine(StartTypingAnimation(tps[i]));
         }
 
-        GameManager.Instance.LoadLevel(1, 1f);
+        GameManager.Instance.LoadLevel(1);
         Destroy(this);
     }
 

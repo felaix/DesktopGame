@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
   m_Name: D_Mum_3
   m_EditorClassIdentifier: 
-  Dialogue: You will always be my little boy
-  npc: 0
+  NPCData:
+    ProfilePicture: {fileID: 0}
+    Name: 0
+  Dialogue: Don't forget it!
+  OnClickAction: 0
+  PhotoToSend: {fileID: 0}
+  SFXSound: 
+  MusicSound: 
   Delay: 5
   Choices: []
   NextNode: {fileID: 11400000, guid: 208ac453dee31414b98b012d1d44e84d, type: 2}
-  trigger:
-    Dialogue: {fileID: 0}
-    Npc: 0
+  TriggerDialogue: {fileID: 0}

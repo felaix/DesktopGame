@@ -35,6 +35,7 @@ public class DialogueBaseNodeSO : ScriptableObject
 
     public Sprite GetProfilePicture() => NPCData.ProfilePicture;
     public string GetChoiceText(int index) => Choices[index].ChoiceText;
+    public TraitType GetTrait(int index) => Choices[index].Trait;
     public bool SkipChoices() => NextNode != null;
     public DialogueBaseNodeSO GetChoiceNode(int index) => Choices[index].NextDialogue;
     public string GetTriggerNPCName() => TriggerDialogue.NPCData.Name.ToString();
@@ -50,6 +51,7 @@ public class DialogueBaseNodeSO : ScriptableObject
 public class Choice
 {
     public string ChoiceText;
+    public TraitType Trait;
     public DialogueBaseNodeSO NextDialogue;
 }
 

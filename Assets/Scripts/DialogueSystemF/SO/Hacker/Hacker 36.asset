@@ -16,9 +16,10 @@ MonoBehaviour:
     ProfilePicture: {fileID: 0}
     Name: 5
   Dialogue: 'good choice. '
+  OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
-  MusicSound: STOP_MUSIC
+  MusicSound: 
   Delay: 0.1
   Choices: []
   NextNode: {fileID: 11400000, guid: 2539d270f65f4f84e98af23735f8f502, type: 2}

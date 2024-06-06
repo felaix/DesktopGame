@@ -16,16 +16,20 @@ MonoBehaviour:
     ProfilePicture: {fileID: 0}
     Name: 5
   Dialogue: although you may not see it at that time.
+  OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 
   Delay: 0.1
   Choices:
   - ChoiceText: wow, thank you
+    Trait: 2
     NextDialogue: {fileID: 11400000, guid: 9c1862102642d424eb44f45f01f2a1a3, type: 2}
   - ChoiceText: yeah.. maybe
+    Trait: 0
     NextDialogue: {fileID: 11400000, guid: 9c1862102642d424eb44f45f01f2a1a3, type: 2}
   - ChoiceText: (say nothing)
+    Trait: 3
     NextDialogue: {fileID: 11400000, guid: 9c1862102642d424eb44f45f01f2a1a3, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

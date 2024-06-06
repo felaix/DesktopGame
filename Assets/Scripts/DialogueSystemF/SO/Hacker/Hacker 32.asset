@@ -15,7 +15,8 @@ MonoBehaviour:
   NPCData:
     ProfilePicture: {fileID: 0}
     Name: 5
-  Dialogue: just so you know...
+  Dialogue: you know... everything, you said to me,
+  OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 

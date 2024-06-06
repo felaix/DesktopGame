@@ -15,7 +15,7 @@ MonoBehaviour:
   NPCData:
     ProfilePicture: {fileID: 0}
     Name: 5
-  Dialogue: www.viruslink.com
+  Dialogue: www.click-this-link.com
   OnClickAction: 2
   PhotoToSend: {fileID: 0}
   SFXSound: 

@@ -16,16 +16,20 @@ MonoBehaviour:
     ProfilePicture: {fileID: 0}
     Name: 5
   Dialogue: Alright.
+  OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: STOP_MUSIC
   Delay: 0.5
   Choices:
   - ChoiceText: thank you.
+    Trait: 2
     NextDialogue: {fileID: 11400000, guid: 854385d45fc35a047b8ad14847905a85, type: 2}
   - ChoiceText: how did you do that?
+    Trait: 1
     NextDialogue: {fileID: 11400000, guid: 854385d45fc35a047b8ad14847905a85, type: 2}
   - ChoiceText: (say nothing)
+    Trait: 3
     NextDialogue: {fileID: 11400000, guid: 854385d45fc35a047b8ad14847905a85, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

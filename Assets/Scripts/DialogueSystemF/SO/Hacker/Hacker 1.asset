@@ -15,13 +15,15 @@ MonoBehaviour:
   NPCData:
     ProfilePicture: {fileID: 0}
     Name: 5
-  Dialogue: a friend :) and what is your name?
+  Dialogue: I'm a friend :) and what is your name?
+  OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 
   Delay: 0.2
   Choices:
   - ChoiceText: I don't want to say.
+    Trait: 0
     NextDialogue: {fileID: 11400000, guid: 889df53e1907d404e97d4c3992aed0ec, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}
