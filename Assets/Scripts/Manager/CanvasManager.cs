@@ -17,6 +17,10 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private Transform _achievementContainer;
     [SerializeField] private GameObject _achievementPrefab;
 
+    [Header("Beginning")]
+    [SerializeField] private GameObject _deviceConfirmation;
+
+
     private void Awake()
     {
         Instance = this;
@@ -27,6 +31,8 @@ public class CanvasManager : MonoBehaviour
         _canvas = FindObjectOfType<Canvas>();
     }
 
+
+    #region Error Notification
     public void IncreaseErrorNotificationCounter(List<GameObject> notifications)
     {
         ErrorNotificationCounter++;
@@ -39,19 +45,11 @@ public class CanvasManager : MonoBehaviour
             }
         }
 
-        if (ErrorNotificationCounter == 4)
+        if (ErrorNotificationCounter >= 3)
         {
             TriggerBlueScreen();
         }
     }
-
-
-    public void TriggerBlueScreen()
-    {
-        _blueScreen.gameObject.SetActive(true);
-        DestroyAllErrorNotifications();
-    }
-
     private void DestroyAllErrorNotifications()
     {
         foreach (GameObject obj in _errorNotifications)
@@ -62,17 +60,29 @@ public class CanvasManager : MonoBehaviour
         _errorNotifications.Clear();
     }
 
-    public void CreateAchievement(string text, float value, float sliderMaxValue = 5f)
-    {
-        GameObject achievement = Instantiate(_achievementPrefab, _achievementContainer);
-        TMP_Text tmp = achievement.GetComponentInChildren<TMP_Text>();
-        Slider slider = achievement.GetComponentInChildren<Slider>();
+    #endregion
 
-        tmp.text = text;
-        slider.maxValue = sliderMaxValue;
-        slider.minValue = 0f;
-        slider.value = value;
+    #region Achievements
+
+        public void CreateAchievementUI(Achievement achievementData)
+        {
+            GameObject achievement = Instantiate(_achievementPrefab, _achievementContainer);
+            TMP_Text titleTMP = achievement.transform.GetComponentInChildren<TMP_Text>();
+            TMP_Text pointsTMP = achievement.transform.GetChild(1).GetComponent<TMP_Text>();
+
+            titleTMP.text = achievementData.Name;
+            pointsTMP.text = achievementData.Points.ToString();
+        }
+
+    #endregion
+
+    #region Ending
+    public void TriggerBlueScreen()
+    {
+        _blueScreen.gameObject.SetActive(true);
+        DestroyAllErrorNotifications();
     }
+    #endregion
 
     public Canvas GetCanvas() { return _canvas; }
 }

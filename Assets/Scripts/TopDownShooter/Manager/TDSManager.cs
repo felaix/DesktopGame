@@ -30,7 +30,7 @@ namespace TDS
 
         public void ResetStats()
         {
-            Wave = 0;
+            Wave = 1;
             Coins = 0;
             Items.Clear();
         }

@@ -1,4 +1,5 @@
 using EditorAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     private static Debugger dbgr;
+
+    public static Action OnGameEnd;
 
     [ReadOnly] public PlayerTraits currentPlayerTraits;
 
@@ -20,17 +23,21 @@ public class GameManager : MonoBehaviour
         if (!dbgr) dbgr = gameObject.AddComponent<Debugger>();
 
         DontDestroyOnLoad(gameObject);
+
+        OnGameEnd += CalculateAchievements;
     }
+
+    public void TriggerEnd() => OnGameEnd();
 
     public void AddAchievement(Achievement achievement)
     {
         PlayerAchievements.Add(achievement);
-        CanvasManager.Instance.CreateAchievement(achievement.Name, achievement.Points);
+        CanvasManager.Instance.CreateAchievementUI(achievement);
     }
 
     public void CalculateAchievements()
     {
-        if (currentPlayerTraits.Emotional == 2)
+        if (currentPlayerTraits.Emotional >= 2)
         {
             Achievement emotionalAchievement = new Achievement();
             emotionalAchievement.Name = "Be emotional";
@@ -38,7 +45,7 @@ public class GameManager : MonoBehaviour
             AddAchievement(emotionalAchievement);
         }
 
-        if (currentPlayerTraits.Reserved == 2)
+        if (currentPlayerTraits.Reserved >= 2)
         {
             Achievement reservedAchievement = new Achievement();
             reservedAchievement.Name = "Be reserved";
@@ -46,7 +53,7 @@ public class GameManager : MonoBehaviour
             AddAchievement(reservedAchievement);
         }
 
-        if (currentPlayerTraits.Polite == 2)
+        if (currentPlayerTraits.Polite >= 2)
         {
             Achievement politeAchievement = new Achievement();
             politeAchievement.Name = "Be polite";
@@ -93,7 +100,7 @@ public class GameManager : MonoBehaviour
 }
 
 [System.Serializable]
-public class Achievement
+public struct Achievement
 {
     public string Name;
     public int Points;

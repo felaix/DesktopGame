@@ -15,13 +15,12 @@ MonoBehaviour:
   NPCData:
     ProfilePicture: {fileID: 0}
     Name: 5
-  Dialogue: Are you okay?
-  PhotoToSend: {fileID: 0}
+  Dialogue: 
+  OnClickAction: 1
+  PhotoToSend: {fileID: 21300000, guid: c9bfd70356dc7b7499c3b99cdce3835b, type: 3}
   SFXSound: 
   MusicSound: 
   Delay: 1
-  Choices:
-  - ChoiceText: why?
-    NextDialogue: {fileID: 11400000, guid: b0b5f327170cef84397529ebae43447d, type: 2}
-  NextNode: {fileID: 0}
+  Choices: []
+  NextNode: {fileID: 11400000, guid: b0b5f327170cef84397529ebae43447d, type: 2}
   TriggerDialogue: {fileID: 0}

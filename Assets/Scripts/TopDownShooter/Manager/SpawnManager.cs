@@ -181,7 +181,7 @@ namespace TDS
             // Reset Level & Conditiions
             CanSpawn = true;
             GameStarted = false;
-            Level = 0;
+            Level = 1;
             _enemies.Clear();
 
             // Reload UI

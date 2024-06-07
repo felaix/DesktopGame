@@ -11,7 +11,7 @@ public class BlueScreen : MonoBehaviour
 
     private void Start()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     void OnEnable()
@@ -20,7 +20,11 @@ public class BlueScreen : MonoBehaviour
     }
 
     private IEnumerator BlueScreenAnimation()
-    {   
+    {
+
+        _ending.transform.localRotation = new Quaternion(-20f, 0f, 0f, 0f);
+        _ending.transform.localScale = Vector3.zero;
+
         float goal = 100f;
         float currentPercentage = 0f;
 
@@ -32,6 +36,9 @@ public class BlueScreen : MonoBehaviour
         }
 
         _ending.transform.DORotate(Vector3.zero, .5f);
+        _ending.transform.DOScale(Vector3.one, .5f);
         _ending.SetActive(true);
+
+        GameManager.Instance.TriggerEnd();
     }
 } 

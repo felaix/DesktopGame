@@ -23,12 +23,16 @@ MonoBehaviour:
   Delay: 0.1
   Choices:
   - ChoiceText: Great, mum. What about you?
+    Trait: 2
     NextDialogue: {fileID: 11400000, guid: 7c6593dbed0edde43a879b5d4b59501f, type: 2}
   - ChoiceText: Good.
+    Trait: 0
     NextDialogue: {fileID: 11400000, guid: 7c6593dbed0edde43a879b5d4b59501f, type: 2}
-  - ChoiceText: I hate my life
-    NextDialogue: {fileID: 0}
+  - ChoiceText: I don't know.
+    Trait: 1
+    NextDialogue: {fileID: 11400000, guid: 7c6593dbed0edde43a879b5d4b59501f, type: 2}
   - ChoiceText: (say nothing)
+    Trait: 3
     NextDialogue: {fileID: 0}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

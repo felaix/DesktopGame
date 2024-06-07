@@ -1,4 +1,5 @@
 using DG.Tweening;
+using EditorAttributes;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -24,8 +25,8 @@ namespace TDS
 
         [Header("Timer")]
         [SerializeField] private Slider _timerSlider;
-        [SerializeField] private float _maxDuration;
-        [SerializeField] private float _duration;
+        [SerializeField] private float _maxDuration = 10f;
+        [ReadOnly] [SerializeField] private float _duration = 1f;
 
         [Header("UI")]
         [SerializeField] private GameObject _mainMenu;
