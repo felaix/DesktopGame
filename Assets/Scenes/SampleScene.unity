@@ -8005,6 +8005,8 @@ MonoBehaviour:
   ErrorNotificationCounter: 0
   _errorNotifications: []
   _blueScreen: {fileID: 1455995689}
+  _achievementContainer: {fileID: 0}
+  _achievementPrefab: {fileID: 0}
 --- !u!114 &287825896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8300,7 +8302,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 460, y: -25.660614}
+  m_AnchoredPosition: {x: 460, y: -25.660645}
   m_SizeDelta: {x: 920, y: 51.32125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &316650824
@@ -28523,7 +28525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7759315641377344742, guid: dd2932eb7a2addc469055814e298afba, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.75
+      value: 0.606
       objectReference: {fileID: 0}
     - target: {fileID: 7759315641377344742, guid: dd2932eb7a2addc469055814e298afba, type: 3}
       propertyPath: m_AnchorMax.y

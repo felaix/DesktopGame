@@ -25,11 +25,12 @@ public class GameManager : MonoBehaviour
     public void AddAchievement(Achievement achievement)
     {
         PlayerAchievements.Add(achievement);
+        CanvasManager.Instance.CreateAchievement(achievement.Name, achievement.Points);
     }
 
     public void CalculateAchievements()
     {
-        if (currentPlayerTraits.Emotional > 2)
+        if (currentPlayerTraits.Emotional == 2)
         {
             Achievement emotionalAchievement = new Achievement();
             emotionalAchievement.Name = "Be emotional";
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
             AddAchievement(emotionalAchievement);
         }
 
-        if (currentPlayerTraits.Reserved > 2)
+        if (currentPlayerTraits.Reserved == 2)
         {
             Achievement reservedAchievement = new Achievement();
             reservedAchievement.Name = "Be reserved";
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
             AddAchievement(reservedAchievement);
         }
 
-        if (currentPlayerTraits.Polite > 2)
+        if (currentPlayerTraits.Polite == 2)
         {
             Achievement politeAchievement = new Achievement();
             politeAchievement.Name = "Be polite";

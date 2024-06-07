@@ -16,7 +16,7 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         if (Instance == null) Instance = this;
-        else Destroy(this);
+        else Destroy(Instance); Instance = this;
 
         DontDestroyOnLoad(Instance);
     }
@@ -27,17 +27,16 @@ public class SoundManager : MonoBehaviour
         _musicSource = transform.GetChild(1).GetComponent<AudioSource>();
     }
 
-    public void UpdateMasterSlider(Slider slider)
-    {
-        _sfxSource.maxDistance = slider.value;
-        _musicSource.maxDistance = slider.value;
-    }
+    //public void UpdateMasterSlider(Slider slider)
+    //{
+    //    //_sfxSource.ignoreListenerVolume = slider.value;
+    //    _musicSource.maxVolume = slider.value;
+    //}
 
     public void UpdateMusicSlider(Slider slider)
     {
         _musicSource.volume = slider.value;
     }
-
 
     public void UpdateSFXSlider(Slider slider)
     {
