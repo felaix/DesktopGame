@@ -1,41 +1,48 @@
 using DG.Tweening;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ChatUI : MonoBehaviour
 {
+    [Header("Prefabs")]
     [SerializeField] private GameObject npcMessagePrefab;
     [SerializeField] private GameObject userMessagePrefab;
-    [SerializeField] private GameObject choiceButtonPrefab; 
+    [SerializeField] private GameObject choiceButtonPrefab;
 
+    [Header("Container")]
     [SerializeField] private Transform npcMessageContainer;
     [SerializeField] private Transform choiceButtonContainer;
     [SerializeField] private Transform userMessageContainer;
-    private int chatIndex;
+
     public DialogueBaseNodeSO dialogueSO;
+    
+    public bool readOnly = false;
+
+    // ---- _
+
+    private int chatIndex;
 
     private List<GameObject> choiceButtons = new();
 
+    // --- Coroutines ---
     private Coroutine userMessageCoroutine;
     private Coroutine npcMessageCoroutine;
     private Coroutine npcNextMessageCoroutine;
 
     private RectTransform savedUserRect;
     private RectTransform savedNpcRect;
+
+    // --- TMPs ---
     private TMP_Text savedUserTimeTMP;
     private TMP_Text savedNPCMsgTMP;
     private TMP_Text savedNPCTimeTMP;
     private string originalTxt;
 
+    // --- Saving tuples ---
     private (TMP_Text, string) savedNPCMessage;
-
-    public bool readOnly = false;
 
     private void Start()
     {
@@ -73,7 +80,7 @@ public class ChatUI : MonoBehaviour
     public void SetNewDialogue(DialogueBaseNodeSO newDialogue) => dialogueSO = newDialogue;
     public int GetIndex() => chatIndex;
     public void SetIndex(int index) { chatIndex = index; }
-
+    private void SetTMPText(TMP_Text tmp, string txt) { if (tmp != null) tmp.text = txt; }
     public void Respond(int index)
     {
         //Debug.Log("Respond index: " + index);
@@ -90,11 +97,15 @@ public class ChatUI : MonoBehaviour
         if (dialogueSO.SkipChoices()) { SetNewDialogue(dialogueSO.NextNode); npcNextMessageCoroutine = StartCoroutine(NPCNextMessageCoroutine()); }
     }
 
+    #region Choices
+    private void ActivateChoiceButtons() => choiceButtons.ForEach(button => { button.SetActive(true); });
     public void DeleteChoices()
     {
         choiceButtons.ForEach(button => { Destroy(button); });
         choiceButtons.Clear();
     }
+
+    #endregion
 
     #region Create
 
@@ -123,7 +134,7 @@ public class ChatUI : MonoBehaviour
         // Trigger On Click Action
 
         Button btn = npcMessageInstance.AddComponent<Button>();
-        ActionInvoker.Instance.SaveButtonEvent(btn, dialogueSO.OnClickAction, img != null ? img.transform : null);
+        ActionInvoker.Instance.SaveButtonEvent(btn, dialogueSO.OnClickAction);
 
         btn.onClick.AddListener(() => 
         {
@@ -219,9 +230,6 @@ public class ChatUI : MonoBehaviour
         userMessageCoroutine = null;
         yield return null;
     }
-
-    private void SetTMPText(TMP_Text tmp, string txt) {if (tmp != null) tmp.text = txt;}
-
     private IEnumerator NPCMessageSpawnCoroutine(RectTransform t, TMP_Text msgTMP, TMP_Text timeTMP, string txt = "", Image img = null)
     {
         savedNpcRect = t;
@@ -275,24 +283,14 @@ public class ChatUI : MonoBehaviour
         DialogueManager.Instance.SetNotification(this.GetIndex() - 1);
         DialogueManager.Instance.SetChatStatus(this.GetIndex() - 1, "online");
         
-        if (!dialogueSO.SkipChoices()) ActivateButtons();
-        else
-        {
-            Debug.Log("next coroutine???");
-        }
+        if (!dialogueSO.SkipChoices()) ActivateChoiceButtons();
 
         yield return new WaitForSeconds(1f);
         npcMessageCoroutine = null;
     }
 
-    private void ActivateButtons()
-    {
-        choiceButtons.ForEach(button => { button.SetActive(true); });
-    }
-
 
     #endregion
-
 
 
 }

@@ -2,7 +2,6 @@ using EditorAttributes;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -11,6 +10,10 @@ public class CanvasManager : MonoBehaviour
     private Canvas _canvas;
     [ReadOnly] public int ErrorNotificationCounter = 1;
     [ReadOnly] public List<GameObject> _errorNotifications;
+
+
+    [Header("Container")]
+    [SerializeField] private GameObject _photoContainer;
 
     [Header("Ending")]
     [SerializeField] private GameObject _blueScreen;
@@ -85,4 +88,5 @@ public class CanvasManager : MonoBehaviour
     #endregion
 
     public Canvas GetCanvas() { return _canvas; }
+    public GameObject GetPhotoContainer() => _photoContainer;
 }

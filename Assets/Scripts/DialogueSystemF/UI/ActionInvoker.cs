@@ -6,20 +6,26 @@ using System.Collections.Generic;
 [DefaultExecutionOrder(0)]
 public class ActionInvoker : MonoBehaviour
 {
-
     public static ActionInvoker Instance { get; private set; }
 
-    private List<(Button btn, OnClickEvent evt, bool invoked, Transform objToScale)> _savedButtons = new List<(Button btn, OnClickEvent evt, bool invoked, Transform objToScale)>();
+    private List<(Button btn, OnClickEvent evt, bool invoked)> _savedButtons = new List<(Button btn, OnClickEvent evt, bool invoked)>();
 
     [SerializeField] private GameObject _virusLoader;
+    [SerializeField] private GameObject _photoContainer;
 
     private void Awake()
     {
         Instance = this;
     }
-    public void SaveButtonEvent(Button btn, OnClickEvent evt, Transform objToScale = null)
+    public void SaveButtonEvent(Button btn, OnClickEvent evt)
     {
-        _savedButtons.Add((btn, evt, true, objToScale));
+        _savedButtons.Add((btn, evt, true));
+    }
+
+    public void SetPhotoSprite(Sprite sprite)
+    {
+        Debug.Log(sprite.ToString());
+        _photoContainer.transform.GetChild(0).GetComponent<Image>().sprite = sprite;
     }
 
     public void InvokeButton(Button btn)
@@ -32,7 +38,7 @@ public class ActionInvoker : MonoBehaviour
             return;
         }
 
-        var (button, evt, invoked, objToScale) = _savedButtons[index];
+        var (button, evt, invoked) = _savedButtons[index];
   
         invoked = !invoked;
 
@@ -44,23 +50,19 @@ public class ActionInvoker : MonoBehaviour
                 Debug.Log("Hello World");
                 return;
             case OnClickEvent.ScaleImage:
-                if (objToScale == null) return;
-                if (invoked)
-                    objToScale.DOScale(Vector3.one, .5f); // Scale to normal size
-                else
-                    objToScale.DOScale(new Vector3(1.5f, 1.5f, 1.5f), .5f); // Scale up
+                _photoContainer.SetActive(true);
                 break;
             case OnClickEvent.DownloadVirus:
                 _virusLoader.SetActive(true);
                 break;
         }
 
-        _savedButtons[index] = (button, evt, invoked, objToScale);
+        _savedButtons[index] = (button, evt, invoked);
     }
 
-    public void InvokeOnClickEvent(Button btn, bool invoked, OnClickEvent ev = OnClickEvent.Null, Transform objToScale = null) 
+    public void InvokeOnClickEvent(Button btn, bool invoked, OnClickEvent ev = OnClickEvent.Null) 
     {
-
+        // -- Check if the btn is already saved --
         var savedButton = _savedButtons.Find(x => x.btn == btn);
         if (savedButton == default)
         {
@@ -68,7 +70,7 @@ public class ActionInvoker : MonoBehaviour
             SaveButtonEvent(btn, ev);
         }
 
-
+        // -- Trigger event based on OnClickEvent Enum --
         switch (ev)
         {
             case OnClickEvent.Null:
@@ -77,14 +79,11 @@ public class ActionInvoker : MonoBehaviour
                 Debug.Log("Hello World");
                 return;
             case OnClickEvent.ScaleImage:
-                if (objToScale == null) return;
-                if (invoked) objToScale.DOScale(Vector3.one, .5f);
-                else objToScale.DOScale(new Vector3(1.5f, 1.5f, 1.5f), .5f);
                 return;
         }
     }
 
-    public void InvokeSavedEvent(bool invoked, OnClickEvent ev = OnClickEvent.Null, Transform objToScale = null)
+    public void InvokeSavedEvent(bool invoked, OnClickEvent ev = OnClickEvent.Null)
     {
         switch (ev)
         {
@@ -94,9 +93,6 @@ public class ActionInvoker : MonoBehaviour
                 Debug.Log("Hello World");
                 return;
             case OnClickEvent.ScaleImage:
-                if (objToScale == null) return;
-                if (invoked) objToScale.DOScale(Vector3.one, .5f);
-                else objToScale.DOScale(new Vector3(1.5f, 1.5f, 1.5f), .5f);
                 return;
         }
     }
