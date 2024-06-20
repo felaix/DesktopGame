@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
 
     private AudioSource _sfxSource;
     private AudioSource _musicSource;
+    private AudioSource _backgroundMusicSource;
 
     public List<Sound> sounds = new List<Sound>();
 
@@ -25,6 +26,9 @@ public class SoundManager : MonoBehaviour
     {
         _sfxSource = GetComponentInChildren<AudioSource>();
         _musicSource = transform.GetChild(1).GetComponent<AudioSource>();
+        _backgroundMusicSource = transform.GetChild(2).GetComponent<AudioSource>();
+
+        _backgroundMusicSource.volume = _musicSource.volume / 2;
     }
 
     //public void UpdateMasterSlider(Slider slider)
@@ -35,6 +39,7 @@ public class SoundManager : MonoBehaviour
 
     public void UpdateMusicSlider(Slider slider)
     {
+        _backgroundMusicSource.volume = slider.value / 2;
         _musicSource.volume = slider.value;
     }
 
@@ -50,6 +55,7 @@ public class SoundManager : MonoBehaviour
 
     public void SetMusicVolume(float volume)
     {
+        _backgroundMusicSource.volume = volume / 2;
         _musicSource.volume = volume;
     }
 
@@ -80,6 +86,13 @@ public class SoundManager : MonoBehaviour
     {
         if (music == "STOP_MUSIC") { _musicSource.Stop(); }
         sounds.ForEach(s => { if (s.Name == music) _musicSource.PlayOneShot(s.SingleAudio); });
+    }
+
+    public void PlayBackgroundMusic(string backgroundMusic)
+    {
+        if (backgroundMusic == "STOP_MUSIC") { _backgroundMusicSource.Stop(); }
+        if (_backgroundMusicSource.isPlaying) { _backgroundMusicSource.Stop(); }
+        sounds.ForEach(s => { if (s.Name == backgroundMusic) _backgroundMusicSource.PlayOneShot(s.SingleAudio); });
     }
 
     private IEnumerator PlayMultipleAudio(float delay, Sound sound)
