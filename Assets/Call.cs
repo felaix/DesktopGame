@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,10 @@ public class Call : MonoBehaviour
     [SerializeField, Range(1, 5)] private float _delay;
     [SerializeField] private Button _declineBtn;
     [SerializeField] private Button _acceptBtn;
+    [SerializeField] private TMP_Text _timeTMP;
+
+    private bool _triggered;
+    private float _time;
 
     private void Awake()
     {
@@ -15,10 +20,17 @@ public class Call : MonoBehaviour
         _acceptBtn.onClick.AddListener(() => Accept());
     }
 
+    private void OnEnable()
+    {
+        _triggered = true;
+        StartCoroutine(CallingCoroutine());
+    }
+
     private void Decline()
     {
         // Play Decline Sound
-        // SoundManager.Instance.PlaySFX("Ring");
+
+        _triggered = false;
 
         gameObject.SetActive(false);
     }
@@ -29,16 +41,32 @@ public class Call : MonoBehaviour
         // SoundManager.Instance.PlaySFX("Ring");
 
         // Invoke ? 
+
+        _triggered = false;
+
     }
 
     private IEnumerator CallingCoroutine()
     {
         yield return null;
 
-        yield return new WaitForSeconds(_delay);
+        while (_triggered)
+        {
+            yield return new WaitForSeconds(_delay);
 
-        // Play Ringing Sound
-        // SoundManager.Instance.PlaySFX("Ring");
+            // Play Ringing Sound
+            SoundManager.Instance.PlaySFX("TelephoneRing");
+        }
+
+        _timeTMP.gameObject.SetActive(true);
+        _declineBtn.transform.parent.gameObject.SetActive(false);
+
+        while (!_triggered)
+        {
+            yield return new WaitForSeconds(1);
+            _time += 1f;
+            _timeTMP.text = _time.ToString() + ":00";
+        }
 
     }
 }

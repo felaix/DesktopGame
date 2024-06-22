@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,14 +29,8 @@ public class SoundManager : MonoBehaviour
         _musicSource = transform.GetChild(1).GetComponent<AudioSource>();
         _backgroundMusicSource = transform.GetChild(2).GetComponent<AudioSource>();
 
-        _backgroundMusicSource.volume = _musicSource.volume / 2;
+        SetBackgroundMusicVolume(.01f);
     }
-
-    //public void UpdateMasterSlider(Slider slider)
-    //{
-    //    //_sfxSource.ignoreListenerVolume = slider.value;
-    //    _musicSource.maxVolume = slider.value;
-    //}
 
     public void UpdateMusicSlider(Slider slider)
     {
@@ -55,8 +50,13 @@ public class SoundManager : MonoBehaviour
 
     public void SetMusicVolume(float volume)
     {
-        _backgroundMusicSource.volume = volume / 2;
         _musicSource.volume = volume;
+        _backgroundMusicSource.volume = volume / 6;
+    }
+
+    public void SetBackgroundMusicVolume(float volume)
+    {
+        _backgroundMusicSource.volume = volume;
     }
 
     public void SetMasterVolume(float volume)
@@ -67,20 +67,33 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySFX(string sfx)
     {
+        if (sfx == "STOP_SFX")
+        {
+            _sfxSource.Stop();
+            return;
+        }
 
-        if (sfx == "STOP_SFX") { _sfxSource.Stop(); }
+        Sound soundToPlay = sounds.Find(s => s.Name == sfx);
 
-        sounds.ForEach(s => { 
-            if (s.Name == sfx) 
+        if (soundToPlay.IsUnityNull()) return;
 
-                _sfxSource.PlayOneShot(s.SingleAudio);
-
-                if (s.Random && s.OneShot) {_sfxSource.PlayOneShot(s.MultipleAudio[UnityEngine.Random.Range(0, s.MultipleAudio.Count)]); return; }
-
-                if (s.Random) StartCoroutine(PlayMultipleAudio(.1f, s));
-        });
-
+        if (soundToPlay.Random && soundToPlay.OneShot)
+        {
+            // Play a random audio clip from MultipleAudio list as a one-shot
+            _sfxSource.PlayOneShot(soundToPlay.MultipleAudio[UnityEngine.Random.Range(0, soundToPlay.MultipleAudio.Count)]);
+        }
+        else if (soundToPlay.Random)
+        {
+            // Start a coroutine to play multiple random audio clips
+            StartCoroutine(PlayMultipleAudio(0.1f, soundToPlay));
+        }
+        else
+        {
+            // Play the single audio clip
+            _sfxSource.PlayOneShot(soundToPlay.SingleAudio);
+        }
     }
+
 
     public void PlayMusic(string music)
     {

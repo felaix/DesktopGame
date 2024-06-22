@@ -131,8 +131,10 @@ public class ChatUI : MonoBehaviour
         Image img = npcMessageInstance.transform.GetChild(0).GetComponent<Image>();
         img.sprite = dialogueSO.PhotoToSend;
 
-        // Trigger On Click Action
+        // On Start Action
+        ActionInvoker.Instance.InvokeStartEvent(dialogueSO.OnStartAction);
 
+        // On Click Action
         Button btn = npcMessageInstance.AddComponent<Button>();
         ActionInvoker.Instance.SaveButtonEvent(btn, dialogueSO.OnClickAction);
 

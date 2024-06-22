@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
-  m_Name: Hacker 40
+  m_Name: Hacker 43
   m_EditorClassIdentifier: 
   NPCData:
     ProfilePicture: {fileID: 0}
     Name: 5
-  Dialogue: https://skf8sd78f9ds87f9sd7f.tk
+  Dialogue: really.
   OnStartAction: 0
-  OnClickAction: 2
+  OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 
   Delay: 0.1
   Choices: []
-  NextNode: {fileID: 11400000, guid: 3a716040ba3995145ab7e1b8247598cf, type: 2}
+  NextNode: {fileID: 11400000, guid: 2f8b056d3420fd54d8c7f3d46e948767, type: 2}
   TriggerDialogue: {fileID: 0}

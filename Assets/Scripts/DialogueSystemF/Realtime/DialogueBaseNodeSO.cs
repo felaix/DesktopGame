@@ -15,6 +15,7 @@ public class DialogueBaseNodeSO : ScriptableObject
 
     [Header("Dialog")]
     public string Dialogue;
+    public OnStartEvent OnStartAction;
     public OnClickEvent OnClickAction;
     //public OnClickEvent OnClickAction;
     public Sprite PhotoToSend;
@@ -69,6 +70,14 @@ public enum OnClickEvent
     ScaleImage,
     DownloadVirus,
     PrintHelloWorld
+}
+
+
+[Serializable]
+public enum OnStartEvent
+{
+    Null,
+    CallFromUnknown
 }
 
 [Serializable]

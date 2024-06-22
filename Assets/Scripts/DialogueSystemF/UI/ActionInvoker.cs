@@ -12,6 +12,7 @@ public class ActionInvoker : MonoBehaviour
 
     [SerializeField] private GameObject _virusLoader;
     [SerializeField] private GameObject _photoContainer;
+    [SerializeField] private GameObject _callFromUnknown;
 
     private void Awake()
     {
@@ -26,6 +27,20 @@ public class ActionInvoker : MonoBehaviour
     {
         Debug.Log(sprite.ToString());
         _photoContainer.transform.GetChild(0).GetComponent<Image>().sprite = sprite;
+    }
+
+    public void InvokeStartEvent(OnStartEvent evt)
+    {
+        switch (evt)
+        {
+            case OnStartEvent.Null:
+                Debug.Log("Null Event");
+                break;
+            case OnStartEvent.CallFromUnknown:
+                _callFromUnknown.SetActive(true);
+                break;
+
+        }
     }
 
     public void InvokeButton(Button btn)
