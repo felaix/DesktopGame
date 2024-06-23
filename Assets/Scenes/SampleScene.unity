@@ -9290,6 +9290,16 @@ MonoBehaviour:
     MultipleAudio: []
     Random: 0
     OneShot: 1
+  - Name: UnknownVoice
+    SingleAudio: {fileID: 8300000, guid: 01792a9af96c740459876885c8f9263d, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 1
+  - Name: HangUp
+    SingleAudio: {fileID: 8300000, guid: ae3df1aae12c06d43a39308e544dce9b, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 1
 --- !u!114 &287825894
 MonoBehaviour:
   m_ObjectHideFlags: 0

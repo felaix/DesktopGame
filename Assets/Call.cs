@@ -60,13 +60,32 @@ public class Call : MonoBehaviour
 
         _timeTMP.gameObject.SetActive(true);
         _declineBtn.transform.parent.gameObject.SetActive(false);
+        StartCoroutine(Calling());
 
         while (!_triggered)
         {
             yield return new WaitForSeconds(1);
             _time += 1f;
             _timeTMP.text = _time.ToString() + ":00";
-        }
 
+            if (_time == 12)
+            { 
+                gameObject.SetActive(false);
+                yield return null;            
+            }
+        }
     }
+
+    public void AcceptCall()
+    {
+        StartCoroutine(Calling());
+    }
+
+    private IEnumerator Calling()
+    {
+        yield return new WaitForSeconds(1);
+
+        SoundManager.Instance.PlaySFX("UnknownVoice");
+    }
+
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   NPCData:
     ProfilePicture: {fileID: 0}
     Name: 5
-  Dialogue: ...
+  Dialogue: answer the call.
   OnStartAction: 1
   OnClickAction: 0
   PhotoToSend: {fileID: 0}
@@ -23,7 +23,7 @@ MonoBehaviour:
   MusicSound: 
   Delay: 0.1
   Choices:
-  - ChoiceText: no
+  - ChoiceText: why?
     Trait: 0
     NextDialogue: {fileID: 11400000, guid: 5f3c9aeb7bdc85144b8015598b759f72, type: 2}
   NextNode: {fileID: 0}

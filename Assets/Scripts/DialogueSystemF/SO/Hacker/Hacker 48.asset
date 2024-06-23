@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
-  m_Name: Hacker 47
+  m_Name: Hacker 48
   m_EditorClassIdentifier: 
   NPCData:
     ProfilePicture: {fileID: 0}
     Name: 5
-  Dialogue: I'm coming closer to you, user
+  Dialogue: it's already too late for you.
   OnStartAction: 0
   OnClickAction: 0
   PhotoToSend: {fileID: 0}
@@ -23,5 +23,5 @@ MonoBehaviour:
   MusicSound: 
   Delay: 0.1
   Choices: []
-  NextNode: {fileID: 11400000, guid: 8ded22df54bdc0146b3c4bcdcef03443, type: 2}
+  NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}
