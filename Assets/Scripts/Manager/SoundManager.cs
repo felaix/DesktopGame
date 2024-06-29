@@ -29,7 +29,7 @@ public class SoundManager : MonoBehaviour
         _musicSource = transform.GetChild(1).GetComponent<AudioSource>();
         _backgroundMusicSource = transform.GetChild(2).GetComponent<AudioSource>();
 
-        SetBackgroundMusicVolume(.01f);
+        SetBackgroundMusicVolume(.1f);
     }
 
     public void UpdateMusicSlider(Slider slider)
@@ -51,7 +51,7 @@ public class SoundManager : MonoBehaviour
     public void SetMusicVolume(float volume)
     {
         _musicSource.volume = volume;
-        _backgroundMusicSource.volume = volume / 6;
+        _backgroundMusicSource.volume = volume / 10;
     }
 
     public void SetBackgroundMusicVolume(float volume)
