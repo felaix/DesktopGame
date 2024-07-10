@@ -16,7 +16,7 @@ MonoBehaviour:
     ProfilePicture: {fileID: 0}
     Name: 5
   Dialogue: I'm coming closer to you, user
-  OnStartAction: 0
+  OnStartAction: 2
   OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 

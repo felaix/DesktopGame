@@ -13,6 +13,7 @@ public class ActionInvoker : MonoBehaviour
     [SerializeField] private GameObject _virusLoader;
     [SerializeField] private GameObject _photoContainer;
     [SerializeField] private GameObject _callFromUnknown;
+    [SerializeField] private GameObject _scareVideo;
 
     private void Awake()
     {
@@ -38,6 +39,9 @@ public class ActionInvoker : MonoBehaviour
                 break;
             case OnStartEvent.CallFromUnknown:
                 _callFromUnknown.SetActive(true);
+                break;
+            case OnStartEvent.ShowVideo:
+                _scareVideo.SetActive(true);
                 break;
 
         }

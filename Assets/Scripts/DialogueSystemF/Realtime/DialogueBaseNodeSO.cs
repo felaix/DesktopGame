@@ -77,7 +77,8 @@ public enum OnClickEvent
 public enum OnStartEvent
 {
     Null,
-    CallFromUnknown
+    CallFromUnknown,
+    ShowVideo
 }
 
 [Serializable]
@@ -89,5 +90,6 @@ public enum NPCNames
     Hacker,
     Leon,
     Unknown,
-    Nancy
+    Nancy,
+    Victor
 }
