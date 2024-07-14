@@ -15,13 +15,22 @@ MonoBehaviour:
   NPCData:
     ProfilePicture: {fileID: 0}
     Name: 7
-  Dialogue: (send video here)
+  Dialogue: please go to police with this material
   OnStartAction: 0
   OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 
   Delay: 1
-  Choices: []
+  Choices:
+  - ChoiceText: thank you (go to police)
+    Trait: 0
+    NextDialogue: {fileID: 0}
+  - ChoiceText: no (don't go to police)
+    Trait: 0
+    NextDialogue: {fileID: 0}
+  - ChoiceText: i'm scared
+    Trait: 1
+    NextDialogue: {fileID: 11400000, guid: 994b3b5be532bf04dacbfb83d002f67e, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

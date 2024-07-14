@@ -14,6 +14,7 @@ public class ActionInvoker : MonoBehaviour
     [SerializeField] private GameObject _photoContainer;
     [SerializeField] private GameObject _callFromUnknown;
     [SerializeField] private GameObject _scareVideo;
+    [SerializeField] private GameObject _hiddenContent;
 
     private void Awake()
     {
@@ -73,6 +74,9 @@ public class ActionInvoker : MonoBehaviour
                 break;
             case OnClickEvent.DownloadVirus:
                 _virusLoader.SetActive(true);
+                break;
+            case OnClickEvent.ShowHiddenContent:
+                _hiddenContent.SetActive(true);
                 break;
         }
 

@@ -69,7 +69,8 @@ public enum OnClickEvent
     Null,
     ScaleImage,
     DownloadVirus,
-    PrintHelloWorld
+    PrintHelloWorld,
+    ShowHiddenContent
 }
 
 

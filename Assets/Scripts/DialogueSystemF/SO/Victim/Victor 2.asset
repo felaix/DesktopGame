@@ -15,7 +15,7 @@ MonoBehaviour:
   NPCData:
     ProfilePicture: {fileID: 0}
     Name: 7
-  Dialogue: My name is Victor and you were a big help to us.
+  Dialogue: My name is Victor and you were a big help to me.
   OnStartAction: 0
   OnClickAction: 0
   PhotoToSend: {fileID: 0}
@@ -23,5 +23,5 @@ MonoBehaviour:
   MusicSound: 
   Delay: 1
   Choices: []
-  NextNode: {fileID: 0}
+  NextNode: {fileID: 11400000, guid: 71461016a1856394793ebd7869ef51e6, type: 2}
   TriggerDialogue: {fileID: 0}

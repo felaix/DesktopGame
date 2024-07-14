@@ -15,7 +15,7 @@ MonoBehaviour:
   NPCData:
     ProfilePicture: {fileID: 0}
     Name: 7
-  Dialogue: that's the hacker.
+  Dialogue: that's the guy.
   OnStartAction: 0
   OnClickAction: 0
   PhotoToSend: {fileID: 0}
@@ -23,5 +23,5 @@ MonoBehaviour:
   MusicSound: 
   Delay: 1
   Choices: []
-  NextNode: {fileID: 0}
+  NextNode: {fileID: 11400000, guid: 2a7964e81639df54188b928cd3a70dce, type: 2}
   TriggerDialogue: {fileID: 0}

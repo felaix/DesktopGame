@@ -178,6 +178,8 @@ public class ChatUI : MonoBehaviour
     {
         if (dialogueSO.SkipChoices()) return;
 
+        if (dialogueSO.Choices[choice].ChoiceText == "(say nothing)") return;
+
         // Instantiate Message
         GameObject userMessageInstance = Instantiate(userMessagePrefab, userMessageContainer);
 

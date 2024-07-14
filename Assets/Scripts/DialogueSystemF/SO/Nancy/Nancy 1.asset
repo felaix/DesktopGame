@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Nancy 1
   m_EditorClassIdentifier: 
   NPCData:
-    ProfilePicture: {fileID: 21300000, guid: 8e47158417a74ae43a5fc12946e04719, type: 3}
+    ProfilePicture: {fileID: 21300000, guid: f008cfefb4cb09242b18dd84c2d6fd91, type: 3}
     Name: 6
   Dialogue: look at this
+  OnStartAction: 0
   OnClickAction: 3
   PhotoToSend: {fileID: 0}
   SFXSound: 

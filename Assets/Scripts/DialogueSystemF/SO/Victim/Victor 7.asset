@@ -15,7 +15,7 @@ MonoBehaviour:
   NPCData:
     ProfilePicture: {fileID: 0}
     Name: 7
-  Dialogue: Please help us to gather more informations about him.
+  Dialogue: just go to police
   OnStartAction: 0
   OnClickAction: 0
   PhotoToSend: {fileID: 0}
@@ -23,13 +23,10 @@ MonoBehaviour:
   MusicSound: 
   Delay: 1
   Choices:
-  - ChoiceText: no
-    Trait: 3
+  - ChoiceText: okay (go to police)
+    Trait: 0
     NextDialogue: {fileID: 0}
-  - ChoiceText: I'm really scared, officer
-    Trait: 1
-    NextDialogue: {fileID: 0}
-  - ChoiceText: okay, how can i help?
+  - ChoiceText: no (don't go)
     Trait: 0
     NextDialogue: {fileID: 0}
   NextNode: {fileID: 0}

@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Nancy
   m_EditorClassIdentifier: 
   NPCData:
-    ProfilePicture: {fileID: 21300000, guid: 8e47158417a74ae43a5fc12946e04719, type: 3}
+    ProfilePicture: {fileID: 21300000, guid: f008cfefb4cb09242b18dd84c2d6fd91, type: 3}
     Name: 6
   Dialogue: hey
+  OnStartAction: 0
   OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
@@ -23,12 +24,16 @@ MonoBehaviour:
   Delay: 1
   Choices:
   - ChoiceText: hi
+    Trait: 0
     NextDialogue: {fileID: 11400000, guid: 13c2ce7b5b9dcec41a6b953b595c0e85, type: 2}
   - ChoiceText: hiiiiiiiii :3
+    Trait: 0
     NextDialogue: {fileID: 11400000, guid: 13c2ce7b5b9dcec41a6b953b595c0e85, type: 2}
   - ChoiceText: moin
+    Trait: 0
     NextDialogue: {fileID: 11400000, guid: 13c2ce7b5b9dcec41a6b953b595c0e85, type: 2}
   - ChoiceText: (ignore)
+    Trait: 0
     NextDialogue: {fileID: 11400000, guid: 13c2ce7b5b9dcec41a6b953b595c0e85, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}
