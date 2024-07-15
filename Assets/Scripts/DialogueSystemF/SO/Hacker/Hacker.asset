@@ -16,6 +16,7 @@ MonoBehaviour:
     ProfilePicture: {fileID: 0}
     Name: 5
   Dialogue: hi
+  OnStartAction: 0
   OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
@@ -30,6 +31,6 @@ MonoBehaviour:
     NextDialogue: {fileID: 11400000, guid: 889df53e1907d404e97d4c3992aed0ec, type: 2}
   - ChoiceText: (say nothing)
     Trait: 3
-    NextDialogue: {fileID: 11400000, guid: 889df53e1907d404e97d4c3992aed0ec, type: 2}
+    NextDialogue: {fileID: 11400000, guid: 0ceac8d642fd12a428f2fb08480a41af, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

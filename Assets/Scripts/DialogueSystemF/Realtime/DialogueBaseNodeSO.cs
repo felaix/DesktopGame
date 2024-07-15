@@ -79,7 +79,10 @@ public enum OnStartEvent
 {
     Null,
     CallFromUnknown,
-    ShowVideo
+    ShowVideo,
+    CallPolice,
+    RefuseToCallPolice,
+    Ignore
 }
 
 [Serializable]

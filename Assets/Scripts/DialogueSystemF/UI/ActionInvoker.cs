@@ -16,6 +16,7 @@ public class ActionInvoker : MonoBehaviour
     [SerializeField] private GameObject _scareVideo;
     [SerializeField] private GameObject _hiddenContent;
 
+    [SerializeField] private List<GameObject> _endings;
     private void Awake()
     {
         Instance = this;
@@ -44,7 +45,15 @@ public class ActionInvoker : MonoBehaviour
             case OnStartEvent.ShowVideo:
                 _scareVideo.SetActive(true);
                 break;
-
+            case OnStartEvent.Ignore:
+                _endings[0].SetActive(true);
+                break;
+            case OnStartEvent.CallPolice:
+                _endings[1].SetActive(true);
+                break;
+            case OnStartEvent.RefuseToCallPolice:
+                _endings[2].SetActive(true);
+                break;
         }
     }
 
