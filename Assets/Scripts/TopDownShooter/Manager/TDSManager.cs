@@ -13,6 +13,8 @@ namespace TDS
         public int Coins;
         public List<Item> Items;
 
+        private Player player;
+
         private void Awake()
         {
             if (Instance == null) Instance = this; else Destroy(this);
@@ -26,6 +28,18 @@ namespace TDS
         public void AddCoins(int amount)
         {
             Coins += amount;
+            if (player == null) { player = GameObject.FindWithTag("Player").GetComponent<Player>(); }
+            player.IncreaseCoins(amount);
+        }
+
+        public void RemoveCoins(int amount)
+        {
+            Coins -= amount;
+            if (Coins <= 0)
+            {
+                Coins = 0;
+            }
+            player.IncreaseCoins(-amount);
         }
 
         public void ResetStats()

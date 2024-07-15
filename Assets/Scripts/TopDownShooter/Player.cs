@@ -24,11 +24,13 @@ namespace TDS
         public Slider GetDelaySlider() => GetPlayerCanvas().GetChild(0).GetComponent<Slider>();
         public Transform GetPlayerCanvas() => transform.GetChild(2);
         public int GetPlayerLuck() => _stats.Luck;
+        public int GetPlayerCoins() => _stats.Coins;
         public void IncreaseSpeed(float amount) => _stats.Speed += amount;
         public void DecreaseSpeed(float amount) => _stats.Speed -= amount;
         public void IncreaseMaxHP(int amount) => _stats.MaxHP += amount;
         public void IncreaseHP(int amount) { _stats.HP += amount; if (_stats.HP >= _stats.MaxHP) _stats.HP = _stats.MaxHP; }
         public void IncreaseBullets(int amount) { _stats.NumOfBullets += amount; _gun.UpgradeGun(); }
+        public void IncreaseCoins(int amount) { _stats.Coins += amount; }
         public void IncreaseStats(Stats stats)
         {
             _stats.AttackSpeed += stats.AttackSpeed;

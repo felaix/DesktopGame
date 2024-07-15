@@ -203,7 +203,6 @@ MonoBehaviour:
   AutoDisable: 0
   ItemsToSpawn:
   - {fileID: 6063491099522433376, guid: 07a6ad9fa05fce64ca9c4230457b0590, type: 3}
-  - {fileID: 6910727406683006814, guid: 75f82e834011a734eb995ae71d69662e, type: 3}
   - {fileID: 4511329600087135352, guid: 65c57d17ad1889d489f0c22bf9b27e00, type: 3}
   - {fileID: 8752367277505045047, guid: 54bdb7c1ef7f7074daa6846f04085f37, type: 3}
   ItemSpawnOffset: {x: -1, y: 0, z: 0}

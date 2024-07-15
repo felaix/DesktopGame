@@ -13,7 +13,7 @@ namespace TDS
 
         [Header("Auto Handling")]
         public bool AutoTimer = true;
-        public List<Transform> NewSpawnPoints = new();
+        //public List<Transform> NewSpawnPoints = new();
 
         [Header("Next Explore Area")]
         public AP_Explore nextExploreArea;
@@ -41,10 +41,10 @@ namespace TDS
             Camera camera = Camera.main;
             camera.transform.DOMove(new Vector3(camera.transform.position.x + Offset.x, camera.transform.position.y + Offset.y, camera.transform.position.z + Offset.z), Duration);
 
-            if (NewSpawnPoints.Count > 0)
-            {
-                SpawnManager.Instance.SetNewSpawnPoints(NewSpawnPoints);
-            }
+            //if (NewSpawnPoints.Count > 0)
+            //{
+            //    SpawnManager.Instance.SetNewSpawnPoints(NewSpawnPoints);
+            //}
 
             //CanvasManager.Instance.ResetTimer();
             //SpawnManager.Instance.AddExploreItem(this);

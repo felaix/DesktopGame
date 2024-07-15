@@ -27,17 +27,29 @@ namespace TDS
             _pickedUp = false;
         }
 
+        private bool HasEnoughCoins(Player player, Item item)
+        {
+            Debug.Log("Current Player Coins: " + player.GetPlayerCoins() + ", item costs: " + item.ItemData.Cost);
+            return player.GetPlayerCoins() >= item.ItemData.Cost;
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Player"))
             {
                 playerTransform = collision.transform;
-                if (!_pickedUp) PickUp(collision.gameObject, (Item)this);
+
+                Player player = collision.GetComponent<Player>();
+
+                if (!_pickedUp && HasEnoughCoins(player, (Item)this)) { PickUp(collision.gameObject, (Item)this); }
             }           
         }
 
-        public virtual void PickUp(GameObject obj, Item item)
+        public virtual void PickUp(GameObject player, Item item)
         {
+
+
+
             if (_pickedUp) return;
             _pickedUp = true;
 
@@ -117,6 +129,8 @@ namespace TDS
 
         public void OnPickUp(Item item) 
         {
+
+
             TDSManager.Instance.AddItem(item);
 
             // Remove because it isn't in the scene anymore

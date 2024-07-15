@@ -103,6 +103,8 @@ namespace TDS
             //CanSpawn = true;
             //WaveCompleted += OnWaveCompleted;
 
+            _spawnPoints = CreateSpawnPoints(5, Vector3.zero);
+
             Level = 0;
             StartGame();
         }
@@ -242,7 +244,7 @@ namespace TDS
         {
             yield return new WaitForSeconds(_delayBetweenWaves);
 
-                for (int i = 0; i < Level; i++)
+                for (int i = -1; i < Level; i++)
                 {
                     if (!CanSpawn) continue;
                     Enemy enemy = SpawnEnemy();
@@ -360,13 +362,14 @@ namespace TDS
         {
             // Returns a random spawn point
 
-            if (_spawnPoints == null || _spawnPoints.Count == 0) return null;
+            //if (_spawnPoints == null || _spawnPoints.Count == 0)
+            //{
+            //    _spawnPoints = CreateSpawnPoints(1, _player.transform.position);
+            //}
 
             int maxRange = _spawnPoints.Count;
 
-            int r = UnityEngine.Random.Range(0, maxRange++);
-
-            if (_spawnPoints[r].transform == null) return null;
+            int r = UnityEngine.Random.Range(0, maxRange);
 
             return _spawnPoints[r].transform;
         }

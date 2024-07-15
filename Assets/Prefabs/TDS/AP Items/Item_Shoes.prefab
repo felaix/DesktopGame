@@ -213,9 +213,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemData:
     Sprite: {fileID: 21300000, guid: d6955c00f1a8f6a4492b402d4ee9d8ef, type: 3}
-    Cost: 5
+    Cost: 1
   SpawnOffset: {x: 0.1, y: 0.1}
   AutoDestroy: 1
+  AutoDisable: 0
   StatToIncrease:
     HP: 0
     MaxHP: 0
