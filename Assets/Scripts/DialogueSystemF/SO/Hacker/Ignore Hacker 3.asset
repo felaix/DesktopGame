@@ -19,7 +19,7 @@ MonoBehaviour:
   OnStartAction: 5
   OnClickAction: 0
   PhotoToSend: {fileID: 0}
-  SFXSound: 
+  SFXSound: JS_MetallicScare
   MusicSound: 
   Delay: 5
   Choices: []

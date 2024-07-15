@@ -10853,6 +10853,7 @@ GameObject:
   - component: {fileID: 442398429}
   - component: {fileID: 442398428}
   - component: {fileID: 442398427}
+  - component: {fileID: 442398430}
   m_Layer: 5
   m_Name: Ending-Virus
   m_TagString: Untagged
@@ -10948,6 +10949,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442398425}
   m_CullTransparentMesh: 1
+--- !u!114 &442398430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442398425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9f2b4c28b84fcc49978e5c93a18a2cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sfxName: JS_MetallicScare
 --- !u!1 &443883466
 GameObject:
   m_ObjectHideFlags: 0
@@ -11747,7 +11761,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 480, y: -212.35374}
+  m_AnchoredPosition: {x: 480, y: -212.35376}
   m_SizeDelta: {x: 920, y: 186.9025}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &525774181
@@ -14889,7 +14903,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 480, y: -59.45125}
+  m_AnchoredPosition: {x: 480, y: -59.451233}
   m_SizeDelta: {x: 920, y: 78.9025}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &775009888
@@ -18824,6 +18838,7 @@ GameObject:
   - component: {fileID: 1054455892}
   - component: {fileID: 1054455891}
   - component: {fileID: 1054455890}
+  - component: {fileID: 1054455893}
   m_Layer: 5
   m_Name: Ending-Police
   m_TagString: Untagged
@@ -18919,6 +18934,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054455888}
   m_CullTransparentMesh: 1
+--- !u!114 &1054455893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054455888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9f2b4c28b84fcc49978e5c93a18a2cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sfxName: JS_MetallicScare
 --- !u!1 &1056343704
 GameObject:
   m_ObjectHideFlags: 0
@@ -22880,6 +22908,7 @@ GameObject:
   - component: {fileID: 1353058332}
   - component: {fileID: 1353058331}
   - component: {fileID: 1353058333}
+  - component: {fileID: 1353058334}
   m_Layer: 5
   m_Name: Ending-Hacker
   m_TagString: Untagged
@@ -22975,6 +23004,19 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1353058334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353058329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9f2b4c28b84fcc49978e5c93a18a2cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sfxName: JS_MetallicScare
 --- !u!1 &1360632556
 GameObject:
   m_ObjectHideFlags: 0
@@ -31034,6 +31076,7 @@ GameObject:
   - component: {fileID: 1616928626}
   - component: {fileID: 1616928625}
   - component: {fileID: 1616928624}
+  - component: {fileID: 1616928627}
   m_Layer: 5
   m_Name: Ending-Ignore
   m_TagString: Untagged
@@ -31129,6 +31172,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1616928622}
   m_CullTransparentMesh: 1
+--- !u!114 &1616928627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616928622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9f2b4c28b84fcc49978e5c93a18a2cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sfxName: JS_MetallicScare
 --- !u!1 &1634821225
 GameObject:
   m_ObjectHideFlags: 0

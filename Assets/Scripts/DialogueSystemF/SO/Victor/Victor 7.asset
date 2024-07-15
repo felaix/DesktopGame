@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
-  m_Name: Victor 6
+  m_Name: Victor 7
   m_EditorClassIdentifier: 
   NPCData:
     ProfilePicture: {fileID: 0}
     Name: 7
-  Dialogue: please go to police with this material
+  Dialogue: just go. I'll go offline for now. delete my number and forget everything.
   OnStartAction: 0
   OnClickAction: 0
   PhotoToSend: {fileID: 0}
@@ -23,14 +23,11 @@ MonoBehaviour:
   MusicSound: 
   Delay: 1
   Choices:
-  - ChoiceText: thank you (go to police)
+  - ChoiceText: okay (go to police)
     Trait: 0
-    NextDialogue: {fileID: 0}
-  - ChoiceText: no (don't go to police)
+    NextDialogue: {fileID: 11400000, guid: 19bf165e9c0b2db43a11b22066f616c0, type: 2}
+  - ChoiceText: no (don't go)
     Trait: 0
-    NextDialogue: {fileID: 0}
-  - ChoiceText: i'm scared
-    Trait: 1
-    NextDialogue: {fileID: 11400000, guid: 994b3b5be532bf04dacbfb83d002f67e, type: 2}
+    NextDialogue: {fileID: 11400000, guid: a125738dadd6fb84ca6588f3b2608840, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}

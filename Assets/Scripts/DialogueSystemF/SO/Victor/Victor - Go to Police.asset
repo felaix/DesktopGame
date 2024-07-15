@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b27187d198086354cb4466a852a54cac, type: 3}
-  m_Name: Dad 2
+  m_Name: Victor - Go to Police
   m_EditorClassIdentifier: 
   NPCData:
-    ProfilePicture: {fileID: 21300000, guid: 8e47158417a74ae43a5fc12946e04719, type: 3}
-    Name: 1
-  Dialogue: haha
-  OnStartAction: 0
+    ProfilePicture: {fileID: 0}
+    Name: 7
+  Dialogue: good.
+  OnStartAction: 3
   OnClickAction: 0
   PhotoToSend: {fileID: 0}
-  SFXSound: 
+  SFXSound: JS_MetallicScare
   MusicSound: 
-  Delay: 0.1
+  Delay: 1
   Choices: []
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}
