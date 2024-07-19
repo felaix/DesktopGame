@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCData:
     ProfilePicture: {fileID: 0}
-    Name: 5
+    Name: 4
   Dialogue: And i saw something weird out the window
+  OnStartAction: 0
   OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3909654145896884010}
   - component: {fileID: 2157474132599026239}
   - component: {fileID: 5502792950339096542}
+  - component: {fileID: -6522760803747537283}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -80,6 +81,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &-6522760803747537283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755163049582766633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28047515e8db99c46b212349b3c2cdeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuBtn: {fileID: 5469990138905452102}
+  quitGameBtn: {fileID: 4851171107007236668}
+  creditMenuBtn: {fileID: 309267173415032638}
+  credits: {fileID: 1201688718000047794, guid: 508d7e7b2cc18404b986ae3c6ddfe111, type: 3}
 --- !u!1 &1179638018500211157
 GameObject:
   m_ObjectHideFlags: 0

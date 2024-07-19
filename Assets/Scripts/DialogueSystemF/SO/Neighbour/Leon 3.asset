@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCData:
     ProfilePicture: {fileID: 0}
-    Name: 5
+    Name: 4
   Dialogue: 
+  OnStartAction: 0
   OnClickAction: 1
   PhotoToSend: {fileID: 21300000, guid: c9bfd70356dc7b7499c3b99cdce3835b, type: 3}
   SFXSound: 

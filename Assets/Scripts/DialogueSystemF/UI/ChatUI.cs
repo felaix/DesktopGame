@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -109,6 +110,14 @@ public class ChatUI : MonoBehaviour
 
     #region Create
 
+    private void ConvertUserName(TMP_Text tmp, string originalTxt)
+    {
+        tmp.text = originalTxt;
+        string username = Environment.UserName;
+        string newTxt = originalTxt.Replace("user", username);
+        tmp.text = newTxt;
+    }
+
     public void CreateNPCMessage()
     {
 
@@ -126,6 +135,7 @@ public class ChatUI : MonoBehaviour
         TMP_Text dialogueTMP = npcMessageInstance.GetComponentInChildren<TMP_Text>();
         dialogueTMP.text = dialogueSO.Dialogue;
         savedNPCMsgTMP = dialogueTMP;
+        if (dialogueSO.Dialogue.Contains("user")) { Debug.Log("contains user."); ConvertUserName(dialogueTMP, dialogueSO.Dialogue); }
 
         // Set Image in case the message contains a photo.
         Image img = npcMessageInstance.transform.GetChild(0).GetComponent<Image>();

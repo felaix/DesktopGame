@@ -15,7 +15,7 @@ MonoBehaviour:
   NPCData:
     ProfilePicture: {fileID: 21300000, guid: 8e47158417a74ae43a5fc12946e04719, type: 3}
     Name: 5
-  Dialogue: 
+  Dialogue: Hello, user
   OnStartAction: 0
   OnClickAction: 1
   PhotoToSend: {fileID: -1890385676, guid: 11db2928a325f30498fc93525b26cbf2, type: 3}

@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCData:
     ProfilePicture: {fileID: 0}
-    Name: 5
+    Name: 4
   Dialogue: I'm home at the moment
+  OnStartAction: 0
   OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 

@@ -1514,6 +1514,134 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1698260829
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1698260831}
+  - component: {fileID: 1698260830}
+  m_Layer: 0
+  m_Name: BGMusic Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1698260830
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698260829}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ac1df7416cfe53a468a33dfe1c0713bb, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1698260831
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698260829}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1863600341}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1773669406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1794,6 +1922,7 @@ Transform:
   m_Children:
   - {fileID: 1609630632}
   - {fileID: 903481503}
+  - {fileID: 1698260831}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1863600342
@@ -1830,6 +1959,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6e5892f4aa530f48a40607b922d20f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPlayerTraits:
+    Emotional: 0
+    Polite: 0
+    Reserved: 0
+  PlayerAchievements: []
 --- !u!114 &1863600344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1865,7 +1999,7 @@ MonoBehaviour:
     Random: 0
     OneShot: 0
   - Name: ButtonHover
-    SingleAudio: {fileID: 8300000, guid: 64847f73dc23c554da27339165407072, type: 3}
+    SingleAudio: {fileID: 0}
     MultipleAudio:
     - {fileID: 8300000, guid: 9d40fe8a716dcc54aa7c938014390b2d, type: 3}
     - {fileID: 8300000, guid: 95d5509aedee9b843b70596045de9e48, type: 3}
@@ -1942,6 +2076,81 @@ MonoBehaviour:
     MultipleAudio: []
     Random: 0
     OneShot: 0
+  - Name: PEMusic
+    SingleAudio: {fileID: 8300000, guid: cb1e0e7c4a9e41843969013b68bfbe60, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 0
+  - Name: Denied
+    SingleAudio: {fileID: 8300000, guid: b5612e2fa9a57374fb9d16cd3bec6c13, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 0
+  - Name: Groove
+    SingleAudio: {fileID: 8300000, guid: 209ef0d13f0fde5479c528abba53cb69, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 1
+  - Name: Role
+    SingleAudio: {fileID: 8300000, guid: 944245b1c1b409f45aa4120c8024c522, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 1
+  - Name: OldScreen
+    SingleAudio: {fileID: 8300000, guid: 2b6f0fc4156f8eb488a69820bd463146, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 1
+  - Name: TelephoneRing
+    SingleAudio: {fileID: 8300000, guid: 42a904773fe3b5b47b3a5b1804d6f004, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 1
+  - Name: UnknownVoice
+    SingleAudio: {fileID: 8300000, guid: 01792a9af96c740459876885c8f9263d, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 1
+  - Name: HangUp
+    SingleAudio: {fileID: 8300000, guid: ae3df1aae12c06d43a39308e544dce9b, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 1
+  - Name: Drill
+    SingleAudio: {fileID: 8300000, guid: ac1df7416cfe53a468a33dfe1c0713bb, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 1
+  - Name: Party
+    SingleAudio: {fileID: 8300000, guid: 64c468cc51bbcd14187758e0ae3e08e4, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 1
+  - Name: JS_Scream
+    SingleAudio: {fileID: 8300000, guid: 7f4ff73751aa8c044aea6a1cf5826567, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 1
+  - Name: JS_DisortedMetal
+    SingleAudio: {fileID: 8300000, guid: 10705b3e1e4ae1e4483a4c39b3f0baf7, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 1
+  - Name: JS_MetallicScare
+    SingleAudio: {fileID: 8300000, guid: c8472084029620845bf68d563f4938f7, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 1
+  - Name: JS_Tension
+    SingleAudio: {fileID: 8300000, guid: 90c537862dc2ed74182b213a091275bb, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 1
+  - Name: JS_Squeak
+    SingleAudio: {fileID: 8300000, guid: 3a58789bb50b2584a8d303c47580ede8, type: 3}
+    MultipleAudio: []
+    Random: 0
+    OneShot: 1
 --- !u!1 &2025642429
 GameObject:
   m_ObjectHideFlags: 0

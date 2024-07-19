@@ -14,14 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCData:
     ProfilePicture: {fileID: 0}
-    Name: 5
+    Name: 4
   Dialogue: It's right in front of your door
+  OnStartAction: 0
+  OnClickAction: 0
   PhotoToSend: {fileID: 0}
   SFXSound: 
   MusicSound: 
   Delay: 1
   Choices:
-  - ChoiceText: what??
+  - ChoiceText: WTF
+    Trait: 0
     NextDialogue: {fileID: 11400000, guid: 5dcfb373068b45a4a89af6f052738c58, type: 2}
   NextNode: {fileID: 0}
   TriggerDialogue: {fileID: 0}
